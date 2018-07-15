@@ -5,19 +5,29 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.ridwanstandingby.ntris.render.Dimensions
+import com.ridwanstandingby.ntris.render.fonts.FontGenerator
 import com.ridwanstandingby.ntris.states.GameStateManager
+import com.ridwanstandingby.ntris.states.PlayState
 
 class NTrisGame : ApplicationAdapter() {
     private lateinit var batch: SpriteBatch
     private lateinit var gsm: GameStateManager
 
     override fun create() {
-        val dimensions = computeDimensions()
         batch = SpriteBatch()
-        gsm = GameStateManager(dimensions)
+        initGameStateManager()
+        initPlayState()
     }
 
-    private fun computeDimensions() = Dimensions(Gdx.graphics.width, Gdx.graphics.height)
+    private fun initGameStateManager() {
+        val dimensions = Dimensions(Gdx.graphics.width, Gdx.graphics.height)
+        val fonts = FontGenerator(dimensions).generate()
+        gsm = GameStateManager(dimensions, fonts)
+    }
+
+    private fun initPlayState() {
+        gsm.push(PlayState(gsm))
+    }
 
     override fun render() {
         clearScreen()
@@ -25,9 +35,7 @@ class NTrisGame : ApplicationAdapter() {
         gsm.render(batch)
     }
 
-    private fun clearScreen() {
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
-    }
+    private fun clearScreen() = Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
 
     override fun dispose() {
         batch.dispose()

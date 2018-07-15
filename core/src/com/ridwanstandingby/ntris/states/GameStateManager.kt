@@ -3,11 +3,10 @@ package com.ridwanstandingby.ntris.states
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.ridwanstandingby.ntris.render.fonts.FontGenerator
 import com.ridwanstandingby.ntris.render.Dimensions
+import com.ridwanstandingby.ntris.render.fonts.Fonts
 import java.util.*
 
-class GameStateManager(private val dimensions: Dimensions) {
-
-    val fontGenerator = FontGenerator(dimensions)
+class GameStateManager(val dimensions: Dimensions, val fonts: Fonts) {
 
     private val states: Stack<State> = Stack()
 
