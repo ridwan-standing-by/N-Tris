@@ -1,6 +1,7 @@
 package com.ridwanstandingby.ntris.states
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.ridwanstandingby.ntris.render.fonts.FontGenerator
 import com.ridwanstandingby.ntris.render.Dimensions
 import com.ridwanstandingby.ntris.render.fonts.Fonts
@@ -27,7 +28,7 @@ class GameStateManager(val dimensions: Dimensions, val fonts: Fonts) {
         states.peek().update(dt)
     }
 
-    fun render(sb: SpriteBatch) {
-        states.peek().render(sb)
+    fun render(sb: SpriteBatch, sr: ShapeRenderer) {
+        states.peek().render(sb, sr)
     }
 }

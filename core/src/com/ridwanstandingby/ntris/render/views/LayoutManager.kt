@@ -16,9 +16,9 @@ class LayoutManager(private val dimensions: Dimensions, private val fonts: Fonts
         })
     }
 
-    fun render(sb: SpriteBatch, shapeRenderer: ShapeRenderer) {
+    fun render(sb: SpriteBatch, sr: ShapeRenderer) {
         views.forEach {
-            it.render(sb, shapeRenderer)
+            it.render(sb, sr)
         }
     }
 }

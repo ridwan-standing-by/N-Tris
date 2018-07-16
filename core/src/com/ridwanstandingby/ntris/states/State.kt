@@ -2,6 +2,7 @@ package com.ridwanstandingby.ntris.states
 
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 
 abstract class State(protected var gsm: GameStateManager) {
 
@@ -13,6 +14,6 @@ abstract class State(protected var gsm: GameStateManager) {
 
     abstract fun handleInput()
     abstract fun update(dt: Float)
-    abstract fun render(sb: SpriteBatch)
+    abstract fun render(sb: SpriteBatch, sr: ShapeRenderer)
     abstract fun dispose()
 }

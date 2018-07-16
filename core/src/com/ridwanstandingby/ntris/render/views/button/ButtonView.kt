@@ -12,8 +12,8 @@ import com.ridwanstandingby.ntris.render.views.View
 abstract class ButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blockHeight: Float, private val icon: String) :
         View(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blockHeight) {
 
-    override fun render(sb: SpriteBatch, shapeRenderer: ShapeRenderer) {
-        renderBorder(shapeRenderer)
+    override fun render(sb: SpriteBatch, sr: ShapeRenderer) {
+        renderBorder(sr)
         renderTextInCentre(sb, fonts.fontSmall, icon)
     }
 

@@ -12,13 +12,13 @@ abstract class View(val dimensions: Dimensions, val fonts: Fonts, val originBloc
     val width = dimensions.rescaledBlock() * blocksWidth
     val height = dimensions.rescaledBlock() * blockHeight
 
-    fun renderBorder(shapeRenderer: ShapeRenderer) {
-        shapeRenderer.rect(originX, originY, width, height)
+    fun renderBorder(sr: ShapeRenderer) {
+        sr.rect(originX, originY, width, height)
     }
 
     fun wasInputInView(x: Float, y: Float): Boolean = originX <= x && x < (originX + width)
             && originY <= y && y < originY + height
 
     abstract fun handleInputInView()
-    abstract fun render(sb: SpriteBatch, shapeRenderer: ShapeRenderer)
+    abstract fun render(sb: SpriteBatch, sr: ShapeRenderer)
 }

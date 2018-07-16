@@ -6,8 +6,6 @@ import com.ridwanstandingby.ntris.render.views.LayoutManager
 
 class PlayState(gsm: GameStateManager) : State(gsm) {
 
-    val shapeRenderer = ShapeRenderer()
-
     private val layoutManager = LayoutManager(gsm.dimensions, gsm.fonts)
 
     init {
@@ -22,31 +20,28 @@ class PlayState(gsm: GameStateManager) : State(gsm) {
 
     }
 
-    override fun render(sb: SpriteBatch) {
+    override fun render(sb: SpriteBatch, sr: ShapeRenderer) {
         sb.projectionMatrix = cam.combined
         sb.begin()
         val block = gsm.dimensions.rescaledBlock()
 
-        shapeRenderer.projectionMatrix = cam.combined
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
+        sr.projectionMatrix = cam.combined
+        sr.begin(ShapeRenderer.ShapeType.Line)
 
-
-//        layoutManager.render(sb, shapeRenderer)
-        shapeRenderer.rect(block * 0.5f, block, block * 10f, block * 30f)
-        shapeRenderer.rect(block * 10.5f, block, block * 4, block * 4)
-        shapeRenderer.rect(block * 14.5f, block, block * 4, block * 4)
-        shapeRenderer.rect(block * 10.5f, block * 5, block * 4, block * 4)
-        shapeRenderer.rect(block * 14.5f, block * 5, block * 4, block * 4)
-        shapeRenderer.rect(block * 10.5f, block * 9, block * 4, block * 4)
-        shapeRenderer.rect(block * 14.5f, block * 9, block * 4, block * 4)
-        shapeRenderer.rect(block * 10.5f, block * 13, block * 8, block * 7)
-        shapeRenderer.rect(block * 10.5f, block * 20, block * 8, block * 4)
-        shapeRenderer.rect(block * 10.5f, block * 24, block * 8, block * 7)
-        shapeRenderer.end()
+        layoutManager.render(sb, sr)
+//        sr.rect(block * 0.5f, block, block * 10f, block * 30f)
+//        sr.rect(block * 10.5f, block, block * 4, block * 4)
+//        sr.rect(block * 14.5f, block, block * 4, block * 4)
+//        sr.rect(block * 10.5f, block * 5, block * 4, block * 4)
+//        sr.rect(block * 14.5f, block * 5, block * 4, block * 4)
+//        sr.rect(block * 10.5f, block * 9, block * 4, block * 4)
+//        sr.rect(block * 14.5f, block * 9, block * 4, block * 4)
+//        sr.rect(block * 10.5f, block * 13, block * 8, block * 7)
+//        sr.rect(block * 10.5f, block * 20, block * 8, block * 4)
+//        sr.rect(block * 10.5f, block * 24, block * 8, block * 7)
+        sr.end()
         sb.end()
     }
 
-    override fun dispose() {
-        shapeRenderer.dispose()
-    }
+    override fun dispose() {}
 }
