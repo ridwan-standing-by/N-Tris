@@ -7,10 +7,10 @@ import com.ridwanstandingby.ntris.render.fonts.Fonts
 
 abstract class View(val dimensions: Dimensions, val fonts: Fonts, val originBlocksX: Float, val originBlocksY: Float, val blocksWidth: Float, val blockHeight: Float) {
 
-    val originX = dimensions.block * originBlocksX
-    val originY = dimensions.block * originBlocksY
-    val width = dimensions.block * blocksWidth
-    val height = dimensions.block * blockHeight
+    val originX = dimensions.rescaledBlock() * originBlocksX
+    val originY = dimensions.rescaledBlock() * originBlocksY
+    val width = dimensions.rescaledBlock() * blocksWidth
+    val height = dimensions.rescaledBlock() * blockHeight
 
     fun renderBorder(shapeRenderer: ShapeRenderer) {
         shapeRenderer.rect(originX, originY, width, height)
