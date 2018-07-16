@@ -14,12 +14,14 @@ abstract class ButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: F
 
     override fun render(sb: SpriteBatch, sr: ShapeRenderer) {
         renderBorder(sr)
-        renderTextInCentre(sb, fonts.fontLarge, icon)
+        renderTextInCentre(sb, fonts.buttonCharacter, icon)
     }
 
     private fun renderTextInCentre(sb: SpriteBatch, font: BitmapFont, text: String) {
         val textDims = getDimensionsOfText(font, text)
-        font.draw(sb, text, originX + width/2 - textDims.x/2, originY + height/2 + textDims.y/2)
+        val x = originX + width/2 - textDims.x/2
+        val y = originY + height/2 + textDims.y/2
+        font.draw(sb, text, x, y)
     }
 
     private fun getDimensionsOfText(font: BitmapFont, text: String): Vector2 {

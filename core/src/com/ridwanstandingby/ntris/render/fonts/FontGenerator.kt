@@ -1,23 +1,29 @@
 package com.ridwanstandingby.ntris.render.fonts
 
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
 import com.ridwanstandingby.ntris.render.Dimensions
+import ktx.freetype.generateFont
 
 class FontGenerator(private val dimensions: Dimensions) {
 
     fun generate(): Fonts {
-        val generator = FreeTypeFontGenerator(Gdx.files.internal(FontParameters.FONT_PATH))
-        val parameter = FreeTypeFontGenerator.FreeTypeFontParameter()
-        parameter.size = dimensions.rescale(FontParameters.FONT_SMALL_SIZE).toInt()
-        val fontSmall = generator.generateFont(parameter)
-        parameter.borderWidth = FontParameters.FONT_BORDER_WIDTH
-        parameter.borderColor = FontParameters.FONT_BORDER_COLOUR
-        val fontSmallBordered = generator.generateFont(parameter)
-        parameter.borderWidth = 0f
-        parameter.size = dimensions.rescale(FontParameters.FONT_LARGE_SIZE).toInt()
-        val fontLarge = generator.generateFont(parameter)
-        generator.dispose()
-        return Fonts(fontSmall, fontLarge, fontSmallBordered)
+        val boxInfo = generateFont(FontParameters.FONT_BOX_INFO_PATH) {
+            size = dimensions.rescale(FontParameters.FONT_BOX_INFO_SIZE).toInt()
+        }
+        val fontButtonCharacter = generateFont(FontParameters.FONT_BUTTON_CHARACTER_PATH) {
+            size = dimensions.rescale(FontParameters.FONT_BUTTON_CHARACTER_SIZE).toInt()
+            characters = FreeTypeFontGenerator.DEFAULT_CHARS + "▼◀▶┃↶↷⇄"
+        }
+        return Fonts(boxInfo, fontButtonCharacter)
+    }
+
+    private fun generateFont(path: String, parameters: FreeTypeFontGenerator.FreeTypeFontParameter.() -> Unit): BitmapFont {
+        FreeTypeFontGenerator(Gdx.files.internal(path)).let {
+            val font = it.generateFont { parameters() }
+            it.dispose()
+            return font
+        }
     }
 }

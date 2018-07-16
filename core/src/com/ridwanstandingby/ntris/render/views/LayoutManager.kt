@@ -11,7 +11,27 @@ class LayoutManager(private val dimensions: Dimensions, private val fonts: Fonts
     val views: ArrayList<View> = arrayListOf()
 
     fun createViews() {
-        views.add(object : ButtonView(dimensions, fonts, 10.5f, 1f, 4f, 4f, "\u25BD") {
+        views.add(object : ButtonView(dimensions, fonts, 10.5f, 1.0f, 4f, 4f, "▼") {
+            override fun handleInputInView() {}
+        })
+
+        views.add(object : ButtonView(dimensions, fonts, 14.5f, 1.0f, 4f, 4f, "┃┃") {
+            override fun handleInputInView() {}
+        })
+
+        views.add(object : ButtonView(dimensions, fonts, 10.5f, 5.0f, 4f, 4f, "◀") {
+            override fun handleInputInView() {}
+        })
+
+        views.add(object : ButtonView(dimensions, fonts, 14.5f, 5.0f, 4f, 4f, "▶") {
+            override fun handleInputInView() {}
+        })
+
+        views.add(object : ButtonView(dimensions, fonts, 10.5f, 9.0f, 4f, 4f, "↶") {
+            override fun handleInputInView() {}
+        })
+
+        views.add(object : ButtonView(dimensions, fonts, 14.5f, 9.0f, 4f, 4f, "↷") {
             override fun handleInputInView() {}
         })
     }
