@@ -21,7 +21,7 @@ class LayoutManager(private val dimensions: Dimensions, private val fonts: Fonts
             override fun handleInputInView() {}
         })
 
-        views.add(object : ButtonView(dimensions, fonts, 14.5f, 1.0f, 4f, 4f, PAUSE_BUTTON_ICON) {
+        views.add(object : ButtonView(dimensions, fonts, 14.5f, 1.0f, 4f, 4f, PAUSE_BUTTON_ICON, PAUSE_BUTTON_ICON_OFFSET) {
             override fun handleInputInView() {}
         })
 
