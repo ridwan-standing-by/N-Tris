@@ -24,4 +24,13 @@ abstract class ButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: F
         val y = originY + height/2 + textDims.y/2
         font.draw(sb, text, x, y)
     }
+
+    companion object {
+        const val MOVE_DOWN_BUTTON_ICON = "▼"
+        const val MOVE_LEFT_BUTTON_ICON = "◀"
+        const val MOVE_RIGHT_BUTTON_ICON = "▶"
+        const val ROTATE_LEFT_BUTTON_ICON = "↶"
+        const val ROTATE_RIGHT_BUTTON_ICON = "↷"
+        const val PAUSE_BUTTON_ICON = "▮"
+    }
 }

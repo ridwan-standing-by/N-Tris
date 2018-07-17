@@ -11,6 +11,9 @@ class ScoreView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, orig
         View(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blockHeight) {
 
     var score: Int = 0
+    var lines: Int = 0
+    var highScore: Int = 0
+    var highLines: Int = 0
 
     private val scaledPadding = dimensions.rescale(TEXT_PADDING)
     private val ySpacing = FontHelper.getDimensionsOfText(fonts.boxInfo, "I").y + TEXT_PADDING
@@ -32,9 +35,9 @@ class ScoreView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, orig
         val x = originX + scaledPadding
         val y = originY + height - scaledPadding
         fonts.boxInfo.draw(sb, TEXT_SCORE.format(score), x, y)
-        fonts.boxInfo.draw(sb, TEXT_LINES.format(score), x, y - 1.0f * ySpacing)
-        fonts.boxInfo.draw(sb, TEXT_SCORE.format(score), x, y - 2.25f * ySpacing)
-        fonts.boxInfo.draw(sb, TEXT_LINES.format(score), x, y - 3.25f * ySpacing)
+        fonts.boxInfo.draw(sb, TEXT_LINES.format(lines), x, y - 1.0f * ySpacing)
+        fonts.boxInfo.draw(sb, TEXT_SCORE.format(highScore), x, y - 2.25f * ySpacing)
+        fonts.boxInfo.draw(sb, TEXT_LINES.format(highLines), x, y - 3.25f * ySpacing)
     }
 
     private fun renderHighScoreIcon(sb: SpriteBatch) {

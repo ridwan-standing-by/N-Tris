@@ -8,8 +8,8 @@ import com.ridwanstandingby.ntris.render.fonts.Fonts
 class ReserveView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blockHeight: Float) :
         PieceDisplayView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blockHeight) {
 
-    override val boxInfoText = BOX_INFO_TEXT
-    override val boxIcon = "⧎"
+    override val boxInfoText = RESERVE_BOX_INFO_TEXT
+    override val boxIcon = RESERVE_BOX_INFO_ICON
     override val scaledPadding = dimensions.rescale(TEXT_PADDING)
 
     override fun handleInputInView() {
@@ -28,7 +28,8 @@ class ReserveView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, or
     }
 
     companion object {
-        const val BOX_INFO_TEXT = "Reserve"
+        const val RESERVE_BOX_INFO_TEXT = "Reserve"
+        const val RESERVE_BOX_INFO_ICON = "⧎"
         const val TEXT_PADDING = 16
     }
 }
