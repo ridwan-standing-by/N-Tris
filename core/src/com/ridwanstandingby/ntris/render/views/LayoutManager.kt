@@ -7,6 +7,7 @@ import com.ridwanstandingby.ntris.render.fonts.Fonts
 import com.ridwanstandingby.ntris.render.views.button.ButtonView
 import com.ridwanstandingby.ntris.render.views.pieceDisplay.NextView
 import com.ridwanstandingby.ntris.render.views.pieceDisplay.ReserveView
+import com.ridwanstandingby.ntris.render.views.play.PlayView
 import com.ridwanstandingby.ntris.render.views.score.ScoreView
 
 class LayoutManager(private val dimensions: Dimensions, private val fonts: Fonts) {
@@ -14,27 +15,29 @@ class LayoutManager(private val dimensions: Dimensions, private val fonts: Fonts
     val views: ArrayList<View> = arrayListOf()
 
     fun createViews() {
-        views.add(object : ButtonView(dimensions, fonts, 10.5f, 1.0f, 4f, 4f, "▼") {
+        views.add(PlayView(dimensions, fonts, 0.5f, 1.0f, 10f, 30f))
+
+        views.add(object : ButtonView(dimensions, fonts, 10.5f, 1.0f, 4f, 4f, MOVE_DOWN_BUTTON_ICON) {
             override fun handleInputInView() {}
         })
 
-        views.add(object : ButtonView(dimensions, fonts, 14.5f, 1.0f, 4f, 4f, "▮▮") {
+        views.add(object : ButtonView(dimensions, fonts, 14.5f, 1.0f, 4f, 4f, PAUSE_BUTTON_ICON) {
             override fun handleInputInView() {}
         })
 
-        views.add(object : ButtonView(dimensions, fonts, 10.5f, 5.0f, 4f, 4f, "◀") {
+        views.add(object : ButtonView(dimensions, fonts, 10.5f, 5.0f, 4f, 4f, MOVE_LEFT_BUTTON_ICON) {
             override fun handleInputInView() {}
         })
 
-        views.add(object : ButtonView(dimensions, fonts, 14.5f, 5.0f, 4f, 4f, "▶") {
+        views.add(object : ButtonView(dimensions, fonts, 14.5f, 5.0f, 4f, 4f, MOVE_RIGHT_BUTTON_ICON) {
             override fun handleInputInView() {}
         })
 
-        views.add(object : ButtonView(dimensions, fonts, 10.5f, 9.0f, 4f, 4f, "↶") {
+        views.add(object : ButtonView(dimensions, fonts, 10.5f, 9.0f, 4f, 4f, ROTATE_LEFT_BUTTON_ICON) {
             override fun handleInputInView() {}
         })
 
-        views.add(object : ButtonView(dimensions, fonts, 14.5f, 9.0f, 4f, 4f, "↷") {
+        views.add(object : ButtonView(dimensions, fonts, 14.5f, 9.0f, 4f, 4f, ROTATE_RIGHT_BUTTON_ICON) {
             override fun handleInputInView() {}
         })
 
