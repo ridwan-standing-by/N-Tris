@@ -5,6 +5,9 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.ridwanstandingby.ntris.render.Dimensions
 import com.ridwanstandingby.ntris.render.fonts.Fonts
 import com.ridwanstandingby.ntris.render.views.button.ButtonView
+import com.ridwanstandingby.ntris.render.views.pieceDisplay.NextView
+import com.ridwanstandingby.ntris.render.views.pieceDisplay.ReserveView
+import com.ridwanstandingby.ntris.render.views.score.ScoreView
 
 class LayoutManager(private val dimensions: Dimensions, private val fonts: Fonts) {
 
@@ -15,7 +18,7 @@ class LayoutManager(private val dimensions: Dimensions, private val fonts: Fonts
             override fun handleInputInView() {}
         })
 
-        views.add(object : ButtonView(dimensions, fonts, 14.5f, 1.0f, 4f, 4f, "┃┃") {
+        views.add(object : ButtonView(dimensions, fonts, 14.5f, 1.0f, 4f, 4f, "▮▮") {
             override fun handleInputInView() {}
         })
 
@@ -34,6 +37,10 @@ class LayoutManager(private val dimensions: Dimensions, private val fonts: Fonts
         views.add(object : ButtonView(dimensions, fonts, 14.5f, 9.0f, 4f, 4f, "↷") {
             override fun handleInputInView() {}
         })
+
+        views.add(ReserveView(dimensions, fonts, 10.5f, 13.0f, 8.0f, 7.0f))
+        views.add(ScoreView(dimensions, fonts, 10.5f, 20.0f, 8.0f, 4.0f))
+        views.add(NextView(dimensions, fonts, 10.5f, 24.0f, 8.0f, 7.0f))
     }
 
     fun render(sb: SpriteBatch, sr: ShapeRenderer) {

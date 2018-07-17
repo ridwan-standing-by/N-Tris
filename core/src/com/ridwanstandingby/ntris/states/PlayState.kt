@@ -26,22 +26,21 @@ class PlayState(gsm: GameStateManager) : State(gsm) {
         val block = gsm.dimensions.rescaledBlock()
 
         layoutManager.render(sb, sr)
-        gsm.fonts.boxInfo.draw(sb, "Hello World!", gsm.dimensions.width/2f, gsm.dimensions.height/2f)
-        gsm.fonts.boxInfo.draw(sb, "Hello World!", gsm.dimensions.width/3f, gsm.dimensions.height/3f)
-        sr.rect(block * 0.5f, block, block * 10f, block * 30f)
-        sr.rect(block * 10.5f, block, block * 4, block * 4)
-        sr.rect(block * 14.5f, block, block * 4, block * 4)
-        sr.rect(block * 10.5f, block * 5, block * 4, block * 4)
-        sr.rect(block * 14.5f, block * 5, block * 4, block * 4)
-        sr.rect(block * 10.5f, block * 9, block * 4, block * 4)
-        sr.rect(block * 14.5f, block * 9, block * 4, block * 4)
-        sr.rect(block * 10.5f, block * 13, block * 8, block * 7)
-        sr.rect(block * 10.5f, block * 20, block * 8, block * 4)
-        sr.rect(block * 10.5f, block * 24, block * 8, block * 7)
+//        gsm.fonts.boxInfo.draw(sb, "Hello World!", gsm.dimensions.width/2f, gsm.dimensions.height/2f)
+//        gsm.fonts.boxInfo.draw(sb, "Hello World!", gsm.dimensions.width/3f, gsm.dimensions.height/3f)
+//        sr.rect(block * 0.5f, block, block * 10f, block * 30f)
+//        sr.rect(block * 10.5f, block, block * 4, block * 4)
+//        sr.rect(block * 14.5f, block, block * 4, block * 4)
+//        sr.rect(block * 10.5f, block * 5, block * 4, block * 4)
+//        sr.rect(block * 14.5f, block * 5, block * 4, block * 4)
+//        sr.rect(block * 10.5f, block * 9, block * 4, block * 4)
+//        sr.rect(block * 14.5f, block * 9, block * 4, block * 4)
+//        sr.rect(block * 10.5f, block * 13, block * 8, block * 7)
+//        sr.rect(block * 10.5f, block * 20, block * 8, block * 4)
+//        sr.rect(block * 10.5f, block * 24, block * 8, block * 7)
 
 
-        sr.end()
-        sb.end()
+        endRender(sb, sr)
     }
 
     private fun beginRender(sb: SpriteBatch, sr: ShapeRenderer) {
@@ -49,6 +48,14 @@ class PlayState(gsm: GameStateManager) : State(gsm) {
         sb.begin()
         sr.projectionMatrix = cam.combined
         sr.begin(ShapeRenderer.ShapeType.Line)
+    }
+
+    private fun endRender(sb: SpriteBatch, sr: ShapeRenderer) {
+        // There's a bug in the fonts renderer - need to render a new font for the previous ones to
+        // render!
+        gsm.fonts.dummy.draw(sb, " ", 0f, 0f)
+        sr.end()
+        sb.end()
     }
 
     override fun dispose() {}

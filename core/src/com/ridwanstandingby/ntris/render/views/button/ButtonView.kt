@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Vector2
 import com.ridwanstandingby.ntris.render.Dimensions
+import com.ridwanstandingby.ntris.render.fonts.FontHelper
 import com.ridwanstandingby.ntris.render.fonts.Fonts
 import com.ridwanstandingby.ntris.render.views.View
 
@@ -18,15 +19,9 @@ abstract class ButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: F
     }
 
     private fun renderTextInCentre(sb: SpriteBatch, font: BitmapFont, text: String) {
-        val textDims = getDimensionsOfText(font, text)
+        val textDims = FontHelper.getDimensionsOfText(font, text)
         val x = originX + width/2 - textDims.x/2
         val y = originY + height/2 + textDims.y/2
         font.draw(sb, text, x, y)
-    }
-
-    private fun getDimensionsOfText(font: BitmapFont, text: String): Vector2 {
-        val glyphLayout = GlyphLayout()
-        glyphLayout.setText(font, text)
-        return Vector2(glyphLayout.width, glyphLayout.height)
     }
 }
