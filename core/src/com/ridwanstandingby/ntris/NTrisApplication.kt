@@ -10,7 +10,7 @@ import com.ridwanstandingby.ntris.render.fonts.FontGenerator
 import com.ridwanstandingby.ntris.states.GameStateManager
 import com.ridwanstandingby.ntris.states.PlayState
 
-class NTrisGame : ApplicationAdapter() {
+class NTrisApplication : ApplicationAdapter() {
     private lateinit var batch: SpriteBatch
     private lateinit var shapeRenderer: ShapeRenderer
     private lateinit var gsm: GameStateManager

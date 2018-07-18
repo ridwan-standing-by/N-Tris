@@ -10,7 +10,7 @@ import com.ridwanstandingby.ntris.render.fonts.Fonts
 import com.ridwanstandingby.ntris.render.views.View
 
 
-abstract class ButtonView(dimensions: Dimensions, fonts: Fonts,
+sealed class ButtonView(dimensions: Dimensions, fonts: Fonts,
                           originBlocksX: Float, originBlocksY: Float,
                           blocksWidth: Float, blockHeight: Float,
                           private val icon: String, private val offset: Vector2 = Vector2(0f, 0f)) :
@@ -26,6 +26,36 @@ abstract class ButtonView(dimensions: Dimensions, fonts: Fonts,
         val x = originX + width/2 - textDims.x/2 + dimensions.rescale(offset.x)
         val y = originY + height/2 + textDims.y/2 + dimensions.rescale(offset.y)
         font.draw(sb, text, x, y)
+    }
+
+    class MoveDownButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blockHeight: Float)
+        : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blockHeight, MOVE_DOWN_BUTTON_ICON) {
+        override fun handleInputInView() {}
+    }
+
+    class PauseButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blockHeight: Float)
+        : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blockHeight, PAUSE_BUTTON_ICON, PAUSE_BUTTON_ICON_OFFSET) {
+        override fun handleInputInView() {}
+    }
+
+    class MoveLeftButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blockHeight: Float)
+        : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blockHeight, MOVE_LEFT_BUTTON_ICON) {
+        override fun handleInputInView() {}
+    }
+
+    class MoveRightButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blockHeight: Float)
+        : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blockHeight, MOVE_RIGHT_BUTTON_ICON) {
+        override fun handleInputInView() {}
+    }
+
+    class RotateLeftButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blockHeight: Float)
+        : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blockHeight, ROTATE_LEFT_BUTTON_ICON) {
+        override fun handleInputInView() {}
+    }
+
+    class RotateRightButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blockHeight: Float)
+        : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blockHeight, ROTATE_RIGHT_BUTTON_ICON) {
+        override fun handleInputInView() {}
     }
 
     companion object {
