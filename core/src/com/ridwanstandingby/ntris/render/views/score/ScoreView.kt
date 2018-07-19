@@ -16,7 +16,7 @@ class ScoreView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, orig
     var highLines: Int = 0
 
     private val scaledPadding = dimensions.rescale(TEXT_PADDING)
-    private val ySpacing = FontHelper.getDimensionsOfText(fonts.boxInfo, "I").y + TEXT_PADDING
+    private val ySpacing = FontHelper.getDimensionsOfText(fonts.boxInfo, TEXT_SCORE.format(0F)).y + scaledPadding
 
     override fun handleInputInView() {}
 

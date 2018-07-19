@@ -4,9 +4,6 @@ import kotlin.math.min
 
 class Dimensions(val width: Int, val height: Int) {
 
-    val scaleX: Float
-    val scaleY: Float
-
     val scale : Float
 
     val gameWidth = 1080
@@ -16,14 +13,14 @@ class Dimensions(val width: Int, val height: Int) {
 
 
     init {
-        scaleX = width / gameWidth.toFloat()
-        scaleY = height / gameHeight.toFloat()
+        val scaleX = width / gameWidth.toFloat()
+        val scaleY = height / gameHeight.toFloat()
 
         scale = min(scaleX, scaleY)
     }
 
-    fun rescale(x: Int): Float = (scaleX * x.toFloat())
-    fun rescale(x: Float): Float = scaleX * x
+    fun rescale(x: Int): Float = (scale * x.toFloat())
+    fun rescale(x: Float): Float = scale * x
 
     fun rescaledBlock() = block * scale
 }
