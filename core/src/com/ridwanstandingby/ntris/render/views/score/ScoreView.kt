@@ -54,8 +54,8 @@ class ScoreView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, orig
 
     companion object {
         const val TEXT_PADDING = 16
-        const val TEXT_SCORE = "  Score%1$7s"
-        const val TEXT_LINES = "  Lines%1$7s"
+        const val TEXT_SCORE = "  Score%1$9s"
+        const val TEXT_LINES = "  Lines%1$9s"
         const val HIGH_SCORE_ICON = "★"
         const val CURRENT_SCORE_ICON = "▶"
     }

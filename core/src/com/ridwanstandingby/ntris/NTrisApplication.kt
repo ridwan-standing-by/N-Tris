@@ -22,10 +22,16 @@ class NTrisApplication : ApplicationAdapter() {
         initPlayState()
     }
 
+    override fun resize(width: Int, height: Int) {
+        super.resize(width, height)
+        gsm.calibrateSize(Gdx.graphics.width, Gdx.graphics.height)
+        gsm.pop()
+        initPlayState()
+    }
+
     private fun initGameStateManager() {
-        val dimensions = Dimensions(Gdx.graphics.width, Gdx.graphics.height)
-        val fonts = FontGenerator(dimensions).generate()
-        gsm = GameStateManager(dimensions, fonts)
+        gsm = GameStateManager()
+        gsm.calibrateSize(Gdx.graphics.width, Gdx.graphics.height)
     }
 
     private fun initPlayState() {

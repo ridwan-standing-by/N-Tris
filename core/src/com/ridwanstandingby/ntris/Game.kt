@@ -1,4 +1,4 @@
 package com.ridwanstandingby.ntris
 
-class GameState {
+class Game {
 }

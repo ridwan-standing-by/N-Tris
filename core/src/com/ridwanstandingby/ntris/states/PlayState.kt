@@ -10,6 +10,10 @@ class PlayState(gsm: GameStateManager) : State(gsm) {
 
     private var views : List<View> = LayoutArranger(gsm.dimensions, gsm.fonts).createViews()
 
+    fun refreshViews() {
+        views = LayoutArranger(gsm.dimensions, gsm.fonts).createViews()
+    }
+
     override fun handleInput() {
 
     }
