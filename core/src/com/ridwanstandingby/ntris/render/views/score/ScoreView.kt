@@ -2,6 +2,7 @@ package com.ridwanstandingby.ntris.render.views.score
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import com.ridwanstandingby.ntris.input.KeyInput.SCORE_KEYS
 import com.ridwanstandingby.ntris.input.RawPlayInput
 import com.ridwanstandingby.ntris.render.Dimensions
 import com.ridwanstandingby.ntris.render.fonts.FontHelper
@@ -19,7 +20,9 @@ class ScoreView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, orig
     private val scaledPadding = dimensions.rescale(TEXT_PADDING)
     private val ySpacing = FontHelper.getDimensionsOfText(fonts.boxInfo, TEXT_SCORE.format(0F)).y + scaledPadding
 
-    override fun handleInputInView(rawPlayInput: RawPlayInput) {
+    override val inputKeys = SCORE_KEYS
+
+    override fun handleInputIsInView(rawPlayInput: RawPlayInput) {
         rawPlayInput.score = true
     }
 

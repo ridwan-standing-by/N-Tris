@@ -17,9 +17,10 @@ abstract class View(val dimensions: Dimensions, val fonts: Fonts, val originBloc
         sr.rect(originX, originY, width, height)
     }
 
-    fun wasInputInView(x: Float, y: Float): Boolean = originX <= x && x < (originX + width)
+    fun wasPointerInView(x: Float, y: Float): Boolean = originX <= x && x < (originX + width)
             && originY <= y && y < originY + height
 
-    abstract fun handleInputInView(rawPlayInput: RawPlayInput)
+    abstract val inputKeys: List<Int>
+    abstract fun handleInputIsInView(rawPlayInput: RawPlayInput)
     abstract fun render(sb: SpriteBatch, sr: ShapeRenderer)
 }

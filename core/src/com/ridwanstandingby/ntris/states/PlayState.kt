@@ -13,8 +13,7 @@ class PlayState(gsm: GameStateManager) : State(gsm) {
     private val rawInputProcessor = RawPlayInputProcessor(gsm)
 
     override fun handleInput() {
-        gsm.game.rawPlayInput = rawInputProcessor.getRawInput(views)
-        gsm.game.resolveInput()
+        gsm.game.resolvePlayInput(rawInputProcessor.getRawInput(views))
     }
 
     override fun update(dt: Float) {

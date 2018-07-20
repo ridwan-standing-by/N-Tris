@@ -7,7 +7,8 @@ import com.ridwanstandingby.ntris.states.GameStateManager
 
 class RawPlayInputProcessor(private val gsm: GameStateManager) {
 
-    fun getRawInput(views: List<View>): RawPlayInput = getRawPointerInput(views)
+    fun getRawInput(views: List<View>): RawPlayInput =
+        getRawPointerInput(views) or getKeyboardInput(views)
 
     private fun getRawPointerInput(views: List<View>): RawPlayInput {
         val pointers = getAllPointers()
@@ -18,8 +19,8 @@ class RawPlayInputProcessor(private val gsm: GameStateManager) {
             RawPlayInput().also { rawPlayInput ->
                 pointers.forEach { pointer ->
                     views.forEach { view ->
-                        if (view.wasInputInView(pointer.x, pointer.y))
-                            view.handleInputInView(rawPlayInput)
+                        if (view.wasPointerInView(pointer.x, pointer.y))
+                            view.handleInputIsInView(rawPlayInput)
                     }
                 }
             }
@@ -34,6 +35,16 @@ class RawPlayInputProcessor(private val gsm: GameStateManager) {
 
     private fun getPositionOfPointer(i: Int): Vector2 = // NOTE: y is from top on input.getY
             Vector2(Gdx.input.getX(i).toFloat(), gsm.dimensions.height.toFloat() - Gdx.input.getY(i))
+
+    private fun getKeyboardInput(views: List<View>): RawPlayInput =
+            RawPlayInput().also { rawPlayInput ->
+                views.forEach { view ->
+                    view.inputKeys.forEach { key ->
+                        if (Gdx.input.isKeyPressed(key))
+                            view.handleInputIsInView(rawPlayInput)
+                    }
+                }
+            }
 
     companion object {
         private const val MAX_POINTERS = 20

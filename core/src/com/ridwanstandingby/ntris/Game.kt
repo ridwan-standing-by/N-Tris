@@ -4,9 +4,7 @@ import com.ridwanstandingby.ntris.input.RawPlayInput
 
 class Game {
 
-    var rawPlayInput = RawPlayInput()
-
-    fun resolveInput() {
+    fun resolvePlayInput(rawPlayInput: RawPlayInput) {
         // TODO
     }
 }
