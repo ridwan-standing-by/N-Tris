@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Vector2
+import com.ridwanstandingby.ntris.input.RawPlayInput
 import com.ridwanstandingby.ntris.render.Dimensions
 import com.ridwanstandingby.ntris.render.fonts.FontHelper
 import com.ridwanstandingby.ntris.render.fonts.Fonts
@@ -30,32 +31,44 @@ sealed class ButtonView(dimensions: Dimensions, fonts: Fonts,
 
     class MoveDownButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blockHeight: Float)
         : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blockHeight, MOVE_DOWN_BUTTON_ICON) {
-        override fun handleInputInView() {}
+        override fun handleInputInView(rawPlayInput: RawPlayInput) {
+            rawPlayInput.moveDown = true
+        }
     }
 
     class PauseButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blockHeight: Float)
         : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blockHeight, PAUSE_BUTTON_ICON, PAUSE_BUTTON_ICON_OFFSET) {
-        override fun handleInputInView() {}
+        override fun handleInputInView(rawPlayInput: RawPlayInput) {
+            rawPlayInput.pause = true
+        }
     }
 
     class MoveLeftButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blockHeight: Float)
         : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blockHeight, MOVE_LEFT_BUTTON_ICON) {
-        override fun handleInputInView() {}
+        override fun handleInputInView(rawPlayInput: RawPlayInput) {
+            rawPlayInput.moveLeft = true
+        }
     }
 
     class MoveRightButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blockHeight: Float)
         : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blockHeight, MOVE_RIGHT_BUTTON_ICON) {
-        override fun handleInputInView() {}
+        override fun handleInputInView(rawPlayInput: RawPlayInput) {
+            rawPlayInput.moveRight = true
+        }
     }
 
     class RotateLeftButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blockHeight: Float)
         : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blockHeight, ROTATE_LEFT_BUTTON_ICON) {
-        override fun handleInputInView() {}
+        override fun handleInputInView(rawPlayInput: RawPlayInput) {
+            rawPlayInput.rotateLeft = true
+        }
     }
 
     class RotateRightButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blockHeight: Float)
         : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blockHeight, ROTATE_RIGHT_BUTTON_ICON) {
-        override fun handleInputInView() {}
+        override fun handleInputInView(rawPlayInput: RawPlayInput) {
+            rawPlayInput.rotateRight = true
+        }
     }
 
     companion object {

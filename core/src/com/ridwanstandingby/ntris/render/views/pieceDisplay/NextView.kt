@@ -2,6 +2,7 @@ package com.ridwanstandingby.ntris.render.views.pieceDisplay
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import com.ridwanstandingby.ntris.input.RawPlayInput
 import com.ridwanstandingby.ntris.render.Dimensions
 import com.ridwanstandingby.ntris.render.fonts.Fonts
 
@@ -12,8 +13,8 @@ class NextView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, origi
     override val boxIcon = NEXT_BOX_INFO_ICON
     override val scaledPadding = dimensions.rescale(TEXT_PADDING)
 
-    override fun handleInputInView() {
-        // TODO
+    override fun handleInputInView(rawPlayInput: RawPlayInput) {
+        rawPlayInput.next = true
     }
 
     override fun renderPiece() {

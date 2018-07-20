@@ -10,7 +10,7 @@ import java.util.*
 
 class GameStateManager {
 
-    val gameState = Game()
+    val game = Game()
 
     lateinit var dimensions: Dimensions
     lateinit var fonts: Fonts

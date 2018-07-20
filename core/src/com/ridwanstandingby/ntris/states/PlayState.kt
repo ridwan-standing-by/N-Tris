@@ -2,6 +2,7 @@ package com.ridwanstandingby.ntris.states
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import com.ridwanstandingby.ntris.input.RawPlayInputProcessor
 import com.ridwanstandingby.ntris.render.views.LayoutArranger
 import com.ridwanstandingby.ntris.render.views.View
 
@@ -9,17 +10,15 @@ import com.ridwanstandingby.ntris.render.views.View
 class PlayState(gsm: GameStateManager) : State(gsm) {
 
     private var views : List<View> = LayoutArranger(gsm.dimensions, gsm.fonts).createViews()
-
-    fun refreshViews() {
-        views = LayoutArranger(gsm.dimensions, gsm.fonts).createViews()
-    }
+    private val rawInputProcessor = RawPlayInputProcessor(gsm)
 
     override fun handleInput() {
-
+        gsm.game.rawPlayInput = rawInputProcessor.getRawInput(views)
+        gsm.game.resolveInput()
     }
 
     override fun update(dt: Float) {
-
+        handleInput()
     }
 
     override fun render(sb: SpriteBatch, sr: ShapeRenderer) {
