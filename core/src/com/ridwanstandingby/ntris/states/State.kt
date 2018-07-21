@@ -9,7 +9,7 @@ abstract class State(protected var gsm: GameStateManager) {
     protected val cam: OrthographicCamera = OrthographicCamera()
 
     init {
-        cam.setToOrtho(false, gsm.dimensions.width.toFloat(), gsm.dimensions.height.toFloat())
+        cam.setToOrtho(false, gsm.dimensions.screenWidth.toFloat(), gsm.dimensions.screenHeight.toFloat())
     }
 
     abstract fun handleInput()

@@ -34,7 +34,7 @@ class RawPlayInputProcessor(private val gsm: GameStateManager) {
             }
 
     private fun getPositionOfPointer(i: Int): Vector2 = // NOTE: y is from top on input.getY
-            Vector2(Gdx.input.getX(i).toFloat(), gsm.dimensions.height.toFloat() - Gdx.input.getY(i))
+            Vector2(Gdx.input.getX(i).toFloat(), gsm.dimensions.screenHeight.toFloat() - Gdx.input.getY(i))
 
     private fun getKeyboardInput(views: List<View>): RawPlayInput =
             RawPlayInput().also { rawPlayInput ->
