@@ -1,6 +1,6 @@
 package com.ridwanstandingby.ntris.input.debounce
 
-abstract class Debouncer(block: () -> Unit) {
+abstract class Debouncer(protected val block: () -> Unit) {
 
     var nowPressed = false
     private var wasPressed = false

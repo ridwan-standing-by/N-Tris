@@ -4,7 +4,6 @@ import com.ridwanstandingby.ntris.Game
 
 class EventHandler {
 
-    val clock = Clock()
     private val eventQueue = mutableListOf<Event>()
 
     fun queue(event: Event) {
@@ -12,9 +11,11 @@ class EventHandler {
     }
 
     fun handleEvents(game: Game) {
-        eventQueue.forEach { event ->
-            event.block(game)
-            eventQueue.remove(event)
-        }
+        eventQueue.filter { event -> !event.done }
+                .forEach { event ->
+                    event.block(game)
+                    event.done = true
+                }
+        eventQueue.removeAll { event -> event.done }
     }
 }

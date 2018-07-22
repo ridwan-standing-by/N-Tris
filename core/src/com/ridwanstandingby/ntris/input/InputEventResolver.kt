@@ -1,5 +1,6 @@
 package com.ridwanstandingby.ntris.input
 
+import com.ridwanstandingby.ntris.events.Clock
 import com.ridwanstandingby.ntris.events.EventHandler
 import com.ridwanstandingby.ntris.events.Events
 import com.ridwanstandingby.ntris.input.debounce.InputDebounceTimes.MOVE_DOWN_DEBOUNCE_TIME
@@ -10,21 +11,21 @@ import com.ridwanstandingby.ntris.input.debounce.InputDebounceTimes.ROTATE_RIGHT
 import com.ridwanstandingby.ntris.input.debounce.SimpleDebouncer
 import com.ridwanstandingby.ntris.input.debounce.TimedDebouncer
 
-class InputEventResolver(private val eventHandler: EventHandler) {
+class InputEventResolver(clock: Clock, private val eventHandler: EventHandler) {
 
-    private val moveDownDebouncer = TimedDebouncer(eventHandler.clock, MOVE_DOWN_DEBOUNCE_TIME) {
+    private val moveDownDebouncer = TimedDebouncer(clock, MOVE_DOWN_DEBOUNCE_TIME) {
         eventHandler.queue(Events.CurrentPieceMoveDown())
     }
-    private val moveLeftDebouncer = TimedDebouncer(eventHandler.clock, MOVE_LEFT_DEBOUNCE_TIME) {
+    private val moveLeftDebouncer = TimedDebouncer(clock, MOVE_LEFT_DEBOUNCE_TIME) {
         eventHandler.queue(Events.CurrentPieceMoveLeft())
     }
-    private val moveRightDebouncer = TimedDebouncer(eventHandler.clock, MOVE_RIGHT_DEBOUNCE_TIME) {
+    private val moveRightDebouncer = TimedDebouncer(clock, MOVE_RIGHT_DEBOUNCE_TIME) {
         eventHandler.queue(Events.CurrentPieceMoveRight())
     }
-    private val rotateLeftDebouncer = TimedDebouncer(eventHandler.clock, ROTATE_LEFT_DEBOUNCE_TIME) {
+    private val rotateLeftDebouncer = TimedDebouncer(clock, ROTATE_LEFT_DEBOUNCE_TIME) {
         eventHandler.queue(Events.CurrentPieceRotateLeft())
     }
-    private val rotateRightDebouncer = TimedDebouncer(eventHandler.clock, ROTATE_RIGHT_DEBOUNCE_TIME) {
+    private val rotateRightDebouncer = TimedDebouncer(clock, ROTATE_RIGHT_DEBOUNCE_TIME) {
         eventHandler.queue(Events.CurrentPieceRotateRight())
     }
     private val reserveDebouncer = SimpleDebouncer {

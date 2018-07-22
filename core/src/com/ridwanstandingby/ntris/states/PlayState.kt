@@ -18,6 +18,7 @@ class PlayState(gsm: GameStateManager) : State(gsm) {
 
     override fun update(dt: Float) {
         handleInput()
+        gsm.game.update(dt)
     }
 
     override fun render(sb: SpriteBatch, sr: ShapeRenderer) {

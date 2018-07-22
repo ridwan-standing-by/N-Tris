@@ -1,43 +1,50 @@
 package com.ridwanstandingby.ntris
 
+import com.ridwanstandingby.ntris.events.Clock
 import com.ridwanstandingby.ntris.events.EventHandler
 import com.ridwanstandingby.ntris.input.InputEventResolver
 import com.ridwanstandingby.ntris.input.RawPlayInput
 
 class Game {
 
+    private val clock = Clock()
     private val eventHandler = EventHandler()
-    private val inputEventResolver = InputEventResolver(eventHandler)
+    private val inputEventResolver = InputEventResolver(clock, eventHandler)
 
     fun resolvePlayInput(rawPlayInput: RawPlayInput) {
         inputEventResolver.resolveInput(rawPlayInput)
     }
 
     fun currentPieceMoveDown() {
-        // TODO
+        System.out.println("MOVE DOWN")
     }
 
     fun currentPieceMoveLeft() {
-        // TODO
+        System.out.println("MOVE LEFT")
     }
 
     fun currentPieceMoveRight() {
-        // TODO
+        System.out.println("MOVE RIGHT")
     }
 
     fun currentPieceRotateLeft() {
-        // TODO
+        System.out.println("ROTATE LEFT")
     }
 
     fun currentPieceRotateRight() {
-        // TODO
+        System.out.println("ROTATE RIGHT")
     }
 
     fun togglePause() {
-        // TODO
+        System.out.println("TOGGLE PAUSE")
     }
 
     fun swapReserveAttempt() {
-        // TODO
+        System.out.println("SWAP RESERVE ATTEMPT")
+    }
+
+    fun update(dt: Float) {
+        eventHandler.handleEvents(this)
+        clock.tick(dt)
     }
 }

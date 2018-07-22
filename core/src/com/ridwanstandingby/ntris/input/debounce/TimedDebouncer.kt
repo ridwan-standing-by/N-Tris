@@ -4,7 +4,7 @@ import com.ridwanstandingby.ntris.events.Clock
 
 class TimedDebouncer(private val clock: Clock,
                      private val debounceTime: Float,
-                     private val block: () -> Unit) : Debouncer(block) {
+                     block: () -> Unit) : Debouncer(block) {
 
     private var lastInvoked: Float = 0F
 
