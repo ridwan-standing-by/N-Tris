@@ -1,5 +1,7 @@
 package com.ridwanstandingby.ntris.states
 
+import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.InputAdapter
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.ridwanstandingby.ntris.input.RawPlayInputProcessor
@@ -12,12 +14,16 @@ class PlayState(gsm: GameStateManager) : State(gsm) {
     private var views : List<View> = LayoutArranger(gsm.dimensions, gsm.fonts).createViews()
     private val rawInputProcessor = RawPlayInputProcessor(gsm)
 
-    override fun handleInput() {
+    init {
+        configureInputProcessor()
+    }
+
+    override fun handleInput() : Boolean {
         gsm.game.resolvePlayInput(rawInputProcessor.getRawInput(views))
+        return true
     }
 
     override fun update(dt: Float) {
-        handleInput()
         gsm.game.update(dt)
     }
 
@@ -42,4 +48,14 @@ class PlayState(gsm: GameStateManager) : State(gsm) {
     }
 
     override fun dispose() {}
+
+    private fun configureInputProcessor() {
+        Gdx.input.inputProcessor = object : InputAdapter() {
+            override fun keyDown(keycode: Int) = handleInput()
+            override fun touchUp(screenX: Int, screenY: Int, pointer: Int, button: Int) = handleInput()
+            override fun touchDown(screenX: Int, screenY: Int, pointer: Int, button: Int) = handleInput()
+            override fun touchDragged(screenX: Int, screenY: Int, pointer: Int) = handleInput()
+            override fun keyUp(keycode: Int) = handleInput()
+        }
+    }
 }

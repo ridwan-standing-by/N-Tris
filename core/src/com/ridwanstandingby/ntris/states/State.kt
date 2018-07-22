@@ -12,7 +12,7 @@ abstract class State(protected var gsm: GameStateManager) {
         cam.setToOrtho(false, gsm.dimensions.screenWidth.toFloat(), gsm.dimensions.screenHeight.toFloat())
     }
 
-    abstract fun handleInput()
+    abstract fun handleInput(): Boolean
     abstract fun update(dt: Float)
     abstract fun render(sb: SpriteBatch, sr: ShapeRenderer)
     abstract fun dispose()
