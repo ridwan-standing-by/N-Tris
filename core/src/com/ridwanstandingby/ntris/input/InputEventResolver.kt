@@ -39,8 +39,8 @@ class InputEventResolver(clock: Clock, private val eventHandler: EventHandler) {
         updateDebouncers(input)
         resolveMovementInput(input)
         resolveRotationInput(input)
-        resolveReserveInput(input)
-        resolvePauseInput(input)
+        resolveReserveInput()
+        resolvePauseInput()
     }
 
     private fun updateDebouncers(input: RawPlayInput) {
@@ -55,24 +55,24 @@ class InputEventResolver(clock: Clock, private val eventHandler: EventHandler) {
 
     private fun resolveMovementInput(input: RawPlayInput) {
         if ((input.moveLeft and input.moveRight).not()) {
-            if (input.moveLeft) moveLeftDebouncer.invokeDebounced()
-            if (input.moveRight) moveRightDebouncer.invokeDebounced()
+            moveLeftDebouncer.invokeDebounced()
+            moveRightDebouncer.invokeDebounced()
         }
-        if (input.moveDown) moveDownDebouncer.invokeDebounced()
+        moveDownDebouncer.invokeDebounced()
     }
 
     private fun resolveRotationInput(input: RawPlayInput) {
         if ((input.rotateLeft and input.rotateRight).not()) {
-            if (input.rotateLeft) rotateLeftDebouncer.invokeDebounced()
-            if (input.rotateRight) rotateRightDebouncer.invokeDebounced()
+            rotateLeftDebouncer.invokeDebounced()
+            rotateRightDebouncer.invokeDebounced()
         }
     }
 
-    private fun resolveReserveInput(input: RawPlayInput) {
-        if (input.reserve) reserveDebouncer.invokeDebounced()
+    private fun resolveReserveInput() {
+        reserveDebouncer.invokeDebounced()
     }
 
-    private fun resolvePauseInput(input: RawPlayInput) {
-        if (input.pause) pauseDebouncer.invokeDebounced()
+    private fun resolvePauseInput() {
+        pauseDebouncer.invokeDebounced()
     }
 }

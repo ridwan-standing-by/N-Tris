@@ -11,19 +11,20 @@ import com.ridwanstandingby.ntris.render.views.View
 
 class PlayState(gsm: GameStateManager) : State(gsm) {
 
-    private var views : List<View> = LayoutArranger(gsm.dimensions, gsm.fonts).createViews()
+    private var views: List<View> = LayoutArranger(gsm.dimensions, gsm.fonts).createViews()
     private val rawInputProcessor = RawPlayInputProcessor(gsm)
 
     init {
         configureInputProcessor()
     }
 
-    override fun handleInput() : Boolean {
+    override fun handleInput(): Boolean {
         gsm.game.resolvePlayInput(rawInputProcessor.getRawInput(views))
         return true
     }
 
     override fun update(dt: Float) {
+        handleInput()
         gsm.game.update(dt)
     }
 
