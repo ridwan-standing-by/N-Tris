@@ -30,7 +30,7 @@ class PlayState(gsm: GameStateManager) : State(gsm) {
 
     override fun render(sb: SpriteBatch, sr: ShapeRenderer) {
         beginRender(sb, sr)
-        views.forEach { it.render(sb, sr) }
+        views.forEach { it.render(sb, sr, gsm.game) }
         endRender(sb, sr)
     }
 

@@ -1,4 +1,4 @@
-package com.ridwanstandingby.ntris.polyomino
+package com.ridwanstandingby.ntris.polyomino.geometry
 
 class Array2D<T>(val xSize: Int, val ySize: Int, val array: Array<Array<T>>) {
 
@@ -33,4 +33,10 @@ class Array2D<T>(val xSize: Int, val ySize: Int, val array: Array<Array<T>>) {
     inline fun forEachIndexed(operation: (x: Int, y: Int, T) -> Unit) {
         array.forEachIndexed { x, p -> p.forEachIndexed { y, t -> operation.invoke(x, y, t) } }
     }
+
+    fun toCoordinateSet(condition: (T) -> Boolean) = mutableSetOf<IntVector2>().also { list ->
+        this.forEachIndexed { x, y, b ->
+            if (condition(b)) list.add(IntVector2(x, y))
+        }
+    }.toSet()
 }

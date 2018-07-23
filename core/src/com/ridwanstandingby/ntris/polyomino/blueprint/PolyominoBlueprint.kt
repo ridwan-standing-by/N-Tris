@@ -1,6 +1,6 @@
 package com.ridwanstandingby.ntris.polyomino.blueprint
 
-import com.ridwanstandingby.ntris.polyomino.Array2D
+import com.ridwanstandingby.ntris.polyomino.geometry.Array2D
 
 data class PolyominoBlueprint(
         val rank: Int,

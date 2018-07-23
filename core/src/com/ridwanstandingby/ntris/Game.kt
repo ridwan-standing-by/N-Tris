@@ -1,10 +1,14 @@
 package com.ridwanstandingby.ntris
 
+import com.badlogic.gdx.graphics.Color
 import com.ridwanstandingby.ntris.events.Clock
 import com.ridwanstandingby.ntris.events.EventHandler
 import com.ridwanstandingby.ntris.input.InputEventResolver
 import com.ridwanstandingby.ntris.input.RawPlayInput
+import com.ridwanstandingby.ntris.polyomino.Polyomino
+import com.ridwanstandingby.ntris.polyomino.blueprint.PolyominoBlueprintHolder.Companion.rankToIndex
 import com.ridwanstandingby.ntris.polyomino.blueprint.PolyominoBlueprintLoader
+import com.ridwanstandingby.ntris.polyomino.geometry.IntVector2
 
 class Game {
 
@@ -12,6 +16,8 @@ class Game {
     private val eventHandler = EventHandler()
     private val inputEventResolver = InputEventResolver(clock, eventHandler)
     private val polyominoBlueprintHolder = PolyominoBlueprintLoader().load()
+
+    var currentPiece = Polyomino(polyominoBlueprintHolder.polyominoBlueprints[rankToIndex(4)][3], IntVector2(5,10), Color.CYAN)
 
     fun resolvePlayInput(rawPlayInput: RawPlayInput) {
         inputEventResolver.resolveInput(rawPlayInput)

@@ -2,6 +2,7 @@ package com.ridwanstandingby.ntris.render.views.play
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import com.ridwanstandingby.ntris.Game
 import com.ridwanstandingby.ntris.input.KeyInput.PLAY_KEYS
 import com.ridwanstandingby.ntris.input.RawPlayInput
 import com.ridwanstandingby.ntris.render.Dimensions
@@ -17,7 +18,12 @@ class PlayView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, origi
         rawPlayInput.play = true
     }
 
-    override fun render(sb: SpriteBatch, sr: ShapeRenderer) {
+    override fun render(sb: SpriteBatch, sr: ShapeRenderer, game: Game) {
         renderBorder(sr)
+        renderCurrentPiece(sb, game)
+    }
+
+    private fun renderCurrentPiece(sb: SpriteBatch, game: Game) {
+        
     }
 }

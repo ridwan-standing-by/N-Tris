@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Vector2
+import com.ridwanstandingby.ntris.Game
 import com.ridwanstandingby.ntris.input.KeyInput.MOVE_DOWN_KEYS
 import com.ridwanstandingby.ntris.input.KeyInput.MOVE_LEFT_KEYS
 import com.ridwanstandingby.ntris.input.KeyInput.MOVE_RIGHT_KEYS
@@ -23,7 +24,7 @@ sealed class ButtonView(dimensions: Dimensions, fonts: Fonts,
                           private val icon: String, private val offset: Vector2 = Vector2(0f, 0f)) :
         View(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blockHeight) {
 
-    override fun render(sb: SpriteBatch, sr: ShapeRenderer) {
+    override fun render(sb: SpriteBatch, sr: ShapeRenderer, game: Game) {
         renderBorder(sr)
         renderTextInCentre(sb, fonts.buttonCharacter, icon)
     }

@@ -1,6 +1,7 @@
 package com.ridwanstandingby.ntris.render.views.pieceDisplay
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import com.ridwanstandingby.ntris.Game
 import com.ridwanstandingby.ntris.render.Dimensions
 import com.ridwanstandingby.ntris.render.fonts.FontHelper
 import com.ridwanstandingby.ntris.render.fonts.Fonts
@@ -13,7 +14,7 @@ abstract class PieceDisplayView(dimensions: Dimensions, fonts: Fonts, originBloc
     protected abstract val boxIcon: String
     protected abstract val scaledPadding: Float
 
-    protected abstract fun renderPiece()
+    protected abstract fun renderPiece(sb: SpriteBatch, game: Game)
 
     protected fun renderText(sb: SpriteBatch) {
         val x = originX + scaledPadding

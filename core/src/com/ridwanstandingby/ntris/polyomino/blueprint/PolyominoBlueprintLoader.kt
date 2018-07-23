@@ -1,7 +1,7 @@
 package com.ridwanstandingby.ntris.polyomino.blueprint
 
 import com.badlogic.gdx.Gdx
-import com.ridwanstandingby.ntris.polyomino.Array2D
+import com.ridwanstandingby.ntris.polyomino.geometry.Array2D
 import com.ridwanstandingby.ntris.polyomino.PolyominoConstants.MAX_RANK
 import com.ridwanstandingby.ntris.polyomino.PolyominoConstants.MIN_RANK
 

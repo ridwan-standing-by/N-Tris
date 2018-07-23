@@ -2,6 +2,7 @@ package com.ridwanstandingby.ntris.render.views.pieceDisplay
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import com.ridwanstandingby.ntris.Game
 import com.ridwanstandingby.ntris.input.KeyInput.NEXT_KEYS
 import com.ridwanstandingby.ntris.input.RawPlayInput
 import com.ridwanstandingby.ntris.render.Dimensions
@@ -19,15 +20,15 @@ class NextView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, origi
         rawPlayInput.next = true
     }
 
-    override fun renderPiece() {
+    override fun renderPiece(sb: SpriteBatch, game: Game) {
         // TODO
     }
 
-    override fun render(sb: SpriteBatch, sr: ShapeRenderer) {
+    override fun render(sb: SpriteBatch, sr: ShapeRenderer, game: Game) {
         renderBorder(sr)
         renderText(sb)
         renderIcon(sb)
-        renderPiece()
+        renderPiece(sb, game)
     }
 
     companion object {

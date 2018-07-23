@@ -2,6 +2,7 @@ package com.ridwanstandingby.ntris.render.views.score
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import com.ridwanstandingby.ntris.Game
 import com.ridwanstandingby.ntris.input.KeyInput.SCORE_KEYS
 import com.ridwanstandingby.ntris.input.RawPlayInput
 import com.ridwanstandingby.ntris.render.Dimensions
@@ -26,7 +27,7 @@ class ScoreView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, orig
         rawPlayInput.score = true
     }
 
-    override fun render(sb: SpriteBatch, sr: ShapeRenderer) {
+    override fun render(sb: SpriteBatch, sr: ShapeRenderer, game: Game) {
         renderBorder(sr)
         renderScoreAndCharacters(sb)
     }

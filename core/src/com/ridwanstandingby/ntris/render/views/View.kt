@@ -2,6 +2,7 @@ package com.ridwanstandingby.ntris.render.views
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import com.ridwanstandingby.ntris.Game
 import com.ridwanstandingby.ntris.input.RawPlayInput
 import com.ridwanstandingby.ntris.render.Dimensions
 import com.ridwanstandingby.ntris.render.fonts.Fonts
@@ -22,5 +23,5 @@ abstract class View(val dimensions: Dimensions, val fonts: Fonts, val originBloc
 
     abstract val inputKeys: List<Int>
     abstract fun handleInputIsInView(rawPlayInput: RawPlayInput)
-    abstract fun render(sb: SpriteBatch, sr: ShapeRenderer)
+    abstract fun render(sb: SpriteBatch, sr: ShapeRenderer, game: Game)
 }
