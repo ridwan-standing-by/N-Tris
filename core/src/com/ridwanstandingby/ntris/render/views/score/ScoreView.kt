@@ -10,8 +10,8 @@ import com.ridwanstandingby.ntris.render.fonts.FontHelper
 import com.ridwanstandingby.ntris.render.fonts.Fonts
 import com.ridwanstandingby.ntris.render.views.View
 
-class ScoreView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blockHeight: Float) :
-        View(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blockHeight) {
+class ScoreView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blocksHeight: Float) :
+        View(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blocksHeight) {
 
     var score: Int = 0
     var lines: Int = 0

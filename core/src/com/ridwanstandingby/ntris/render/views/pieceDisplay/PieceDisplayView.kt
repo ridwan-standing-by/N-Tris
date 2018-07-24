@@ -2,19 +2,27 @@ package com.ridwanstandingby.ntris.render.views.pieceDisplay
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.ridwanstandingby.ntris.Game
+import com.ridwanstandingby.ntris.polyomino.Polyomino
+import com.ridwanstandingby.ntris.polyomino.geometry.IntVector2
 import com.ridwanstandingby.ntris.render.Dimensions
 import com.ridwanstandingby.ntris.render.fonts.FontHelper
 import com.ridwanstandingby.ntris.render.fonts.Fonts
+import com.ridwanstandingby.ntris.render.polyomino.PolyominoRenderer
 import com.ridwanstandingby.ntris.render.views.View
 
-abstract class PieceDisplayView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blockHeight: Float) :
-        View(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blockHeight) {
+abstract class PieceDisplayView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blocksHeight: Float) :
+        View(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blocksHeight) {
+
+    private val polyominoRenderer = PolyominoRenderer(dimensions, originX, originY)
 
     protected abstract val boxInfoText: String
     protected abstract val boxIcon: String
     protected abstract val scaledPadding: Float
 
-    protected abstract fun renderPiece(sb: SpriteBatch, game: Game)
+    protected fun renderPiece(sb: SpriteBatch, polyomino: Polyomino) {
+        val offset = IntVector2(blocksWidth, blocksHeight) / 2
+        polyominoRenderer.render(sb, polyomino, offset)
+    }
 
     protected fun renderText(sb: SpriteBatch) {
         val x = originX + scaledPadding

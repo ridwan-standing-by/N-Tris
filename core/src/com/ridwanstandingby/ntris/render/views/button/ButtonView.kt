@@ -20,9 +20,9 @@ import com.ridwanstandingby.ntris.render.views.View
 
 sealed class ButtonView(dimensions: Dimensions, fonts: Fonts,
                           originBlocksX: Float, originBlocksY: Float,
-                          blocksWidth: Float, blockHeight: Float,
+                          blocksWidth: Float, blocksHeight: Float,
                           private val icon: String, private val offset: Vector2 = Vector2(0f, 0f)) :
-        View(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blockHeight) {
+        View(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blocksHeight) {
 
     override fun render(sb: SpriteBatch, sr: ShapeRenderer, game: Game) {
         renderBorder(sr)
@@ -36,48 +36,48 @@ sealed class ButtonView(dimensions: Dimensions, fonts: Fonts,
         font.draw(sb, text, x, y)
     }
 
-    class MoveDownButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blockHeight: Float)
-        : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blockHeight, MOVE_DOWN_BUTTON_ICON) {
+    class MoveDownButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blocksHeight: Float)
+        : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blocksHeight, MOVE_DOWN_BUTTON_ICON) {
         override val inputKeys = MOVE_DOWN_KEYS
         override fun handleInputIsInView(rawPlayInput: RawPlayInput) {
             rawPlayInput.moveDown = true
         }
     }
 
-    class PauseButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blockHeight: Float)
-        : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blockHeight, PAUSE_BUTTON_ICON, PAUSE_BUTTON_ICON_OFFSET) {
+    class PauseButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blocksHeight: Float)
+        : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blocksHeight, PAUSE_BUTTON_ICON, PAUSE_BUTTON_ICON_OFFSET) {
         override val inputKeys = PAUSE_KEYS
         override fun handleInputIsInView(rawPlayInput: RawPlayInput) {
             rawPlayInput.pause = true
         }
     }
 
-    class MoveLeftButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blockHeight: Float)
-        : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blockHeight, MOVE_LEFT_BUTTON_ICON) {
+    class MoveLeftButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blocksHeight: Float)
+        : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blocksHeight, MOVE_LEFT_BUTTON_ICON) {
         override val inputKeys = MOVE_LEFT_KEYS
         override fun handleInputIsInView(rawPlayInput: RawPlayInput) {
             rawPlayInput.moveLeft = true
         }
     }
 
-    class MoveRightButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blockHeight: Float)
-        : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blockHeight, MOVE_RIGHT_BUTTON_ICON) {
+    class MoveRightButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blocksHeight: Float)
+        : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blocksHeight, MOVE_RIGHT_BUTTON_ICON) {
         override val inputKeys = MOVE_RIGHT_KEYS
         override fun handleInputIsInView(rawPlayInput: RawPlayInput) {
             rawPlayInput.moveRight = true
         }
     }
 
-    class RotateLeftButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blockHeight: Float)
-        : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blockHeight, ROTATE_LEFT_BUTTON_ICON) {
+    class RotateLeftButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blocksHeight: Float)
+        : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blocksHeight, ROTATE_LEFT_BUTTON_ICON) {
         override val inputKeys = ROTATE_LEFT_KEYS
         override fun handleInputIsInView(rawPlayInput: RawPlayInput) {
             rawPlayInput.rotateLeft = true
         }
     }
 
-    class RotateRightButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blockHeight: Float)
-        : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blockHeight, ROTATE_RIGHT_BUTTON_ICON) {
+    class RotateRightButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blocksHeight: Float)
+        : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blocksHeight, ROTATE_RIGHT_BUTTON_ICON) {
         override val inputKeys = ROTATE_RIGHT_KEYS
         override fun handleInputIsInView(rawPlayInput: RawPlayInput) {
             rawPlayInput.rotateRight = true

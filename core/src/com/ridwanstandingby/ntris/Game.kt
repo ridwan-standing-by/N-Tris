@@ -17,22 +17,27 @@ class Game {
     private val inputEventResolver = InputEventResolver(clock, eventHandler)
     private val polyominoBlueprintHolder = PolyominoBlueprintLoader().load()
 
-    var currentPiece = Polyomino(polyominoBlueprintHolder.polyominoBlueprints[rankToIndex(4)][3], IntVector2(5,10), Color.CYAN)
+    var currentPiece = Polyomino(polyominoBlueprintHolder.polyominoBlueprints[rankToIndex(4)][3], IntVector2(5, 30), Color.CYAN)
+    var nextPiece = Polyomino(polyominoBlueprintHolder.polyominoBlueprints[rankToIndex(4)][3], IntVector2(0, 0), Color.CHARTREUSE)
+    var reservePiece = Polyomino(polyominoBlueprintHolder.polyominoBlueprints[rankToIndex(4)][3], IntVector2(0, 0), Color.FIREBRICK)
 
     fun resolvePlayInput(rawPlayInput: RawPlayInput) {
         inputEventResolver.resolveInput(rawPlayInput)
     }
 
     fun currentPieceMoveDown() {
-        System.out.println("MOVE DOWN")
+        currentPiece.position += IntVector2(0, -1)
+        println(currentPiece.position)
     }
 
     fun currentPieceMoveLeft() {
-        System.out.println("MOVE LEFT")
+        currentPiece.position += IntVector2(-1, 0)
+        println(currentPiece.position)
     }
 
     fun currentPieceMoveRight() {
-        System.out.println("MOVE RIGHT")
+        currentPiece.position += IntVector2(1, 0)
+        println(currentPiece.position)
     }
 
     fun currentPieceRotateLeft() {

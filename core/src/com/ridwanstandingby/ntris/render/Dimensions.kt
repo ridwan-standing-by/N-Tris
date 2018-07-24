@@ -9,7 +9,7 @@ class Dimensions(val screenWidth: Int, val screenHeight: Int) {
     private val gameWidth = 1080
     private val gameHeight = 1920
 
-    private val block = 60f
+    val block = 60f
 
 
     init {

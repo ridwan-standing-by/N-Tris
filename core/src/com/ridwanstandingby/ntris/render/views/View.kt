@@ -7,12 +7,12 @@ import com.ridwanstandingby.ntris.input.RawPlayInput
 import com.ridwanstandingby.ntris.render.Dimensions
 import com.ridwanstandingby.ntris.render.fonts.Fonts
 
-abstract class View(val dimensions: Dimensions, val fonts: Fonts, val originBlocksX: Float, val originBlocksY: Float, val blocksWidth: Float, val blockHeight: Float) {
+abstract class View(val dimensions: Dimensions, val fonts: Fonts, val originBlocksX: Float, val originBlocksY: Float, val blocksWidth: Float, val blocksHeight: Float) {
 
     val originX = dimensions.rescaledBlock() * originBlocksX
     val originY = dimensions.rescaledBlock() * originBlocksY
     val width = dimensions.rescaledBlock() * blocksWidth
-    val height = dimensions.rescaledBlock() * blockHeight
+    val height = dimensions.rescaledBlock() * blocksHeight
 
     fun renderBorder(sr: ShapeRenderer) {
         sr.rect(originX, originY, width, height)
