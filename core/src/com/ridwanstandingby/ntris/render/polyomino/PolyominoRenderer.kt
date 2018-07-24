@@ -13,12 +13,13 @@ class PolyominoRenderer(private val dimensions: Dimensions, private val originX:
 
     fun render(sb: SpriteBatch, polyomino: Polyomino, blockOffset: IntVector2 = IntVector2(0, 0)) {
         val sprite = Sprite(blockTexture)
-        sprite.setPosition(
-                originX + dimensions.rescaledBlock() * (polyomino.position.x + blockOffset.x),
-                originY + dimensions.rescaledBlock() * (polyomino.position.y + blockOffset.y))
         sprite.setSize(dimensions.rescaledBlock(), dimensions.rescaledBlock())
         sprite.color = polyomino.colour
-        sprite.draw(sb)
+        polyomino.blocks.forEach { p ->
+            val screenPosition = (polyomino.position - polyomino.positionalCentre + blockOffset + p) * dimensions.rescaledBlock()
+            sprite.setPosition(originX + screenPosition.x, originY + screenPosition.y)
+            sprite.draw(sb)
+        }
     }
 
     companion object {
