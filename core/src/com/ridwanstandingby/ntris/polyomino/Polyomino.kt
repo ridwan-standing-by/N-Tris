@@ -11,7 +11,7 @@ data class Polyomino(private val polyominoBlueprint: PolyominoBlueprint,
                      private var position: IntVector2) {
     private val size = IntVector2(polyominoBlueprint.blockMatrix.xSize, polyominoBlueprint.blockMatrix.ySize)
     private val positionalCentre = size / 2
-    private val rotationalCentre = Vector2(size.x / 2f, size.y / 2f)
+    private val rotationalCentre = Vector2(rotationalCentreCalculateRule(size.x), rotationalCentreCalculateRule(size.y))
     private var relativeCoordinates: Set<IntVector2> = polyominoBlueprint.generateCoordinates()
 
     fun copy(): Polyomino = Polyomino(polyominoBlueprint, colour, position).also {
@@ -49,6 +49,13 @@ data class Polyomino(private val polyominoBlueprint: PolyominoBlueprint,
     }
 
     companion object {
+
+        private val rotationalCentreCalculateRule = { i: Int ->
+            if (i % 2 == 0)
+                (i - 1).toFloat() / 2f
+            else
+                i.toFloat() / 2f
+        }
         private val rotateLeftRule = { v: Vector2 -> Vector2(-v.y, v.x) }
         private val rotateRightRule = { v: Vector2 -> Vector2(v.y, -v.x) }
     }
