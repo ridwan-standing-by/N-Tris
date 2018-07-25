@@ -29,4 +29,8 @@ object Events {
     class SwapReserveAttempt : Event({ game ->
         game.swapReserveAttempt()
     })
+
+    class Pulse : Event({ game ->
+        game.pulse()
+    })
 }

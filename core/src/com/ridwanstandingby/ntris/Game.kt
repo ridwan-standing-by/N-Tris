@@ -4,8 +4,10 @@ import com.badlogic.gdx.graphics.Color
 import com.ridwanstandingby.ntris.GameRules.PLAY_BLOCK_SIZE
 import com.ridwanstandingby.ntris.events.Clock
 import com.ridwanstandingby.ntris.events.EventHandler
+import com.ridwanstandingby.ntris.events.Events
 import com.ridwanstandingby.ntris.input.InputEventResolver
 import com.ridwanstandingby.ntris.input.RawPlayInput
+import com.ridwanstandingby.ntris.input.debounce.TimedDebouncer
 import com.ridwanstandingby.ntris.polyomino.Block
 import com.ridwanstandingby.ntris.polyomino.BlockMap
 import com.ridwanstandingby.ntris.polyomino.LegalMoveHelper
@@ -21,6 +23,10 @@ class Game {
     private val inputEventResolver = InputEventResolver(clock, eventHandler)
     private val polyominoBlueprintHolder = PolyominoBlueprintLoader().load()
     private val legalMoveHelper = LegalMoveHelper()
+    private val pulser = TimedDebouncer(clock, GameRules.PULSE_TIME) { eventHandler.queue(Events.Pulse()) }
+            .also { it.nowPressed = true }
+
+    private var paused = false
 
     var currentPiece = Polyomino(polyominoBlueprintHolder.polyominoBlueprints[rankToIndex(10)][40], Color.CYAN)
             .apply { setToPlaySpawnPosition(PLAY_BLOCK_SIZE) }
@@ -51,7 +57,7 @@ class Game {
     fun currentPieceRotateRight() = tryCurrentPieceMove { rotateRight() }
 
     fun togglePause() {
-        System.out.println("TOGGLE PAUSE")
+        paused = !paused
     }
 
     fun swapReserveAttempt() {
@@ -61,7 +67,13 @@ class Game {
     }
 
     fun update(dt: Float) {
+        pulser.invokeDebounced()
         eventHandler.handleEvents(this)
-        clock.tick(dt)
+        if (!paused) clock.tick(dt)
+    }
+
+    fun pulse() {
+        println("PULSE")
+        eventHandler.queue(Events.CurrentPieceMoveDown())
     }
 }
