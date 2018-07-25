@@ -4,6 +4,7 @@ import kotlin.math.floor
 
 data class IntVector2(var x: Int, var y: Int) {
 
+    constructor(v: IntVector2): this(v.x, v.y)
     constructor(x: Float, y: Float): this(floorToInt(x), floorToInt(y))
 
     operator fun unaryPlus() = IntVector2(x, y)

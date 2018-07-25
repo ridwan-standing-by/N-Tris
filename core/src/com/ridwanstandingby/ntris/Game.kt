@@ -7,6 +7,7 @@ import com.ridwanstandingby.ntris.input.InputEventResolver
 import com.ridwanstandingby.ntris.input.RawPlayInput
 import com.ridwanstandingby.ntris.polyomino.Block
 import com.ridwanstandingby.ntris.polyomino.BlockMap
+import com.ridwanstandingby.ntris.polyomino.LegalMoveHelper
 import com.ridwanstandingby.ntris.polyomino.Polyomino
 import com.ridwanstandingby.ntris.polyomino.blueprint.PolyominoBlueprintHolder.Companion.rankToIndex
 import com.ridwanstandingby.ntris.polyomino.blueprint.PolyominoBlueprintLoader
@@ -18,6 +19,7 @@ class Game {
     private val eventHandler = EventHandler()
     private val inputEventResolver = InputEventResolver(clock, eventHandler)
     private val polyominoBlueprintHolder = PolyominoBlueprintLoader().load()
+    private val legalMoveHelper = LegalMoveHelper()
 
     var currentPiece = Polyomino(polyominoBlueprintHolder.polyominoBlueprints[rankToIndex(4)][3], IntVector2(5, 30), Color.CYAN)
     var nextPiece = Polyomino(polyominoBlueprintHolder.polyominoBlueprints[rankToIndex(8)][160], IntVector2(0, 0), Color.CHARTREUSE)
@@ -34,18 +36,21 @@ class Game {
     }
 
     fun currentPieceMoveDown() {
-        currentPiece.position += IntVector2(0, -1)
-        println(currentPiece.position)
+        legalMoveHelper.ifMoveIsLegalThenDoMove(currentPiece, backgroundBlockMap) {
+            moveDown()
+        }
     }
 
     fun currentPieceMoveLeft() {
-        currentPiece.position += IntVector2(-1, 0)
-        println(currentPiece.position)
+        legalMoveHelper.ifMoveIsLegalThenDoMove(currentPiece, backgroundBlockMap) {
+            moveLeft()
+        }
     }
 
     fun currentPieceMoveRight() {
-        currentPiece.position += IntVector2(1, 0)
-        println(currentPiece.position)
+        legalMoveHelper.ifMoveIsLegalThenDoMove(currentPiece, backgroundBlockMap) {
+            moveRight()
+        }
     }
 
     fun currentPieceRotateLeft() {
