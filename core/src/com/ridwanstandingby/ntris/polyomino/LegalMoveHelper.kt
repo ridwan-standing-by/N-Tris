@@ -10,7 +10,7 @@ class LegalMoveHelper {
     }
 
     private fun isMoveLegal(currentPiece: Polyomino, backgroundBlockMap: BlockMap, move: Polyomino.() -> Unit): Boolean {
-        val dummyPiece = Polyomino(currentPiece)
+        val dummyPiece = currentPiece.copy()
         dummyPiece.move()
         val futureBlockMap = combinePolyominoAndBlockMap(dummyPiece, backgroundBlockMap)
         return isLegalBlockMap(futureBlockMap)

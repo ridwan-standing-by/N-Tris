@@ -39,7 +39,7 @@ class PolyominoBlueprintLoader {
         val width = line.substring(WIDTH_POSITION).stripWhitespaceAndConvertToInt()
         val height = line.substring(HEIGHT_POSITION).stripWhitespaceAndConvertToInt()
         val matrix = parseBlockMatrix(width, height, lines)
-        return PolyominoBlueprint(rank, index, width, height, matrix)
+        return PolyominoBlueprint(rank, index, matrix)
     }
 
     private fun String.stripWhitespaceAndConvertToInt() = replace(" ", "").toInt()
