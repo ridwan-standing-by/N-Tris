@@ -1,5 +1,6 @@
 package com.ridwanstandingby.ntris.render.views
 
+import com.ridwanstandingby.ntris.GameRules
 import com.ridwanstandingby.ntris.render.Dimensions
 import com.ridwanstandingby.ntris.render.fonts.Fonts
 import com.ridwanstandingby.ntris.render.views.button.ButtonView.*
@@ -30,6 +31,8 @@ class LayoutArranger(private val dimensions: Dimensions, private val fonts: Font
         add(NextView(dimensions, fonts,
                 10.5f, 24.0f, 8.0f, 7.0f))
         add(PlayView(dimensions, fonts,
-                00.5f, 01.0f, 10.0f, 30.0f))
+                00.5f, 01.0f,
+                GameRules.PLAY_BLOCK_SIZE.x.toFloat(),
+                GameRules.PLAY_BLOCK_SIZE.y.toFloat()))
     }
 }

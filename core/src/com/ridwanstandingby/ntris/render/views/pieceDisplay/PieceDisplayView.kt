@@ -1,19 +1,18 @@
 package com.ridwanstandingby.ntris.render.views.pieceDisplay
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
-import com.ridwanstandingby.ntris.Game
 import com.ridwanstandingby.ntris.polyomino.Polyomino
 import com.ridwanstandingby.ntris.polyomino.geometry.IntVector2
 import com.ridwanstandingby.ntris.render.Dimensions
 import com.ridwanstandingby.ntris.render.fonts.FontHelper
 import com.ridwanstandingby.ntris.render.fonts.Fonts
-import com.ridwanstandingby.ntris.render.polyomino.PolyominoRenderer
+import com.ridwanstandingby.ntris.render.polyomino.BlockRenderer
 import com.ridwanstandingby.ntris.render.views.View
 
 abstract class PieceDisplayView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blocksHeight: Float) :
         View(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blocksHeight) {
 
-    private val polyominoRenderer = PolyominoRenderer(dimensions, originX, originY)
+    private val polyominoRenderer = BlockRenderer(dimensions, originX, originY)
 
     protected abstract val boxInfoText: String
     protected abstract val boxIcon: String
@@ -21,7 +20,7 @@ abstract class PieceDisplayView(dimensions: Dimensions, fonts: Fonts, originBloc
 
     protected fun renderPiece(sb: SpriteBatch, polyomino: Polyomino) {
         val offset = IntVector2(blocksWidth, blocksHeight) / 2
-        polyominoRenderer.render(sb, polyomino, offset)
+        polyominoRenderer.renderPolyomino(sb, polyomino, offset)
     }
 
     protected fun renderText(sb: SpriteBatch) {

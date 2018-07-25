@@ -42,7 +42,7 @@ class PlayState(gsm: GameStateManager) : State(gsm) {
     }
 
     private fun endRender(sb: SpriteBatch, sr: ShapeRenderer) {
-        // Bug workaround - need to render a new font for the previous ones to render
+        // Bug workaround - need to renderPolyomino a new font for the previous ones to renderPolyomino
         gsm.fonts.dummy.draw(sb, " ", 0f, 0f)
         sr.end()
         sb.end()
