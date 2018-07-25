@@ -35,31 +35,18 @@ class Game {
         inputEventResolver.resolveInput(rawPlayInput)
     }
 
-    fun currentPieceMoveDown() {
-        legalMoveHelper.ifMoveIsLegalThenDoMove(currentPiece, backgroundBlockMap) {
-            moveDown()
-        }
-    }
+    private fun tryCurrentPieceMove(move: Polyomino.() -> Unit) =
+            legalMoveHelper.ifMoveIsLegalThenDoMove(currentPiece, backgroundBlockMap) { move() }
 
-    fun currentPieceMoveLeft() {
-        legalMoveHelper.ifMoveIsLegalThenDoMove(currentPiece, backgroundBlockMap) {
-            moveLeft()
-        }
-    }
+    fun currentPieceMoveDown() = tryCurrentPieceMove { moveDown() }
 
-    fun currentPieceMoveRight() {
-        legalMoveHelper.ifMoveIsLegalThenDoMove(currentPiece, backgroundBlockMap) {
-            moveRight()
-        }
-    }
+    fun currentPieceMoveLeft() = tryCurrentPieceMove { moveLeft() }
 
-    fun currentPieceRotateLeft() {
-        System.out.println("ROTATE LEFT")
-    }
+    fun currentPieceMoveRight() = tryCurrentPieceMove { moveRight() }
 
-    fun currentPieceRotateRight() {
-        System.out.println("ROTATE RIGHT")
-    }
+    fun currentPieceRotateLeft() = tryCurrentPieceMove { rotateLeft() }
+
+    fun currentPieceRotateRight() = tryCurrentPieceMove { rotateRight() }
 
     fun togglePause() {
         System.out.println("TOGGLE PAUSE")
