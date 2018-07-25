@@ -1,7 +1,6 @@
-package com.ridwanstandingby.ntris
+package com.ridwanstandingby.ntris.game
 
 import com.badlogic.gdx.graphics.Color
-import com.ridwanstandingby.ntris.GameRules.PLAY_BLOCK_SIZE
 import com.ridwanstandingby.ntris.events.Clock
 import com.ridwanstandingby.ntris.events.EventHandler
 import com.ridwanstandingby.ntris.events.Events
@@ -27,9 +26,11 @@ class Game {
             .also { it.nowPressed = true }
 
     private var paused = false
+    private var wasLastMoveDownSuccessful: Boolean = true
+    private var wasLastSpawnPieceSuccessful: Boolean = true
 
     var currentPiece = Polyomino(polyominoBlueprintHolder.polyominoBlueprints[rankToIndex(10)][40], Color.CYAN)
-            .apply { setToPlaySpawnPosition(PLAY_BLOCK_SIZE) }
+            .apply { setToPlaySpawnPosition() }
     var nextPiece = Polyomino(polyominoBlueprintHolder.polyominoBlueprints[rankToIndex(8)][160], Color.CHARTREUSE)
     var reservePiece = Polyomino(polyominoBlueprintHolder.polyominoBlueprints[rankToIndex(7)][98], Color.FIREBRICK)
     var backgroundBlockMap = BlockMap().apply {
@@ -43,18 +44,24 @@ class Game {
         inputEventResolver.resolveInput(rawPlayInput)
     }
 
-    private fun tryCurrentPieceMove(move: Polyomino.() -> Unit) =
-            legalMoveHelper.ifMoveIsLegalThenDoMove(currentPiece, backgroundBlockMap) { move() }
+    fun update(dt: Float) {
+        eventHandler.handleEvents(this)
+        pulser.invokeDebounced()
+        if (!paused) clock.tick(dt)
+    }
 
-    fun currentPieceMoveDown() = tryCurrentPieceMove { moveDown() }
+    private fun tryPieceMove(polyomino: Polyomino, move: Polyomino.() -> Unit): Boolean =
+            legalMoveHelper.ifMoveIsLegalThenDoMove(polyomino, backgroundBlockMap) { move() }
 
-    fun currentPieceMoveLeft() = tryCurrentPieceMove { moveLeft() }
+    fun currentPieceMoveDown() = tryPieceMove(currentPiece) { moveDown() }
 
-    fun currentPieceMoveRight() = tryCurrentPieceMove { moveRight() }
+    fun currentPieceMoveLeft() = tryPieceMove(currentPiece) { moveLeft() }
 
-    fun currentPieceRotateLeft() = tryCurrentPieceMove { rotateLeft() }
+    fun currentPieceMoveRight() = tryPieceMove(currentPiece) { moveRight() }
 
-    fun currentPieceRotateRight() = tryCurrentPieceMove { rotateRight() }
+    fun currentPieceRotateLeft() = tryPieceMove(currentPiece) { rotateLeft() }
+
+    fun currentPieceRotateRight() = tryPieceMove(currentPiece) { rotateRight() }
 
     fun togglePause() {
         paused = !paused
@@ -63,17 +70,33 @@ class Game {
     fun swapReserveAttempt() {
         currentPiece = reservePiece.also { reservePiece = currentPiece }
         reservePiece.resetPositionToOrigin()
-        currentPiece.setToPlaySpawnPosition(PLAY_BLOCK_SIZE)
-    }
-
-    fun update(dt: Float) {
-        pulser.invokeDebounced()
-        eventHandler.handleEvents(this)
-        if (!paused) clock.tick(dt)
+        currentPiece.setToPlaySpawnPosition()
     }
 
     fun pulse() {
-        println("PULSE")
-        eventHandler.queue(Events.CurrentPieceMoveDown())
+        when {
+            wasLastMoveDownSuccessful -> currentPieceMoveDownFromPulse()
+            currentPieceMoveDownFromPulse() -> {}
+            wasLastSpawnPieceSuccessful -> spawnPiece()
+            else -> gameOver()
+        }
+    }
+
+    private fun currentPieceMoveDownFromPulse(): Boolean  =
+            tryPieceMove(currentPiece) { moveDown() }.also { wasLastMoveDownSuccessful = it }
+
+    private fun spawnPiece() {
+        backgroundBlockMap.blocks.addAll(currentPiece.generateBlocks())
+        wasLastSpawnPieceSuccessful = tryPieceMove(nextPiece) { setToPlaySpawnPosition() }
+        if (wasLastSpawnPieceSuccessful) {
+            currentPiece = nextPiece
+            nextPiece = Polyomino(polyominoBlueprintHolder.polyominoBlueprints[rankToIndex(6)][47], Color.OLIVE)
+            wasLastMoveDownSuccessful = true
+        }
+    }
+
+    private fun gameOver() {
+        paused = true
+        println("GAME OVER!")
     }
 }

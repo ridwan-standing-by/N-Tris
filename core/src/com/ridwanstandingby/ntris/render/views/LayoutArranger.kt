@@ -1,6 +1,6 @@
 package com.ridwanstandingby.ntris.render.views
 
-import com.ridwanstandingby.ntris.GameRules
+import com.ridwanstandingby.ntris.game.GameRules
 import com.ridwanstandingby.ntris.render.Dimensions
 import com.ridwanstandingby.ntris.render.fonts.Fonts
 import com.ridwanstandingby.ntris.render.views.button.ButtonView.*

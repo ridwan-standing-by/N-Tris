@@ -1,15 +1,19 @@
 package com.ridwanstandingby.ntris.polyomino
 
-import com.ridwanstandingby.ntris.GameRules
+import com.ridwanstandingby.ntris.game.GameRules
 import com.ridwanstandingby.ntris.polyomino.geometry.IntVector2
 
 class LegalMoveHelper {
 
-    fun ifMoveIsLegalThenDoMove(currentPiece: Polyomino, backgroundBlockMap: BlockMap, move: Polyomino.() -> Unit) {
-        if (isMoveLegal(currentPiece, backgroundBlockMap, move)) currentPiece.move()
-    }
+    fun ifMoveIsLegalThenDoMove(currentPiece: Polyomino, backgroundBlockMap: BlockMap, move: Polyomino.() -> Unit): Boolean =
+            if (isMoveLegal(currentPiece, backgroundBlockMap, move)) {
+                currentPiece.move()
+                true
+            } else {
+                false
+            }
 
-    private fun isMoveLegal(currentPiece: Polyomino, backgroundBlockMap: BlockMap, move: Polyomino.() -> Unit): Boolean {
+    fun isMoveLegal(currentPiece: Polyomino, backgroundBlockMap: BlockMap, move: Polyomino.() -> Unit): Boolean {
         val dummyPiece = currentPiece.copy()
         dummyPiece.move()
         val futureBlockMap = combinePolyominoAndBlockMap(dummyPiece, backgroundBlockMap)

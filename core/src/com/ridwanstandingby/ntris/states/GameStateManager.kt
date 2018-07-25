@@ -2,7 +2,7 @@ package com.ridwanstandingby.ntris.states
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
-import com.ridwanstandingby.ntris.Game
+import com.ridwanstandingby.ntris.game.Game
 import com.ridwanstandingby.ntris.render.Dimensions
 import com.ridwanstandingby.ntris.render.fonts.FontGenerator
 import com.ridwanstandingby.ntris.render.fonts.Fonts

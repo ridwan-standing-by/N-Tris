@@ -2,13 +2,14 @@ package com.ridwanstandingby.ntris.polyomino
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.math.Vector2
+import com.ridwanstandingby.ntris.game.GameRules
 import com.ridwanstandingby.ntris.polyomino.blueprint.PolyominoBlueprint
 import com.ridwanstandingby.ntris.polyomino.geometry.IntVector2
 import ktx.math.plus
 
-data class Polyomino(private val polyominoBlueprint: PolyominoBlueprint,
-                     private val colour: Color,
-                     private var position: IntVector2 = IntVector2(0, 0)) {
+class Polyomino(private val polyominoBlueprint: PolyominoBlueprint,
+                private val colour: Color,
+                private var position: IntVector2 = IntVector2(0, 0)) {
     private val size = IntVector2(polyominoBlueprint.blockMatrix.xSize, polyominoBlueprint.blockMatrix.ySize)
     private val positionalCentre = size / 2
     private val rotationalCentre = Vector2(rotationalCentreCalculateRule(size.x), rotationalCentreCalculateRule(size.y))
@@ -18,10 +19,10 @@ data class Polyomino(private val polyominoBlueprint: PolyominoBlueprint,
         position = IntVector2(0, 0)
     }
 
-    fun setToPlaySpawnPosition(playBlockSize: IntVector2) {
+    fun setToPlaySpawnPosition() {
         position = IntVector2(
-                playBlockSize.x / 2,
-                playBlockSize.y - 1 + positionalCentre.y)
+                GameRules.PLAY_BLOCK_SIZE.x / 2,
+                GameRules.PLAY_BLOCK_SIZE.y - 1 + positionalCentre.y)
     }
 
     fun copy(): Polyomino = Polyomino(polyominoBlueprint, colour, position).also {

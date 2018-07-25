@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Vector2
-import com.ridwanstandingby.ntris.Game
+import com.ridwanstandingby.ntris.game.Game
 import com.ridwanstandingby.ntris.input.KeyInput.MOVE_DOWN_KEYS
 import com.ridwanstandingby.ntris.input.KeyInput.MOVE_LEFT_KEYS
 import com.ridwanstandingby.ntris.input.KeyInput.MOVE_RIGHT_KEYS
