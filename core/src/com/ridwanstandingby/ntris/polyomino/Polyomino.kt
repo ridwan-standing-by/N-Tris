@@ -8,11 +8,21 @@ import ktx.math.plus
 
 data class Polyomino(private val polyominoBlueprint: PolyominoBlueprint,
                      private val colour: Color,
-                     private var position: IntVector2) {
+                     private var position: IntVector2 = IntVector2(0, 0)) {
     private val size = IntVector2(polyominoBlueprint.blockMatrix.xSize, polyominoBlueprint.blockMatrix.ySize)
     private val positionalCentre = size / 2
     private val rotationalCentre = Vector2(rotationalCentreCalculateRule(size.x), rotationalCentreCalculateRule(size.y))
     private var relativeCoordinates: Set<IntVector2> = polyominoBlueprint.generateCoordinates()
+
+    fun resetPositionToOrigin() {
+        position = IntVector2(0, 0)
+    }
+
+    fun setToPlaySpawnPosition(playBlockSize: IntVector2) {
+        position = IntVector2(
+                playBlockSize.x / 2,
+                playBlockSize.y - 1 + positionalCentre.y)
+    }
 
     fun copy(): Polyomino = Polyomino(polyominoBlueprint, colour, position).also {
         it.relativeCoordinates = this.relativeCoordinates

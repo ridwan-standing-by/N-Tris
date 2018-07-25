@@ -1,6 +1,7 @@
 package com.ridwanstandingby.ntris
 
 import com.badlogic.gdx.graphics.Color
+import com.ridwanstandingby.ntris.GameRules.PLAY_BLOCK_SIZE
 import com.ridwanstandingby.ntris.events.Clock
 import com.ridwanstandingby.ntris.events.EventHandler
 import com.ridwanstandingby.ntris.input.InputEventResolver
@@ -21,9 +22,10 @@ class Game {
     private val polyominoBlueprintHolder = PolyominoBlueprintLoader().load()
     private val legalMoveHelper = LegalMoveHelper()
 
-    var currentPiece = Polyomino(polyominoBlueprintHolder.polyominoBlueprints[rankToIndex(4)][3], Color.CYAN, IntVector2(5, 30))
-    var nextPiece = Polyomino(polyominoBlueprintHolder.polyominoBlueprints[rankToIndex(8)][160], Color.CHARTREUSE, IntVector2(0, 0))
-    var reservePiece = Polyomino(polyominoBlueprintHolder.polyominoBlueprints[rankToIndex(7)][98], Color.FIREBRICK, IntVector2(0, 0))
+    var currentPiece = Polyomino(polyominoBlueprintHolder.polyominoBlueprints[rankToIndex(10)][40], Color.CYAN)
+            .apply { setToPlaySpawnPosition(PLAY_BLOCK_SIZE) }
+    var nextPiece = Polyomino(polyominoBlueprintHolder.polyominoBlueprints[rankToIndex(8)][160], Color.CHARTREUSE)
+    var reservePiece = Polyomino(polyominoBlueprintHolder.polyominoBlueprints[rankToIndex(7)][98], Color.FIREBRICK)
     var backgroundBlockMap = BlockMap().apply {
         blocks.add(Block(IntVector2(5, 8), Color.GOLDENROD))
         blocks.add(Block(IntVector2(6, 8), Color.GOLDENROD))
@@ -53,7 +55,9 @@ class Game {
     }
 
     fun swapReserveAttempt() {
-        System.out.println("SWAP RESERVE ATTEMPT")
+        currentPiece = reservePiece.also { reservePiece = currentPiece }
+        reservePiece.resetPositionToOrigin()
+        currentPiece.setToPlaySpawnPosition(PLAY_BLOCK_SIZE)
     }
 
     fun update(dt: Float) {
