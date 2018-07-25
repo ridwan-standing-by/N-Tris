@@ -6,15 +6,13 @@ import com.ridwanstandingby.ntris.polyomino.blueprint.PolyominoBlueprint
 import com.ridwanstandingby.ntris.polyomino.geometry.IntVector2
 import ktx.math.plus
 
-class Polyomino(private val polyominoBlueprint: PolyominoBlueprint,
+data class Polyomino(private val polyominoBlueprint: PolyominoBlueprint,
                 var position: IntVector2,
                 private val colour: Color) {
     private val size = IntVector2(polyominoBlueprint.blockMatrix.xSize, polyominoBlueprint.blockMatrix.ySize)
     private val positionalCentre = size / 2
     private val rotationalCentre = Vector2(size.x / 2f, size.y / 2f)
     private var relativeCoordinates: Set<IntVector2> = polyominoBlueprint.blockMatrix.toCoordinateSet { it != null && it }
-
-    constructor(polyomino: Polyomino) : this(polyomino.polyominoBlueprint, IntVector2(polyomino.position), polyomino.colour)
 
     fun generateBlocks(): List<Block> = this.relativeCoordinates.map {
         Block(this.position - this.positionalCentre + it, this.colour)
