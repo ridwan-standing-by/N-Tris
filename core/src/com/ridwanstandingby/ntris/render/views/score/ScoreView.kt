@@ -13,11 +13,6 @@ import com.ridwanstandingby.ntris.render.views.View
 class ScoreView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blocksHeight: Float) :
         View(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blocksHeight) {
 
-    var score: Int = 0
-    var lines: Int = 0
-    var highScore: Int = 0
-    var highLines: Int = 0
-
     private val scaledPadding = dimensions.rescale(TEXT_PADDING)
     private val ySpacing = FontHelper.getDimensionsOfText(fonts.boxInfo, TEXT_SCORE.format(0F)).y + scaledPadding
 
@@ -29,22 +24,22 @@ class ScoreView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, orig
 
     override fun render(sb: SpriteBatch, sr: ShapeRenderer, game: Game) {
         renderBorder(sr)
-        renderScoreAndCharacters(sb)
+        renderScoreAndCharacters(sb, game)
     }
 
-    private fun renderScoreAndCharacters(sb: SpriteBatch) {
-        renderText(sb)
+    private fun renderScoreAndCharacters(sb: SpriteBatch, game: Game) {
+        renderText(sb, game)
         renderHighScoreIcon(sb)
         renderCurrentScoreIcon(sb)
     }
 
-    private fun renderText(sb: SpriteBatch) {
+    private fun renderText(sb: SpriteBatch, game: Game) {
         val x = originX + scaledPadding
         val y = originY + height - scaledPadding
-        fonts.boxInfo.draw(sb, TEXT_SCORE.format(score), x, y)
-        fonts.boxInfo.draw(sb, TEXT_LINES.format(lines), x, y - 1.0f * ySpacing)
-        fonts.boxInfo.draw(sb, TEXT_SCORE.format(highScore), x, y - 2.25f * ySpacing)
-        fonts.boxInfo.draw(sb, TEXT_LINES.format(highLines), x, y - 3.25f * ySpacing)
+        fonts.boxInfo.draw(sb, TEXT_SCORE.format(game.score.points), x, y)
+        fonts.boxInfo.draw(sb, TEXT_LINES.format(game.score.lines), x, y - 1.0f * ySpacing)
+        fonts.boxInfo.draw(sb, TEXT_SCORE.format(game.score.points), x, y - 2.25f * ySpacing)
+        fonts.boxInfo.draw(sb, TEXT_LINES.format(game.score.lines), x, y - 3.25f * ySpacing)
     }
 
     private fun renderHighScoreIcon(sb: SpriteBatch) {

@@ -6,21 +6,18 @@ import com.ridwanstandingby.ntris.events.Events
 import com.ridwanstandingby.ntris.input.InputEventResolver
 import com.ridwanstandingby.ntris.input.RawPlayInput
 import com.ridwanstandingby.ntris.input.debounce.TimedDebouncer
-import com.ridwanstandingby.ntris.polyomino.BlockMap
-import com.ridwanstandingby.ntris.polyomino.LegalMoveHelper
-import com.ridwanstandingby.ntris.polyomino.Polyomino
-import com.ridwanstandingby.ntris.polyomino.PolyominoSpawner
+import com.ridwanstandingby.ntris.polyomino.*
 import com.ridwanstandingby.ntris.polyomino.blueprint.PolyominoBlueprintLoader
 
 class Game {
 
-    private val score = Score(0, 0)
     private val clock = Clock()
     private val eventHandler = EventHandler()
     private val inputEventResolver = InputEventResolver(clock, eventHandler)
     private val polyominoBlueprintHolder = PolyominoBlueprintLoader().load()
     private val polyominoSpawner = PolyominoSpawner(polyominoBlueprintHolder)
     private val legalMoveHelper = LegalMoveHelper()
+    private val completeLineChecker = CompleteLineChecker()
     private val pulser = TimedDebouncer(clock, GameRules.PULSE_TIME) { eventHandler.queue(Events.Pulse()) }
             .also { it.nowPressed = true }
 
@@ -28,10 +25,13 @@ class Game {
     private var wasLastMoveDownSuccessful: Boolean = true
     private var wasLastSpawnPieceSuccessful: Boolean = true
 
+    val score = Score(0, 0)
+
+    val backgroundBlockMap = BlockMap()
+
     var currentPiece = polyominoSpawner.generatePolyomino(score).apply { setToPlaySpawnPosition() }
     var nextPiece = polyominoSpawner.generatePolyomino(score)
     var reservePiece = polyominoSpawner.generatePolyomino(score)
-    var backgroundBlockMap = BlockMap()
 
     fun resolvePlayInput(rawPlayInput: RawPlayInput) {
         inputEventResolver.resolveInput(rawPlayInput)
@@ -82,6 +82,7 @@ class Game {
         backgroundBlockMap.blocks.addAll(currentPiece.generateBlocks())
         wasLastSpawnPieceSuccessful = tryPieceMove(nextPiece) { setToPlaySpawnPosition() }
         if (wasLastSpawnPieceSuccessful) {
+            completeLineChecker.checkLinesAndIncreaseScoreIfNecessary(backgroundBlockMap, score)
             currentPiece = nextPiece
             nextPiece = polyominoSpawner.generatePolyomino(score)
             wasLastMoveDownSuccessful = true
