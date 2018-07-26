@@ -24,6 +24,7 @@ class Game {
 
     private var paused = false
     private var hasSwappedReserve = false
+    private var hasRerolledNext = false
     private var wasLastMoveDownSuccessful: Boolean = true
     private var wasLastSpawnPieceSuccessful: Boolean = true
 
@@ -74,6 +75,13 @@ class Game {
         }
     }
 
+    fun nextRerollAttempt() {
+        if (!hasRerolledNext) {
+            nextPiece = polyominoSpawner.generatePolyomino(score)
+            hasRerolledNext = true
+        }
+    }
+
     fun pulse() {
         when {
             wasLastMoveDownSuccessful -> currentPieceMoveDownFromPulse()
@@ -94,9 +102,14 @@ class Game {
             completeLineChecker.checkLinesAndIncreaseScoreIfNecessary(backgroundBlockMap, score)
             currentPiece = nextPiece
             nextPiece = polyominoSpawner.generatePolyomino(score)
-            wasLastMoveDownSuccessful = true
-            hasSwappedReserve = false
+            resetFlags()
         }
+    }
+
+    private fun resetFlags() {
+        wasLastMoveDownSuccessful = true
+        hasSwappedReserve = false
+        hasRerolledNext = false
     }
 
     private fun gameOver() {

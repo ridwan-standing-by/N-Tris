@@ -33,4 +33,8 @@ object Events {
     class Pulse : Event({ game ->
         game.pulse()
     })
+
+    class NextRerollAttempt : Event({ game ->
+        game.nextRerollAttempt()
+    })
 }

@@ -31,6 +31,9 @@ class InputEventResolver(clock: Clock, private val eventHandler: EventHandler) {
     private val reserveDebouncer = SimpleDebouncer {
         eventHandler.queue(Events.SwapReserveAttempt())
     }
+    private val nextDebouncer = SimpleDebouncer {
+        eventHandler.queue(Events.NextRerollAttempt())
+    }
     private val pauseDebouncer = SimpleDebouncer {
         eventHandler.queue(Events.Pause())
     }
@@ -40,6 +43,7 @@ class InputEventResolver(clock: Clock, private val eventHandler: EventHandler) {
         resolveMovementInput(input)
         resolveRotationInput(input)
         resolveReserveInput()
+        resolveNextInput()
         resolvePauseInput()
     }
 
@@ -50,6 +54,7 @@ class InputEventResolver(clock: Clock, private val eventHandler: EventHandler) {
         rotateLeftDebouncer.nowPressed = input.rotateLeft
         rotateRightDebouncer.nowPressed = input.rotateRight
         reserveDebouncer.nowPressed = input.reserve
+        nextDebouncer.nowPressed = input.next
         pauseDebouncer.nowPressed = input.pause
     }
 
@@ -70,6 +75,10 @@ class InputEventResolver(clock: Clock, private val eventHandler: EventHandler) {
 
     private fun resolveReserveInput() {
         reserveDebouncer.invokeDebounced()
+    }
+
+    private fun resolveNextInput() {
+        nextDebouncer.invokeDebounced()
     }
 
     private fun resolvePauseInput() {
