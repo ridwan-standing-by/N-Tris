@@ -5,17 +5,17 @@ import com.ridwanstandingby.ntris.polyomino.geometry.IntVector2
 
 class LegalMoveHelper {
 
-    fun ifMoveIsLegalThenDoMove(currentPiece: Polyomino, backgroundBlockMap: BlockMap, move: Polyomino.() -> Unit): Boolean =
-            if (isMoveLegal(currentPiece, backgroundBlockMap, move)) {
-                currentPiece.move()
+    fun ifMoveSequenceIsLegalThenDoMoves(piece: Polyomino, backgroundBlockMap: BlockMap, moves: Iterable<Polyomino.() -> Unit>): Boolean =
+            if (isMoveSequenceLegal(piece, backgroundBlockMap, moves)) {
+                piece.doMoves(moves)
                 true
             } else {
                 false
             }
 
-    private fun isMoveLegal(currentPiece: Polyomino, backgroundBlockMap: BlockMap, move: Polyomino.() -> Unit): Boolean {
-        val dummyPiece = currentPiece.copy()
-        dummyPiece.move()
+    private fun isMoveSequenceLegal(piece: Polyomino, backgroundBlockMap: BlockMap, moves: Iterable<Polyomino.() -> Unit>): Boolean {
+        val dummyPiece = piece.copy()
+        dummyPiece.doMoves(moves)
         val futureBlockMap = combinePolyominoAndBlockMap(dummyPiece, backgroundBlockMap)
         return isLegalBlockMap(futureBlockMap)
     }
@@ -44,4 +44,8 @@ class LegalMoveHelper {
     private fun positionIsInBounds(position: IntVector2): Boolean =
             position.x >= 0 && position.x < GameRules.PLAY_BLOCK_SIZE.x && position.y >= 0
 
+    private fun Polyomino.doMoves(moves: Iterable<Polyomino.() -> Unit>) =
+            moves.forEach { move ->
+                move()
+            }
 }

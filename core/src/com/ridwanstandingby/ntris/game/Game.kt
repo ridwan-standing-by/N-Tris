@@ -17,6 +17,7 @@ class Game {
     private val polyominoBlueprintHolder = PolyominoBlueprintLoader().load()
     private val polyominoSpawner = PolyominoSpawner(polyominoBlueprintHolder)
     private val legalMoveHelper = LegalMoveHelper()
+    private val generousRotator = GenerousRotator { piece, moves -> tryPieceMoves(piece, moves) }
     private val completeLineChecker = CompleteLineChecker()
     private val pulser = TimedDebouncer(clock, GameRules.PULSE_TIME) { eventHandler.queue(Events.Pulse()) }
             .also { it.nowPressed = true }
@@ -45,7 +46,10 @@ class Game {
     }
 
     private fun tryPieceMove(polyomino: Polyomino, move: Polyomino.() -> Unit): Boolean =
-            legalMoveHelper.ifMoveIsLegalThenDoMove(polyomino, backgroundBlockMap) { move() }
+            tryPieceMoves(polyomino, listOf(move))
+
+    private fun tryPieceMoves(polyomino: Polyomino, moves: Iterable<Polyomino.() -> Unit>): Boolean =
+            legalMoveHelper.ifMoveSequenceIsLegalThenDoMoves(polyomino, backgroundBlockMap, moves)
 
     fun currentPieceMoveDown() = tryPieceMove(currentPiece) { moveDown() }
 
@@ -53,9 +57,9 @@ class Game {
 
     fun currentPieceMoveRight() = tryPieceMove(currentPiece) { moveRight() }
 
-    fun currentPieceRotateLeft() = tryPieceMove(currentPiece) { rotateLeft() }
+    fun currentPieceRotateLeft() = generousRotator.tryPieceRotateLeft(currentPiece)
 
-    fun currentPieceRotateRight() = tryPieceMove(currentPiece) { rotateRight() }
+    fun currentPieceRotateRight() = generousRotator.tryPieceRotateRight(currentPiece)
 
     fun togglePause() {
         paused = !paused
