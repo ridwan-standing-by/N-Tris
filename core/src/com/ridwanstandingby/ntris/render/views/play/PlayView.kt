@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.ridwanstandingby.ntris.game.Game
 import com.ridwanstandingby.ntris.input.KeyInput.PLAY_KEYS
 import com.ridwanstandingby.ntris.input.RawPlayInput
+import com.ridwanstandingby.ntris.polyomino.geometry.IntVector2
 import com.ridwanstandingby.ntris.render.Dimensions
 import com.ridwanstandingby.ntris.render.fonts.Fonts
 import com.ridwanstandingby.ntris.render.polyomino.BlockRenderer
@@ -29,10 +30,10 @@ class PlayView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, origi
     }
 
     private fun renderBackgroundBlockMap(sb: SpriteBatch, game: Game) {
-        polyominoRenderer.renderBlocks(sb, game.backgroundBlockMap.blocks)
+        polyominoRenderer.renderBlocks(sb, game.backgroundBlockMap.blocks, IntVector2(blocksWidth, blocksHeight))
     }
 
     private fun renderCurrentPiece(sb: SpriteBatch, game: Game) {
-        polyominoRenderer.renderPolyomino(sb, game.currentPiece)
+        polyominoRenderer.renderPolyomino(sb, game.currentPiece, IntVector2(blocksWidth, blocksHeight))
     }
 }

@@ -20,7 +20,7 @@ abstract class PieceDisplayView(dimensions: Dimensions, fonts: Fonts, originBloc
 
     protected fun renderPiece(sb: SpriteBatch, polyomino: Polyomino) {
         val offset = IntVector2(blocksWidth, blocksHeight) / 2
-        polyominoRenderer.renderPolyomino(sb, polyomino, offset)
+        polyominoRenderer.renderPolyomino(sb, polyomino, IntVector2(blocksWidth, blocksHeight), offset)
     }
 
     protected fun renderText(sb: SpriteBatch) {
