@@ -23,8 +23,6 @@ class PolyominoSpawner(private val polyominoBlueprintHolder: PolyominoBlueprintH
 
     private fun scoreToRank(score: Score): Int =
             when {
-                score.lines < 5 -> randomRankDifficultyIndex(0)
-                score.lines < 15 -> randomRankDifficultyIndex(1)
                 score.lines < 30 -> randomRankDifficultyIndex(2)
                 score.lines < 50 -> randomRankDifficultyIndex(3)
                 score.lines < 75 -> randomRankDifficultyIndex(4)
@@ -46,8 +44,8 @@ class PolyominoSpawner(private val polyominoBlueprintHolder: PolyominoBlueprintH
             else -> {
                 val min = MIN_RANK
                 val max = MIN_RANK + d - 1
-                val N = twoToThe(d)
-                val r = random.nextInt(N)
+                val n = twoToThe(d)
+                val r = random.nextInt(n)
                 (max downTo min).forEach {
                     if (r < twoToThe(max - it + 1)) return it
                 }
@@ -59,30 +57,30 @@ class PolyominoSpawner(private val polyominoBlueprintHolder: PolyominoBlueprintH
     private fun randomIndex(rank: Int) = random.nextInt(polyominoBlueprintHolder.polyominoBlueprints[rankToIndex(rank)].size)
 
     private fun randomColour(): Color {
-        val H = random.nextFloat() * 360f
-        val S = 1.0f
-        val V = 1.0f
+        val hue = random.nextFloat() * 360f
+        val saturation = 1.0f
+        val value = 1.0f
 
-        val C = V * S  // Chroma, from 0 to 1
-        val Hp = H / 60  // Sector, from 0 to 6
-        val term = (Hp % 2) - 1
-        val X = if (term >= 0)
-            C * (1 - term)
+        val chroma = value * saturation  // Chroma, from 0 to 1
+        val sector = hue / 60  // Sector, from 0 to 6
+        val term = (sector % 2) - 1
+        val x = if (term >= 0)
+            chroma * (1 - term)
         else
-            C * (1 + term)
+            chroma * (1 + term)
 
-        val (R, G, B) = when {
-            Hp < 1f -> arrayOf(C, X, 0f)
-            Hp < 2f -> arrayOf(X, C, 0f)
-            Hp < 3f -> arrayOf(0f, C, X)
-            Hp < 4f -> arrayOf(0f, X, C)
-            Hp < 5f -> arrayOf(X, 0f, C)
-            Hp < 6f -> arrayOf(C, 0f, X)
+        val (red, green, blue) = when {
+            sector < 1f -> arrayOf(chroma, x, 0f)
+            sector < 2f -> arrayOf(x, chroma, 0f)
+            sector < 3f -> arrayOf(0f, chroma, x)
+            sector < 4f -> arrayOf(0f, x, chroma)
+            sector < 5f -> arrayOf(x, 0f, chroma)
+            sector < 6f -> arrayOf(chroma, 0f, x)
             else -> arrayOf(0f, 0f, 0f)
         }
 
-        val m = V - C
-        return Color(R + m, G + m, B + m, 1f)
+        val m = value - chroma
+        return Color(red + m, green + m, blue + m, 1f)
     }
 
     companion object {
