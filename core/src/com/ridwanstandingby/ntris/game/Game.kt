@@ -22,6 +22,7 @@ class Game {
             .also { it.nowPressed = true }
 
     private var paused = false
+    private var hasSwappedReserve = false
     private var wasLastMoveDownSuccessful: Boolean = true
     private var wasLastSpawnPieceSuccessful: Boolean = true
 
@@ -61,21 +62,25 @@ class Game {
     }
 
     fun swapReserveAttempt() {
-        currentPiece = reservePiece.also { reservePiece = currentPiece }
-        reservePiece.resetPositionToOrigin()
-        currentPiece.setToPlaySpawnPosition()
+        if (!hasSwappedReserve) {
+            currentPiece = reservePiece.also { reservePiece = currentPiece }
+            reservePiece.resetPositionToOrigin()
+            currentPiece.setToPlaySpawnPosition()
+            hasSwappedReserve = true
+        }
     }
 
     fun pulse() {
         when {
             wasLastMoveDownSuccessful -> currentPieceMoveDownFromPulse()
-            currentPieceMoveDownFromPulse() -> {}
+            currentPieceMoveDownFromPulse() -> {
+            }
             wasLastSpawnPieceSuccessful -> spawnPiece()
             else -> gameOver()
         }
     }
 
-    private fun currentPieceMoveDownFromPulse(): Boolean  =
+    private fun currentPieceMoveDownFromPulse(): Boolean =
             tryPieceMove(currentPiece) { moveDown() }.also { wasLastMoveDownSuccessful = it }
 
     private fun spawnPiece() {
@@ -86,6 +91,7 @@ class Game {
             currentPiece = nextPiece
             nextPiece = polyominoSpawner.generatePolyomino(score)
             wasLastMoveDownSuccessful = true
+            hasSwappedReserve = false
         }
     }
 
