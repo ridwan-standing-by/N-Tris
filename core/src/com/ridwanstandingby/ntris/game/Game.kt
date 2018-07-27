@@ -1,5 +1,6 @@
 package com.ridwanstandingby.ntris.game
 
+import com.badlogic.gdx.Gdx
 import com.ridwanstandingby.ntris.events.Clock
 import com.ridwanstandingby.ntris.events.EventHandler
 import com.ridwanstandingby.ntris.events.Events
@@ -112,5 +113,9 @@ class Game {
     private fun gameOver() {
         paused = true
         println("GAME OVER!")
+    }
+
+    fun exit() {
+        Gdx.app.exit()
     }
 }

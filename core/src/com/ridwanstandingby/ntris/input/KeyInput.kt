@@ -13,4 +13,5 @@ object KeyInput {
     val SCORE_KEYS = listOf<Int>()
     val NEXT_KEYS = listOf(Input.Keys.CONTROL_RIGHT, Input.Keys.TAB)
     val PLAY_KEYS = listOf<Int>()
+    val EXIT_KEYS = listOf(Input.Keys.ESCAPE)
 }

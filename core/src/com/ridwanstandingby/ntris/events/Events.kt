@@ -37,4 +37,8 @@ object Events {
     class NextRerollAttempt : Event({ game ->
         game.nextRerollAttempt()
     })
+
+    class Exit : Event({ game ->
+        game.exit()
+    })
 }

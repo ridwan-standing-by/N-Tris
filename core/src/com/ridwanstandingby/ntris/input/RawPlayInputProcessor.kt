@@ -44,7 +44,14 @@ class RawPlayInputProcessor(private val gsm: GameStateManager) {
                             view.handleInputIsInView(rawPlayInput)
                     }
                 }
+                handleNonViewKeys(rawPlayInput)
             }
+
+    private fun handleNonViewKeys(rawPlayInput: RawPlayInput) {
+        KeyInput.EXIT_KEYS.forEach { key ->
+            if (Gdx.input.isKeyPressed(key)) rawPlayInput.exit = true
+        }
+    }
 
     companion object {
         private const val MAX_POINTERS = 20
