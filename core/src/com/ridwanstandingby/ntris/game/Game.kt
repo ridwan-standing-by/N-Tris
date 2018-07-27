@@ -25,8 +25,6 @@ class Game {
     private var paused = false
     private var hasSwappedReserve = false
     private var hasRerolledNext = false
-    private var wasLastMoveDownSuccessful: Boolean = true
-    private var wasLastSpawnPieceSuccessful: Boolean = true
 
     val score = Score(0, 0)
 
@@ -84,30 +82,28 @@ class Game {
 
     fun pulse() {
         when {
-            wasLastMoveDownSuccessful -> currentPieceMoveDownFromPulse()
-            currentPieceMoveDownFromPulse() -> {
+            currentPieceMoveDown() -> {
             }
-            wasLastSpawnPieceSuccessful -> spawnPiece()
+            tryCyclePiece() -> {
+            }
             else -> gameOver()
         }
     }
 
-    private fun currentPieceMoveDownFromPulse(): Boolean =
-            tryPieceMove(currentPiece) { moveDown() }.also { wasLastMoveDownSuccessful = it }
-
-    private fun spawnPiece() {
+    private fun tryCyclePiece(): Boolean {
         backgroundBlockMap.blocks.addAll(currentPiece.generateBlocks())
-        wasLastSpawnPieceSuccessful = tryPieceMove(nextPiece) { setToPlaySpawnPosition() }
-        if (wasLastSpawnPieceSuccessful) {
-            completeLineChecker.checkLinesAndIncreaseScoreIfNecessary(backgroundBlockMap, score)
-            currentPiece = nextPiece
-            nextPiece = polyominoSpawner.generatePolyomino(score)
-            resetFlags()
-        }
+        val wasLastSpawnPieceSuccessful = tryPieceMove(nextPiece) { setToPlaySpawnPosition() }
+        return if (wasLastSpawnPieceSuccessful) {
+            doCyclePieceAndResolveLines()
+            true
+        } else
+            false
     }
 
-    private fun resetFlags() {
-        wasLastMoveDownSuccessful = true
+    private fun doCyclePieceAndResolveLines() {
+        completeLineChecker.checkLinesAndIncreaseScoreIfNecessary(backgroundBlockMap, score)
+        currentPiece = nextPiece
+        nextPiece = polyominoSpawner.generatePolyomino(score)
         hasSwappedReserve = false
         hasRerolledNext = false
     }
