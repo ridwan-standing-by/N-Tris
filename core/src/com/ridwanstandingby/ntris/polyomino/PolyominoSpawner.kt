@@ -23,11 +23,11 @@ class PolyominoSpawner(private val polyominoBlueprintHolder: PolyominoBlueprintH
 
     private fun scoreToRank(score: Score): Int =
             when {
-                score.lines < 30 -> randomRankDifficultyIndex(2)
-                score.lines < 50 -> randomRankDifficultyIndex(3)
-                score.lines < 75 -> randomRankDifficultyIndex(4)
-                score.lines < 105 -> randomRankDifficultyIndex(5)
-                score.lines < 140 -> randomRankDifficultyIndex(6)
+                score.lines < 5 -> randomRankDifficultyIndex(2)
+                score.lines < 15 -> randomRankDifficultyIndex(3)
+                score.lines < 30 -> randomRankDifficultyIndex(4)
+                score.lines < 50 -> randomRankDifficultyIndex(5)
+                score.lines < 75 -> randomRankDifficultyIndex(6)
                 else -> randomRankDifficultyIndex(7)
             }
 

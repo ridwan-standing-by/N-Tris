@@ -38,8 +38,8 @@ class ScoreView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, orig
         val y = originY + height - scaledPadding
         fonts.boxInfo.draw(sb, TEXT_SCORE.format(game.score.points), x, y)
         fonts.boxInfo.draw(sb, TEXT_LINES.format(game.score.lines), x, y - 1.0f * ySpacing)
-        fonts.boxInfo.draw(sb, TEXT_SCORE.format(game.score.points), x, y - 2.25f * ySpacing)
-        fonts.boxInfo.draw(sb, TEXT_LINES.format(game.score.lines), x, y - 3.25f * ySpacing)
+        fonts.boxInfo.draw(sb, TEXT_SCORE.format(game.highScore.points), x, y - 2.25f * ySpacing)
+        fonts.boxInfo.draw(sb, TEXT_LINES.format(game.highScore.lines), x, y - 3.25f * ySpacing)
     }
 
     private fun renderHighScoreIcon(sb: SpriteBatch) {

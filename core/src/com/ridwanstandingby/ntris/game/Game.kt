@@ -27,6 +27,7 @@ class Game {
     private var hasRerolledNext = false
 
     val score = Score(0, 0)
+    val highScore = Score(0, 0) // TODO
 
     val backgroundBlockMap = BlockMap()
 
