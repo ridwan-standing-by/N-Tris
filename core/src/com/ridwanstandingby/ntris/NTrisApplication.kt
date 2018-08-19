@@ -5,10 +5,11 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import com.ridwanstandingby.ntris.data.DataManager
 import com.ridwanstandingby.ntris.states.GameStateManager
 import com.ridwanstandingby.ntris.states.PlayState
 
-class NTrisApplication : ApplicationAdapter() {
+class NTrisApplication(private val dataManager: DataManager) : ApplicationAdapter() {
     private lateinit var batch: SpriteBatch
     private lateinit var shapeRenderer: ShapeRenderer
     private lateinit var gsm: GameStateManager
@@ -28,7 +29,7 @@ class NTrisApplication : ApplicationAdapter() {
     }
 
     private fun initGameStateManager() {
-        gsm = GameStateManager()
+        gsm = GameStateManager(dataManager)
         gsm.calibrateSize(Gdx.graphics.width, Gdx.graphics.height)
     }
 

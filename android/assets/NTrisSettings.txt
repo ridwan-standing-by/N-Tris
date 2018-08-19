@@ -1,0 +1,2 @@
+high_score_points=210
+high_score_lines=14

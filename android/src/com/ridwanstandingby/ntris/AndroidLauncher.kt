@@ -4,12 +4,14 @@ import android.os.Bundle
 
 import com.badlogic.gdx.backends.android.AndroidApplication
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration
+import com.ridwanstandingby.ntris.data.AndroidDataManager
 
 class AndroidLauncher : AndroidApplication() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val config = AndroidApplicationConfiguration()
         config.useWakelock = true
-        initialize(NTrisApplication(), config)
+        initialize(NTrisApplication(AndroidDataManager(this)), config)
     }
 }

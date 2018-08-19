@@ -1,6 +1,7 @@
 package com.ridwanstandingby.ntris.game
 
 import com.badlogic.gdx.Gdx
+import com.ridwanstandingby.ntris.data.DataManager
 import com.ridwanstandingby.ntris.events.Clock
 import com.ridwanstandingby.ntris.events.EventHandler
 import com.ridwanstandingby.ntris.events.Events
@@ -10,7 +11,7 @@ import com.ridwanstandingby.ntris.input.debounce.TimedDebouncer
 import com.ridwanstandingby.ntris.polyomino.*
 import com.ridwanstandingby.ntris.polyomino.blueprint.PolyominoBlueprintLoader
 
-class Game {
+class Game(private val dataManager: DataManager) {
 
     private val clock = Clock()
     private val eventHandler = EventHandler()
@@ -27,8 +28,8 @@ class Game {
     private var hasSwappedReserve = false
     private var hasRerolledNext = false
 
-    val score = Score(0, 0)
-    val highScore = Score(0, 0) // TODO
+    var score = Score(0, 0)
+    val highScore = dataManager.highScore.copy()
 
     val backgroundBlockMap = BlockMap()
 
@@ -103,7 +104,8 @@ class Game {
     }
 
     private fun doCyclePieceAndResolveLines() {
-        completeLineChecker.checkLinesAndIncreaseScoreIfNecessary(backgroundBlockMap, score)
+        score += completeLineChecker.checkAndDestroyLinesAndCalculateScoreIncrease(backgroundBlockMap)
+        updateHighScoreIfNecessary()
         currentPiece = nextPiece
         nextPiece = polyominoSpawner.generatePolyomino(score)
         hasSwappedReserve = false
@@ -112,7 +114,11 @@ class Game {
 
     private fun gameOver() {
         paused = true
-        println("GAME OVER!")
+    }
+
+    private fun updateHighScoreIfNecessary() {
+        if (score > highScore)
+            dataManager.highScore = score
     }
 
     fun exit() {

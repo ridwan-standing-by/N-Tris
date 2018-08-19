@@ -5,12 +5,12 @@ import com.ridwanstandingby.ntris.game.Score
 
 class CompleteLineChecker {
 
-    fun checkLinesAndIncreaseScoreIfNecessary(blockMap: BlockMap, score: Score) {
+    fun checkAndDestroyLinesAndCalculateScoreIncrease(blockMap: BlockMap): Score {
         val yCoordinatesOfCompleteLines = findYCoordsOfCompleteLines(blockMap)
         if (yCoordinatesOfCompleteLines.isNotEmpty()) {
             destroyLinesAndShiftBlocksDown(blockMap, yCoordinatesOfCompleteLines)
-            score.incrementScore(yCoordinatesOfCompleteLines.size)
         }
+        return calculateScoreIncrease(yCoordinatesOfCompleteLines.size)
     }
 
     private fun findYCoordsOfCompleteLines(blockMap: BlockMap): List<Int> {
@@ -30,4 +30,7 @@ class CompleteLineChecker {
             blockMap.blocks.forEach { block -> if (block.position.y > y) block.position.y -= 1 }
         }
     }
+
+    private fun calculateScoreIncrease(numberOfLines: Int) =
+            Score(GameRules.linesToScore(numberOfLines), numberOfLines)
 }

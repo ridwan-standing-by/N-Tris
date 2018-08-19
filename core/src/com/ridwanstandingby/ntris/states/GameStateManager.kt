@@ -2,15 +2,16 @@ package com.ridwanstandingby.ntris.states
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import com.ridwanstandingby.ntris.data.DataManager
 import com.ridwanstandingby.ntris.game.Game
 import com.ridwanstandingby.ntris.render.Dimensions
 import com.ridwanstandingby.ntris.render.fonts.FontGenerator
 import com.ridwanstandingby.ntris.render.fonts.Fonts
 import java.util.*
 
-class GameStateManager {
+class GameStateManager(dataManager: DataManager) {
 
-    val game = Game()
+    val game = Game(dataManager)
 
     lateinit var dimensions: Dimensions
     lateinit var fonts: Fonts
