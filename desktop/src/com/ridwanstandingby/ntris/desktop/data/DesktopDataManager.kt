@@ -22,9 +22,8 @@ class DesktopDataManager : DataManager {
 
     private inline fun <reified T> getValue(key: String, default: T): T =
             try {
-                File(PREFS_FILE_NAME)
-                        .useLines { it.toList() }
-                        .firstOrNull { it.contains(key) && it.contains(PREFS_DELIMITER) }
+                getAllLinesFromFile()
+                        .firstOrNull { isLineForPreference(it, key) }
                         ?.split(PREFS_DELIMITER)
                         ?.let { it[1].toPrimitive<T>() } ?: default
             } catch (e: Exception) {
@@ -32,14 +31,18 @@ class DesktopDataManager : DataManager {
             }
 
     private inline fun <reified T> setValue(key: String, value: T) {
-        val oldLines = File(PREFS_FILE_NAME)
-                .useLines { it.toList() }
+        val oldLines = getAllLinesFromFile()
+        val newLines = generateNewLines(key, value, oldLines)
+        val newFileString = StringBuilder().apply { newLines.forEach { appendln(it) } }.toString()
+        File(PREFS_FILE_NAME).writeText(newFileString)
+    }
 
+    private inline fun <reified T> generateNewLines(key: String, value: T, oldLines: List<String>): MutableList<String> {
         var lineFound = false
         val newLines = mutableListOf<String>()
         val lineToBeAdded = key + PREFS_DELIMITER + value.toString()
         oldLines.forEach {
-            if (it.contains(key) && it.contains(PREFS_DELIMITER)) {
+            if (isLineForPreference(it, key)) {
                 lineFound = true
                 newLines.add(lineToBeAdded)
             } else {
@@ -48,11 +51,12 @@ class DesktopDataManager : DataManager {
         }
 
         if (!lineFound) newLines.add(lineToBeAdded)
-
-        val newFileString = StringBuilder().apply { newLines.forEach { appendln(it) } }.toString()
-
-        File(PREFS_FILE_NAME).writeText(newFileString)
+        return newLines
     }
+
+    private fun getAllLinesFromFile() = File(PREFS_FILE_NAME).useLines { it.toList() }
+
+    private fun isLineForPreference(line: String, key: String) = line.contains(key) && line.contains(PREFS_DELIMITER)
 
     private inline fun <reified T> String.toPrimitive(): T? =
             when (T::class) {
