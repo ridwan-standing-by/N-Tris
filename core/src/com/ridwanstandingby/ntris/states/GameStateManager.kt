@@ -9,9 +9,9 @@ import com.ridwanstandingby.ntris.render.fonts.FontGenerator
 import com.ridwanstandingby.ntris.render.fonts.Fonts
 import java.util.*
 
-class GameStateManager(dataManager: DataManager) {
+class GameStateManager(private val dataManager: DataManager) {
 
-    val game = Game(dataManager)
+    var game = Game(dataManager)
 
     lateinit var dimensions: Dimensions
     lateinit var fonts: Fonts
@@ -38,6 +38,7 @@ class GameStateManager(dataManager: DataManager) {
 
     fun update(dt: Float) {
         states.peek().update(dt)
+        if (game.doRestart) game = Game(dataManager)
     }
 
     fun render(sb: SpriteBatch, sr: ShapeRenderer) {

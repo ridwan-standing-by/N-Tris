@@ -24,17 +24,17 @@ class Game(private val dataManager: DataManager) {
     private val pulser = TimedDebouncer(clock, GameRules.PULSE_TIME) { eventHandler.queue(Events.Pulse()) }
             .also { it.nowPressed = true }
 
-    private var hasSwappedReserve = false
-
     var score = Score(0, 0)
     val highScore = dataManager.highScore.copy()
-    var isGameOver = true
+
+    var isGameOver = false
+    var doRestart = false
 
     val backgroundBlockMap = BlockMap()
-
     var currentPiece = polyominoSpawner.generatePolyomino(score).apply { setToPlaySpawnPosition() }
     var nextPiece = polyominoSpawner.generatePolyomino(score)
     var reservePiece = polyominoSpawner.generatePolyomino(score)
+    private var hasSwappedReserve = false
 
     fun resolvePlayInput(rawPlayInput: RawPlayInput) {
         inputEventResolver.resolveInput(rawPlayInput)
@@ -115,6 +115,6 @@ class Game(private val dataManager: DataManager) {
     }
 
     fun restartGameAttempt() {
-        if (isGameOver) TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (isGameOver) doRestart = true
     }
 }
