@@ -35,10 +35,11 @@ abstract class View(val dimensions: Dimensions, val fonts: Fonts, originBlocksX:
 
     abstract val inputKeys: List<Int>
     abstract fun handleInputIsInView(rawPlayInput: RawPlayInput)
-    abstract fun renderShapes(sr: ShapeRenderer, game: Game)
-    abstract fun renderSprites(sb: SpriteBatch, game: Game)
+    open fun renderBlocks(sb: SpriteBatch, game: Game) {}
+    open fun renderShapes(sr: ShapeRenderer, game: Game) {}
+    open fun renderSprites(sb: SpriteBatch, game: Game) {}
 
     companion object {
-        private val HIGHLIGHT_COLOUR = Color(0x77294900)
+        private val HIGHLIGHT_COLOUR = Color(0x297577FF)
     }
 }

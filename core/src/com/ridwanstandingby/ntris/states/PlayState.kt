@@ -23,8 +23,16 @@ class PlayState(gsm: GameStateManager) : State(gsm) {
     }
 
     override fun render(sb: SpriteBatch, sr: ShapeRenderer) {
+        renderBlocks(sb)
         renderShapes(sr)
         renderSprites(sb)
+    }
+
+    private fun renderBlocks(sb: SpriteBatch) {
+        sb.projectionMatrix = cam.combined
+        sb.begin()
+        views.forEach { it.renderBlocks(sb, gsm.game) }
+        sb.end()
     }
 
     private fun renderShapes(sr: ShapeRenderer) {

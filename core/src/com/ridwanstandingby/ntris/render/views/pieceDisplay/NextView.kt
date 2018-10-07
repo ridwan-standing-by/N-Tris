@@ -17,10 +17,12 @@ class NextView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, origi
     override val inputKeys = NEXT_KEYS
 
     override fun handleInputIsInView(rawPlayInput: RawPlayInput) {
+        queueHighlight = true
         rawPlayInput.next = true
     }
 
     override fun renderShapes(sr: ShapeRenderer, game: Game) {
+        renderHighlightIfQueued(sr)
         renderBorder(sr)
     }
 

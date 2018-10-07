@@ -23,13 +23,13 @@ class PlayView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, origi
         rawPlayInput.play = true
     }
 
-    override fun renderShapes(sr: ShapeRenderer, game: Game) {
-        renderBorder(sr)
-    }
-
-    override fun renderSprites(sb: SpriteBatch, game: Game) {
+    override fun renderBlocks(sb: SpriteBatch, game: Game) {
         renderBackgroundBlockMap(sb, game)
         renderCurrentPiece(sb, game)
+    }
+
+    override fun renderShapes(sr: ShapeRenderer, game: Game) {
+        renderBorder(sr)
     }
 
     private fun renderBackgroundBlockMap(sb: SpriteBatch, game: Game) {
