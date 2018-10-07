@@ -2,5 +2,8 @@
 <resources>
 
     <string name="app_name">N-Tris</string>
+    <string name="how_to_play">How to play</string>
+    <string name="play">Play</string>
+    <string name="loading">Loading…</string>
 
 </resources>

@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun beginLoading() {
         loadingProgressBar.visibility = View.VISIBLE
+        loadingTextView.visibility = View.VISIBLE
         doAsync {
             dataManager.loadPolyominoBlueprints()
             uiThread {
@@ -39,6 +40,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun handleFinishedLoading() {
         loadingProgressBar.visibility = View.INVISIBLE
+        loadingTextView.visibility = View.INVISIBLE
         playButton.visibility = View.VISIBLE
         playButton.setOnClickListener { launchGameActivity() }
     }
