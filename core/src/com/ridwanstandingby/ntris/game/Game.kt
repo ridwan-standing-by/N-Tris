@@ -25,7 +25,6 @@ class Game(private val dataManager: DataManager) {
             .also { it.nowPressed = true }
 
     private var hasSwappedReserve = false
-    private var hasRerolledNext = false
 
     var score = Score(0, 0)
     val highScore = dataManager.highScore.copy()
@@ -73,13 +72,6 @@ class Game(private val dataManager: DataManager) {
         }
     }
 
-    fun nextRerollAttempt() {
-        if (!hasRerolledNext) {
-            nextPiece = polyominoSpawner.generatePolyomino(score)
-            hasRerolledNext = true
-        }
-    }
-
     fun pulse() {
         when {
             currentPieceMoveDown() -> {
@@ -106,7 +98,6 @@ class Game(private val dataManager: DataManager) {
         currentPiece = nextPiece
         nextPiece = polyominoSpawner.generatePolyomino(score)
         hasSwappedReserve = false
-        hasRerolledNext = false
     }
 
     private fun gameOver() {

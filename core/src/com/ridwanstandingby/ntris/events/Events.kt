@@ -34,10 +34,6 @@ object Events {
         game.pulse()
     })
 
-    class NextRerollAttempt : Event({ game ->
-        game.nextRerollAttempt()
-    })
-
     class Exit : Event({ game ->
         game.exit()
     })
