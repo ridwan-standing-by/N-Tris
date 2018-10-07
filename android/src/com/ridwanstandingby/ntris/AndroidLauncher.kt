@@ -12,6 +12,10 @@ class AndroidLauncher : AndroidApplication() {
         super.onCreate(savedInstanceState)
         val config = AndroidApplicationConfiguration()
         config.useWakelock = true
-        initialize(NTrisApplication(AndroidDataManager(this)), config)
+
+        val dataManager = AndroidDataManager(this)
+        dataManager.loadPolyominoBlueprints()
+
+        initialize(NTrisApplication(dataManager), config)
     }
 }

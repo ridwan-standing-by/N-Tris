@@ -4,7 +4,7 @@ import com.ridwanstandingby.ntris.data.DataManager
 import com.ridwanstandingby.ntris.game.Score
 import java.io.File
 
-class DesktopDataManager : DataManager {
+class DesktopDataManager : DataManager() {
 
     init {
         File(PREFS_FILE_NAME).createNewFile()
@@ -19,6 +19,8 @@ class DesktopDataManager : DataManager {
             setValue(HIGH_SCORE_POINTS_KEY, value.points)
             setValue(HIGH_SCORE_LINES_KEY, value.lines)
         }
+
+    override val polyominoFileStrings: HashMap<String, String>? = null
 
     private inline fun <reified T> getValue(key: String, default: T): T =
             try {

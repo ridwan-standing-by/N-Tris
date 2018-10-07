@@ -11,6 +11,9 @@ object DesktopLauncher {
         val config = LwjglApplicationConfiguration()
         config.width = 393
         config.height = 660
-        LwjglApplication(NTrisApplication(DesktopDataManager()), config)
+
+        val dataManager = DesktopDataManager()
+
+        LwjglApplication(NTrisApplication(dataManager), config)
     }
 }

@@ -1,11 +1,11 @@
 package com.ridwanstandingby.ntris.polyomino.blueprint
 
 import com.badlogic.gdx.Gdx
-import com.ridwanstandingby.ntris.polyomino.geometry.Array2D
 import com.ridwanstandingby.ntris.polyomino.PolyominoConstants.MAX_RANK
 import com.ridwanstandingby.ntris.polyomino.PolyominoConstants.MIN_RANK
+import com.ridwanstandingby.ntris.polyomino.geometry.Array2D
 
-class PolyominoBlueprintLoader {
+class PolyominoBlueprintLoader(private val polyominoFileStrings: HashMap<String, String>? = null) {
 
     fun load(): PolyominoBlueprintHolder {
         val polyominoBlueprintHolder = PolyominoBlueprintHolder()
@@ -29,10 +29,16 @@ class PolyominoBlueprintLoader {
             }
 
     private fun loadFileLines(rank: Int): Iterator<String> =
-            Gdx.files.internal(BLUEPRINT_FILE_PATHS_TEMPLATE.format(rank))
-                    .readString()
-                    .split(LINE_SEPARATOR)
-                    .iterator()
+            if (polyominoFileStrings != null) {
+                (polyominoFileStrings[BLUEPRINT_FILE_NAME_TEMPLATE.format(rank)]
+                        ?.split(LINE_SEPARATOR) ?: listOf())
+                        .iterator()
+            } else {
+                Gdx.files.internal(BLUEPRINT_FILE_PATH_TEMPLATE.format(rank))
+                        .readString()
+                        .split(LINE_SEPARATOR)
+                        .iterator()
+            }
 
     private fun parsePolyomino(line: String, lines: Iterator<String>, rank: Int): PolyominoBlueprint {
         val index = line.substring(INDEX_POSITION).stripWhitespaceAndConvertToInt()
@@ -60,7 +66,8 @@ class PolyominoBlueprintLoader {
     }
 
     companion object {
-        private const val BLUEPRINT_FILE_PATHS_TEMPLATE = "polyominos/Polyominos_%02d.txt"
+        const val BLUEPRINT_FILE_NAME_TEMPLATE = "polyominos_%02d"
+        const val BLUEPRINT_FILE_PATH_TEMPLATE = "polyominos/$BLUEPRINT_FILE_NAME_TEMPLATE.txt"
         private const val LINE_SEPARATOR = "\r\n"
         private const val INFO_LINE_BEGINNING_CHARACTER = '@'
         private const val BLOCK_CHARACTER = '#'

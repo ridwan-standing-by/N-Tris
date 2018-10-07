@@ -16,7 +16,7 @@ class Game(private val dataManager: DataManager) {
     private val clock = Clock()
     private val eventHandler = EventHandler()
     private val inputEventResolver = InputEventResolver(clock, eventHandler)
-    private val polyominoBlueprintHolder = PolyominoBlueprintLoader().load()
+    private val polyominoBlueprintHolder = dataManager.polyominoBlueprintHolder?: PolyominoBlueprintLoader().load()
     private val polyominoSpawner = PolyominoSpawner(polyominoBlueprintHolder)
     private val legalMoveHelper = LegalMoveHelper()
     private val generousPieceManipulator = GenerousPieceManipulator { piece, moves -> tryPieceMoves(piece, moves) }
