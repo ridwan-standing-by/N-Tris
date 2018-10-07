@@ -8,7 +8,7 @@
     <ImageView
         android:id="@+id/logo"
         android:layout_width="wrap_content"
-        android:layout_height="227dp"
+        android:layout_height="200dp"
         android:contentDescription="@string/ntris_logo"
         app:layout_constraintBottom_toTopOf="@+id/howToPlayButton"
         app:layout_constraintTop_toTopOf="parent"
@@ -17,8 +17,8 @@
     <Button
         android:id="@+id/howToPlayButton"
         style="@style/GdxTheme"
-        android:layout_width="215dp"
-        android:layout_height="75dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:padding="24dp"
@@ -31,7 +31,7 @@
     <Button
         android:id="@+id/playButton"
         style="@style/GdxTheme"
-        android:layout_width="215dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
