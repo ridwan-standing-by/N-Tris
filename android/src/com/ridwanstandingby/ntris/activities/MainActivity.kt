@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun beginLoading() {
+        playButton.visibility = View.INVISIBLE
         loadingProgressBar.visibility = View.VISIBLE
         loadingTextView.visibility = View.VISIBLE
         doAsync {
