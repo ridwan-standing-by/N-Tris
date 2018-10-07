@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.ridwanstandingby.ntris.data.DataManager
+import com.ridwanstandingby.ntris.render.Colours.BACKGROUND_COLOUR
 import com.ridwanstandingby.ntris.states.GameStateManager
 import com.ridwanstandingby.ntris.states.PlayState
 
@@ -39,11 +40,14 @@ class NTrisApplication(private val dataManager: DataManager) : ApplicationAdapte
 
     override fun render() {
         clearScreen()
+        setBackgroundColour()
         gsm.update(Gdx.graphics.deltaTime)
         gsm.render(batch, shapeRenderer)
     }
 
     private fun clearScreen() = Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
+
+    private fun setBackgroundColour() = Gdx.gl.glClearColor(BACKGROUND_COLOUR.r, BACKGROUND_COLOUR.g, BACKGROUND_COLOUR.b, BACKGROUND_COLOUR.a)
 
     override fun dispose() {
         batch.dispose()

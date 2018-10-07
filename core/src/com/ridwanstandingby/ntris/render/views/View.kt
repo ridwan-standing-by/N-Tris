@@ -1,10 +1,10 @@
 package com.ridwanstandingby.ntris.render.views
 
-import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.ridwanstandingby.ntris.game.Game
 import com.ridwanstandingby.ntris.input.RawPlayInput
+import com.ridwanstandingby.ntris.render.Colours.HIGHLIGHT_COLOUR
 import com.ridwanstandingby.ntris.render.Dimensions
 import com.ridwanstandingby.ntris.render.fonts.Fonts
 
@@ -38,8 +38,4 @@ abstract class View(val dimensions: Dimensions, val fonts: Fonts, originBlocksX:
     open fun renderBlocks(sb: SpriteBatch, game: Game) {}
     open fun renderShapes(sr: ShapeRenderer, game: Game) {}
     open fun renderSprites(sb: SpriteBatch, game: Game) {}
-
-    companion object {
-        private val HIGHLIGHT_COLOUR = Color(0x297577FF)
-    }
 }

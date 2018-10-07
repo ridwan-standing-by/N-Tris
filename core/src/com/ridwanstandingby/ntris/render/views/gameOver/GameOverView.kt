@@ -1,11 +1,11 @@
 package com.ridwanstandingby.ntris.render.views.gameOver
 
-import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.ridwanstandingby.ntris.game.Game
 import com.ridwanstandingby.ntris.input.KeyInput
 import com.ridwanstandingby.ntris.input.RawPlayInput
+import com.ridwanstandingby.ntris.render.Colours.BACKGROUND_COLOUR
 import com.ridwanstandingby.ntris.render.Dimensions
 import com.ridwanstandingby.ntris.render.fonts.FontHelper
 import com.ridwanstandingby.ntris.render.fonts.Fonts
@@ -31,7 +31,7 @@ class GameOverView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, o
 
     private fun renderBackground(sr: ShapeRenderer) {
         sr.set(ShapeRenderer.ShapeType.Filled)
-        sr.rect(originX, originY, width, height, GAME_OVER_BG_COLOUR, GAME_OVER_BG_COLOUR, GAME_OVER_BG_COLOUR, GAME_OVER_BG_COLOUR)
+        sr.rect(originX, originY, width, height, BACKGROUND_COLOUR, BACKGROUND_COLOUR, BACKGROUND_COLOUR, BACKGROUND_COLOUR)
     }
 
     override fun renderSprites(sb: SpriteBatch, game: Game) {
@@ -56,8 +56,6 @@ class GameOverView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, o
     }
 
     companion object {
-        private val GAME_OVER_BG_COLOUR = Color(0x000000FF)
-
         const val TEXT_PADDING = 96
         const val GAME_OVER_TITLE = "Game Over!"
         const val RESTART_ICON = "⟳"
