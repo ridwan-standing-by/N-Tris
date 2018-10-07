@@ -23,22 +23,22 @@ class PlayState(gsm: GameStateManager) : State(gsm) {
     }
 
     override fun render(sb: SpriteBatch, sr: ShapeRenderer) {
-        beginRender(sb, sr)
-        views.forEach { it.render(sb, sr, gsm.game) }
-        endRender(sb, sr)
+        renderShapes(sr)
+        renderSprites(sb)
     }
 
-    private fun beginRender(sb: SpriteBatch, sr: ShapeRenderer) {
+    private fun renderShapes(sr: ShapeRenderer) {
+        sr.projectionMatrix = cam.combined
+        sr.setAutoShapeType(true)
+        sr.begin()
+        views.forEach { it.renderShapes(sr, gsm.game) }
+        sr.end()
+    }
+
+    private fun renderSprites(sb: SpriteBatch) {
         sb.projectionMatrix = cam.combined
         sb.begin()
-        sr.projectionMatrix = cam.combined
-        sr.begin(ShapeRenderer.ShapeType.Line)
-    }
-
-    private fun endRender(sb: SpriteBatch, sr: ShapeRenderer) {
-        // Bug workaround - need to render a new font for the previous ones to render
-        gsm.fonts.dummy.draw(sb, " ", 0f, 0f)
-        sr.end()
+        views.forEach { it.renderSprites(sb, gsm.game) }
         sb.end()
     }
 

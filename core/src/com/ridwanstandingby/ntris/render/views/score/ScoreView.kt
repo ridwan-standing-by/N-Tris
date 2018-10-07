@@ -22,8 +22,11 @@ class ScoreView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, orig
         rawPlayInput.score = true
     }
 
-    override fun render(sb: SpriteBatch, sr: ShapeRenderer, game: Game) {
+    override fun renderShapes(sr: ShapeRenderer, game: Game) {
         renderBorder(sr)
+    }
+
+    override fun renderSprites(sb: SpriteBatch, game: Game) {
         renderScoreAndCharacters(sb, game)
     }
 

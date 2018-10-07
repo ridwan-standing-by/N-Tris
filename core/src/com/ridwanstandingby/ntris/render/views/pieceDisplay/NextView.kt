@@ -20,8 +20,11 @@ class NextView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, origi
         rawPlayInput.next = true
     }
 
-    override fun render(sb: SpriteBatch, sr: ShapeRenderer, game: Game) {
+    override fun renderShapes(sr: ShapeRenderer, game: Game) {
         renderBorder(sr)
+    }
+
+    override fun renderSprites(sb: SpriteBatch, game: Game) {
         renderText(sb)
         renderIcon(sb)
         renderPiece(sb, game.nextPiece)

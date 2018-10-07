@@ -19,20 +19,24 @@ import com.ridwanstandingby.ntris.render.views.View
 
 
 sealed class ButtonView(dimensions: Dimensions, fonts: Fonts,
-                          originBlocksX: Float, originBlocksY: Float,
-                          blocksWidth: Float, blocksHeight: Float,
-                          private val icon: String, private val offset: Vector2 = Vector2(0f, 0f)) :
+                        originBlocksX: Float, originBlocksY: Float,
+                        blocksWidth: Float, blocksHeight: Float,
+                        private val icon: String, private val offset: Vector2 = Vector2(0f, 0f)) :
         View(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blocksHeight) {
 
-    override fun render(sb: SpriteBatch, sr: ShapeRenderer, game: Game) {
+    override fun renderShapes(sr: ShapeRenderer, game: Game) {
+        renderHighlightIfQueued(sr)
         renderBorder(sr)
+    }
+
+    override fun renderSprites(sb: SpriteBatch, game: Game) {
         renderTextInCentre(sb, fonts.buttonCharacter, icon)
     }
 
     private fun renderTextInCentre(sb: SpriteBatch, font: BitmapFont, text: String) {
         val textDims = FontHelper.getDimensionsOfText(font, text)
-        val x = originX + width/2 - textDims.x/2 + dimensions.rescale(offset.x)
-        val y = originY + height/2 + textDims.y/2 + dimensions.rescale(offset.y)
+        val x = originX + width / 2 - textDims.x / 2 + dimensions.rescale(offset.x)
+        val y = originY + height / 2 + textDims.y / 2 + dimensions.rescale(offset.y)
         font.draw(sb, text, x, y)
     }
 
@@ -40,6 +44,7 @@ sealed class ButtonView(dimensions: Dimensions, fonts: Fonts,
         : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blocksHeight, MOVE_DOWN_BUTTON_ICON) {
         override val inputKeys = MOVE_DOWN_KEYS
         override fun handleInputIsInView(rawPlayInput: RawPlayInput) {
+            queueHighlight = true
             rawPlayInput.moveDown = true
         }
     }
@@ -48,6 +53,7 @@ sealed class ButtonView(dimensions: Dimensions, fonts: Fonts,
         : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blocksHeight, PAUSE_BUTTON_ICON, PAUSE_BUTTON_ICON_OFFSET) {
         override val inputKeys = PAUSE_KEYS
         override fun handleInputIsInView(rawPlayInput: RawPlayInput) {
+            queueHighlight = true
             rawPlayInput.pause = true
         }
     }
@@ -56,6 +62,7 @@ sealed class ButtonView(dimensions: Dimensions, fonts: Fonts,
         : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blocksHeight, MOVE_LEFT_BUTTON_ICON) {
         override val inputKeys = MOVE_LEFT_KEYS
         override fun handleInputIsInView(rawPlayInput: RawPlayInput) {
+            queueHighlight = true
             rawPlayInput.moveLeft = true
         }
     }
@@ -64,6 +71,7 @@ sealed class ButtonView(dimensions: Dimensions, fonts: Fonts,
         : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blocksHeight, MOVE_RIGHT_BUTTON_ICON) {
         override val inputKeys = MOVE_RIGHT_KEYS
         override fun handleInputIsInView(rawPlayInput: RawPlayInput) {
+            queueHighlight = true
             rawPlayInput.moveRight = true
         }
     }
@@ -72,6 +80,7 @@ sealed class ButtonView(dimensions: Dimensions, fonts: Fonts,
         : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blocksHeight, ROTATE_LEFT_BUTTON_ICON) {
         override val inputKeys = ROTATE_LEFT_KEYS
         override fun handleInputIsInView(rawPlayInput: RawPlayInput) {
+            queueHighlight = true
             rawPlayInput.rotateLeft = true
         }
     }
@@ -80,6 +89,7 @@ sealed class ButtonView(dimensions: Dimensions, fonts: Fonts,
         : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blocksHeight, ROTATE_RIGHT_BUTTON_ICON) {
         override val inputKeys = ROTATE_RIGHT_KEYS
         override fun handleInputIsInView(rawPlayInput: RawPlayInput) {
+            queueHighlight = true
             rawPlayInput.rotateRight = true
         }
     }

@@ -17,11 +17,16 @@ class ReserveView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, or
     override val inputKeys = RESERVE_KEYS
 
     override fun handleInputIsInView(rawPlayInput: RawPlayInput) {
+        queueHighlight = true
         rawPlayInput.reserve = true
     }
 
-    override fun render(sb: SpriteBatch, sr: ShapeRenderer, game: Game) {
+    override fun renderShapes(sr: ShapeRenderer, game: Game) {
+        renderHighlightIfQueued(sr)
         renderBorder(sr)
+    }
+
+    override fun renderSprites(sb: SpriteBatch, game: Game) {
         renderText(sb)
         renderIcon(sb)
         renderPiece(sb, game.reservePiece)
