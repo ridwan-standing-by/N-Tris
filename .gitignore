@@ -124,4 +124,11 @@ Thumbs.db
 !/ios-moe/xcode/*.xcodeproj/project.pbxproj
 /ios-moe/xcode/native/
 
+## Other Android
+*.jks
+*.apk
+android/release/
+android/debug/
+
+## N-Tris Generated
 android/assets/NTrisSettings\.txt
