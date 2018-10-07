@@ -46,17 +46,21 @@ class Polyomino(private val polyominoBlueprint: PolyominoBlueprint,
     }
 
     fun rotateLeft() {
-        rotate(rotateLeftRule)
+        manipulate(rotateLeftRule)
     }
 
     fun rotateRight() {
-        rotate(rotateRightRule)
+        manipulate(rotateRightRule)
     }
 
-    private fun rotate(rotateRule: (Vector2) -> Vector2) {
-        val oldRotationalCoordinates = relativeCoordinates.map { it - rotationalCentre }
-        val newRotationalCoordinates = oldRotationalCoordinates.map { rotateRule(it) }
-        relativeCoordinates = newRotationalCoordinates.map { IntVector2(it + rotationalCentre) }.toSet()
+    fun reflect() {
+        manipulate(reflectRule)
+    }
+
+    private fun manipulate(manipulateRule: (Vector2) -> Vector2) {
+        val oldAbstractCoordinates = relativeCoordinates.map { it - rotationalCentre }
+        val newAbstractCoordinates = oldAbstractCoordinates.map { manipulateRule(it) }
+        relativeCoordinates = newAbstractCoordinates.map { IntVector2(it + rotationalCentre) }.toSet()
     }
 
     companion object {
@@ -69,5 +73,6 @@ class Polyomino(private val polyominoBlueprint: PolyominoBlueprint,
         }
         private val rotateLeftRule = { v: Vector2 -> Vector2(-v.y, v.x) }
         private val rotateRightRule = { v: Vector2 -> Vector2(v.y, -v.x) }
+        private val reflectRule = { v: Vector2 -> Vector2(-v.x, v.y) }
     }
 }

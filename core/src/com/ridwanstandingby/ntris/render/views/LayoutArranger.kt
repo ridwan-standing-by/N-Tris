@@ -14,7 +14,7 @@ class LayoutArranger(private val dimensions: Dimensions, private val fonts: Font
     fun createViews(): ArrayList<View> = arrayListOf<View>().apply {
         add(MoveDownButtonView(dimensions, fonts,
                 10.5f, 01.0f, 4.0f, 4.0f))
-        add(PauseButtonView(dimensions, fonts,
+        add(ReflectButtonView(dimensions, fonts,
                 14.5f, 01.0f, 4.0f, 4.0f))
         add(MoveLeftButtonView(dimensions, fonts,
                 10.5f, 05.0f, 4.0f, 4.0f))

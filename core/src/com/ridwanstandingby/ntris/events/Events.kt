@@ -22,8 +22,8 @@ object Events {
         game.currentPieceRotateRight()
     })
 
-    class Pause : Event({ game ->
-        game.togglePause()
+    class CurrentPieceReflect : Event({ game ->
+        game.currentPieceReflect()
     })
 
     class SwapReserveAttempt : Event({ game ->

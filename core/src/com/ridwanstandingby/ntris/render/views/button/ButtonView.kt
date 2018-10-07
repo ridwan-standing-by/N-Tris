@@ -3,12 +3,11 @@ package com.ridwanstandingby.ntris.render.views.button
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
-import com.badlogic.gdx.math.Vector2
 import com.ridwanstandingby.ntris.game.Game
 import com.ridwanstandingby.ntris.input.KeyInput.MOVE_DOWN_KEYS
 import com.ridwanstandingby.ntris.input.KeyInput.MOVE_LEFT_KEYS
 import com.ridwanstandingby.ntris.input.KeyInput.MOVE_RIGHT_KEYS
-import com.ridwanstandingby.ntris.input.KeyInput.PAUSE_KEYS
+import com.ridwanstandingby.ntris.input.KeyInput.REFLECT_KEYS
 import com.ridwanstandingby.ntris.input.KeyInput.ROTATE_LEFT_KEYS
 import com.ridwanstandingby.ntris.input.KeyInput.ROTATE_RIGHT_KEYS
 import com.ridwanstandingby.ntris.input.RawPlayInput
@@ -21,7 +20,7 @@ import com.ridwanstandingby.ntris.render.views.View
 sealed class ButtonView(dimensions: Dimensions, fonts: Fonts,
                         originBlocksX: Float, originBlocksY: Float,
                         blocksWidth: Float, blocksHeight: Float,
-                        private val icon: String, private val offset: Vector2 = Vector2(0f, 0f)) :
+                        private val icon: String) :
         View(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blocksHeight) {
 
     override fun renderShapes(sr: ShapeRenderer, game: Game) {
@@ -35,8 +34,8 @@ sealed class ButtonView(dimensions: Dimensions, fonts: Fonts,
 
     private fun renderTextInCentre(sb: SpriteBatch, font: BitmapFont, text: String) {
         val textDims = FontHelper.getDimensionsOfText(font, text)
-        val x = originX + width / 2 - textDims.x / 2 + dimensions.rescale(offset.x)
-        val y = originY + height / 2 + textDims.y / 2 + dimensions.rescale(offset.y)
+        val x = originX + width / 2 - textDims.x / 2
+        val y = originY + height / 2 + textDims.y / 2
         font.draw(sb, text, x, y)
     }
 
@@ -49,12 +48,12 @@ sealed class ButtonView(dimensions: Dimensions, fonts: Fonts,
         }
     }
 
-    class PauseButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blocksHeight: Float)
-        : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blocksHeight, PAUSE_BUTTON_ICON, PAUSE_BUTTON_ICON_OFFSET) {
-        override val inputKeys = PAUSE_KEYS
+    class ReflectButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blocksHeight: Float)
+        : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blocksHeight, REFLECT_BUTTON_ICON) {
+        override val inputKeys = REFLECT_KEYS
         override fun handleInputIsInView(rawPlayInput: RawPlayInput) {
             queueHighlight = true
-            rawPlayInput.pause = true
+            rawPlayInput.reflect = true
         }
     }
 
@@ -100,7 +99,6 @@ sealed class ButtonView(dimensions: Dimensions, fonts: Fonts,
         const val MOVE_RIGHT_BUTTON_ICON = "→"
         const val ROTATE_LEFT_BUTTON_ICON = "↶"
         const val ROTATE_RIGHT_BUTTON_ICON = "↷"
-        const val PAUSE_BUTTON_ICON = "╻╻"
-        private val PAUSE_BUTTON_ICON_OFFSET = Vector2(0f, 32f)
+        const val REFLECT_BUTTON_ICON = "⇹"
     }
 }

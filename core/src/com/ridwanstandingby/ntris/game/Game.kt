@@ -19,12 +19,11 @@ class Game(private val dataManager: DataManager) {
     private val polyominoBlueprintHolder = PolyominoBlueprintLoader().load()
     private val polyominoSpawner = PolyominoSpawner(polyominoBlueprintHolder)
     private val legalMoveHelper = LegalMoveHelper()
-    private val generousRotator = GenerousRotator { piece, moves -> tryPieceMoves(piece, moves) }
+    private val generousPieceManipulator = GenerousPieceManipulator { piece, moves -> tryPieceMoves(piece, moves) }
     private val completeLineChecker = CompleteLineChecker()
     private val pulser = TimedDebouncer(clock, GameRules.PULSE_TIME) { eventHandler.queue(Events.Pulse()) }
             .also { it.nowPressed = true }
 
-    private var paused = false
     private var hasSwappedReserve = false
     private var hasRerolledNext = false
 
@@ -44,7 +43,7 @@ class Game(private val dataManager: DataManager) {
     fun update(dt: Float) {
         eventHandler.handleEvents(this)
         pulser.invokeDebounced()
-        if (!paused) clock.tick(dt)
+        clock.tick(dt)
     }
 
     private fun tryPieceMove(polyomino: Polyomino, move: Polyomino.() -> Unit): Boolean =
@@ -59,13 +58,11 @@ class Game(private val dataManager: DataManager) {
 
     fun currentPieceMoveRight() = tryPieceMove(currentPiece) { moveRight() }
 
-    fun currentPieceRotateLeft() = generousRotator.tryPieceRotateLeft(currentPiece)
+    fun currentPieceRotateLeft() = generousPieceManipulator.tryPieceRotateLeft(currentPiece)
 
-    fun currentPieceRotateRight() = generousRotator.tryPieceRotateRight(currentPiece)
+    fun currentPieceRotateRight() = generousPieceManipulator.tryPieceRotateRight(currentPiece)
 
-    fun togglePause() {
-        paused = !paused
-    }
+    fun currentPieceReflect() = generousPieceManipulator.tryPieceReflect(currentPiece)
 
     fun swapReserveAttempt() {
         if (!hasSwappedReserve) {
@@ -113,7 +110,7 @@ class Game(private val dataManager: DataManager) {
     }
 
     private fun gameOver() {
-        paused = true
+        // TODO
     }
 
     private fun updateHighScoreIfNecessary() {

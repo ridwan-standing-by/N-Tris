@@ -50,7 +50,7 @@ class FontGenerator(private val dimensions: Dimensions) {
                         ButtonView.MOVE_RIGHT_BUTTON_ICON +
                         ButtonView.ROTATE_LEFT_BUTTON_ICON +
                         ButtonView.ROTATE_RIGHT_BUTTON_ICON +
-                        ButtonView.PAUSE_BUTTON_ICON
+                        ButtonView.REFLECT_BUTTON_ICON
     }
 
 }
