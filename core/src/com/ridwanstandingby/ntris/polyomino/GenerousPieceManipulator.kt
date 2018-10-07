@@ -17,9 +17,9 @@ class GenerousPieceManipulator(private val ifLegalThenDo: (piece: Polyomino, mov
                                            manipulateMove: Polyomino.() -> Unit,
                                            movePrimaryDirection: Polyomino.() -> Unit,
                                            moveSecondaryDirection: Polyomino.() -> Unit): Boolean {
-        (0..GameRules.GENEROUS_MANIPULATION_MAX_MOVES).forEach {
-            val primaryMoveList = List(it) { movePrimaryDirection } + manipulateMove
-            val secondaryMoveList = List(it) { moveSecondaryDirection } + manipulateMove
+        (0..GameRules.GENEROUS_MANIPULATION_MAX_MOVES).forEach { move ->
+            val primaryMoveList = List(move) { movePrimaryDirection } + manipulateMove
+            val secondaryMoveList = List(move) { moveSecondaryDirection } + manipulateMove
 
             if (ifLegalThenDo(piece, primaryMoveList)) return true
             if (ifLegalThenDo(piece, secondaryMoveList)) return true

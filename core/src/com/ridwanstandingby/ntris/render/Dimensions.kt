@@ -20,6 +20,5 @@ class Dimensions(val screenWidth: Int, val screenHeight: Int) {
     }
 
     fun rescale(x: Int): Float = (scale * x.toFloat())
-    fun rescale(x: Float): Float = scale * x
     fun rescaledBlock() = block * scale
 }
