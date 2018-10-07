@@ -9,20 +9,24 @@ import ktx.math.plus
 
 class Polyomino(private val polyominoBlueprint: PolyominoBlueprint,
                 private val colour: Color,
-                private var position: IntVector2 = IntVector2(0, 0)) {
-    private val size = IntVector2(polyominoBlueprint.blockMatrix.xSize, polyominoBlueprint.blockMatrix.ySize)
-    private val positionalCentre = size / 2
-    private val rotationalCentre = Vector2(rotationalCentreCalculateRule(size.x), rotationalCentreCalculateRule(size.y))
-    private var relativeCoordinates: Set<IntVector2> = polyominoBlueprint.generateCoordinates()
+                private var position: Vector2 = Vector2(0f, 0f)) {
+
+    private var relativeCoordinates: Set<Vector2> = calculateRelativeCoordinates()
+
+    private fun calculateRelativeCoordinates(): Set<Vector2> {
+        val absoluteCoordinates = polyominoBlueprint.generateAbsoluteCoordinates()
+        val absoluteCentre = getCentre(absoluteCoordinates.map { Vector2(it.x.toFloat(), it.y.toFloat()) }.toSet())
+        return absoluteCoordinates.map { Vector2(it.x.toFloat() - absoluteCentre.x, it.y.toFloat() - absoluteCentre.y) }.toSet()
+    }
 
     fun resetPositionToOrigin() {
-        position = IntVector2(0, 0)
+        position = Vector2(0f, 0f)
     }
 
     fun setToPlaySpawnPosition() {
-        position = IntVector2(
-                GameRules.PLAY_BLOCK_SIZE.x / 2,
-                GameRules.PLAY_BLOCK_SIZE.y - 1 + positionalCentre.y)
+        position = Vector2(
+                (GameRules.PLAY_BLOCK_SIZE.x / 2).toFloat(),
+                GameRules.PLAY_BLOCK_SIZE.y - 1f + getCentre(relativeCoordinates).y)
     }
 
     fun copy(): Polyomino = Polyomino(polyominoBlueprint, colour, position).also {
@@ -30,19 +34,19 @@ class Polyomino(private val polyominoBlueprint: PolyominoBlueprint,
     }
 
     fun generateBlocks(): List<Block> = relativeCoordinates.map { coordinate ->
-        Block(position - positionalCentre + coordinate, colour)
+        Block(IntVector2(position + coordinate), colour)
     }
 
     fun moveDown() {
-        position += IntVector2(0, -1)
+        position += Vector2(0f, -1f)
     }
 
     fun moveLeft() {
-        position += IntVector2(-1, 0)
+        position += Vector2(-1f, 0f)
     }
 
     fun moveRight() {
-        position += IntVector2(1, 0)
+        position += Vector2(1f, 0f)
     }
 
     fun rotateLeft() {
@@ -58,19 +62,17 @@ class Polyomino(private val polyominoBlueprint: PolyominoBlueprint,
     }
 
     private fun manipulate(manipulateRule: (Vector2) -> Vector2) {
-        val oldAbstractCoordinates = relativeCoordinates.map { it - rotationalCentre }
-        val newAbstractCoordinates = oldAbstractCoordinates.map { manipulateRule(it) }
-        relativeCoordinates = newAbstractCoordinates.map { IntVector2(it + rotationalCentre) }.toSet()
+        relativeCoordinates = relativeCoordinates.map { manipulateRule(it) }.toSet()
     }
 
     companion object {
 
-        private val rotationalCentreCalculateRule = { i: Int ->
-            if (i % 2 == 0)
-                (i - 1).toFloat() / 2f
-            else
-                i.toFloat() / 2f
-        }
+        private fun getSize(coordinates: Set<Vector2>) = Vector2(
+                (coordinates.maxBy { it.x }?.x ?: 0f) - (coordinates.minBy { it.x }?.x ?: 0f),
+                (coordinates.maxBy { it.y }?.y ?: 0f) - (coordinates.minBy { it.y }?.y ?: 0f))
+
+        private fun getCentre(coordinates: Set<Vector2>) = getSize(coordinates).let { Vector2(it.x / 2f, it.y / 2f) }
+
         private val rotateLeftRule = { v: Vector2 -> Vector2(-v.y, v.x) }
         private val rotateRightRule = { v: Vector2 -> Vector2(v.y, -v.x) }
         private val reflectRule = { v: Vector2 -> Vector2(-v.x, v.y) }

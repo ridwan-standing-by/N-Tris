@@ -8,7 +8,7 @@ data class PolyominoBlueprint(
         val index: Int,
         val blockMatrix: Array2D<Boolean?>) {
 
-    fun generateCoordinates() = mutableSetOf<IntVector2>().also { list ->
+    fun generateAbsoluteCoordinates() = mutableSetOf<IntVector2>().also { list ->
         blockMatrix.forEachIndexed { x, y, b ->
             if (b != null && b) list.add(com.ridwanstandingby.ntris.polyomino.geometry.IntVector2(x, y))
         }
