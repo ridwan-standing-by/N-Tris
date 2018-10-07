@@ -25,6 +25,8 @@ class MainActivity : AppCompatActivity() {
         } else {
             beginLoading()
         }
+
+        howToPlayButton.setOnClickListener { launchTutorialActivity() }
     }
 
     private fun beginLoading() {
@@ -47,6 +49,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun launchGameActivity() {
         val intent = Intent(this, GameActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun launchTutorialActivity() {
+        val intent = Intent(this, TutorialActivity::class.java)
         startActivity(intent)
     }
 }
