@@ -1,5 +1,5 @@
 android {
-    buildToolsVersion "28.0.1"
+    buildToolsVersion "28.0.2"
     compileSdkVersion 28
     sourceSets {
         main {
@@ -78,7 +78,7 @@ task run(type: Exec) {
     }
 
     def adb = path + "/platform-tools/adb"
-    commandLine "$adb", 'shell', 'am', 'start', '-n', 'com.ridwanstandingby.ntris/com.ridwanstandingby.ntris.AndroidLauncher'
+    commandLine "$adb", 'shell', 'am', 'start', '-n', 'com.ridwanstandingby.ntris/com.ridwanstandingby.ntris.activities.GameActivity'
 }
 
 // sets up the Android Eclipse project, using the old Ant based build.

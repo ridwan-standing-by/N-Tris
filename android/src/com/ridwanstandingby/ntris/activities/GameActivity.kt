@@ -1,21 +1,18 @@
-package com.ridwanstandingby.ntris
+package com.ridwanstandingby.ntris.activities
 
 import android.os.Bundle
-
 import com.badlogic.gdx.backends.android.AndroidApplication
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration
-import com.ridwanstandingby.ntris.data.AndroidDataManager
+import com.ridwanstandingby.ntris.Application
+import com.ridwanstandingby.ntris.NTrisApplication
 
-class AndroidLauncher : AndroidApplication() {
+class GameActivity : AndroidApplication() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val config = AndroidApplicationConfiguration()
         config.useWakelock = true
 
-        val dataManager = AndroidDataManager(this)
-        dataManager.loadPolyominoBlueprints()
-
-        initialize(NTrisApplication(dataManager), config)
+        initialize(NTrisApplication((application as Application).dataManager), config)
     }
 }
