@@ -34,6 +34,10 @@ object Events {
         game.pulse()
     })
 
+    class RestartGame : Event({ game ->
+        game.restartGameAttempt()
+    })
+
     class Exit : Event({ game ->
         game.exit()
     })

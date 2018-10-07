@@ -4,6 +4,7 @@ import com.ridwanstandingby.ntris.game.GameRules
 import com.ridwanstandingby.ntris.render.Dimensions
 import com.ridwanstandingby.ntris.render.fonts.Fonts
 import com.ridwanstandingby.ntris.render.views.button.ButtonView.*
+import com.ridwanstandingby.ntris.render.views.gameOver.GameOverView
 import com.ridwanstandingby.ntris.render.views.pieceDisplay.NextView
 import com.ridwanstandingby.ntris.render.views.pieceDisplay.ReserveView
 import com.ridwanstandingby.ntris.render.views.play.PlayView
@@ -34,5 +35,7 @@ class LayoutArranger(private val dimensions: Dimensions, private val fonts: Font
                 00.5f, 01.0f,
                 GameRules.PLAY_BLOCK_SIZE.x.toFloat(),
                 GameRules.PLAY_BLOCK_SIZE.y.toFloat()))
+        add(GameOverView(dimensions, fonts,
+                01.5f, 13.0f, 8.0f, 7.0f))
     }
 }

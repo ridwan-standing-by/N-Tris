@@ -34,6 +34,9 @@ class InputEventResolver(clock: Clock, private val eventHandler: EventHandler) {
     private val reflectDebouncer = SimpleDebouncer {
         eventHandler.queue(Events.CurrentPieceReflect())
     }
+    private val gameOverDebouncer = SimpleDebouncer {
+        eventHandler.queue(Events.RestartGame())
+    }
     private val exitDebouncer = SimpleDebouncer {
         eventHandler.queue((Events.Exit()))
     }
@@ -41,6 +44,7 @@ class InputEventResolver(clock: Clock, private val eventHandler: EventHandler) {
     fun resolveInput(input: RawPlayInput) {
         updateDebouncers(input)
         resolveExitInput()
+        resolveGameOverInput()
         resolveMovementInput(input)
         resolveRotationInput(input)
         resolveReserveInput()
@@ -49,6 +53,7 @@ class InputEventResolver(clock: Clock, private val eventHandler: EventHandler) {
 
     private fun updateDebouncers(input: RawPlayInput) {
         exitDebouncer.nowPressed = input.exit
+        gameOverDebouncer.nowPressed = input.gameOver
         moveDownDebouncer.nowPressed = input.moveDown
         moveLeftDebouncer.nowPressed = input.moveLeft
         moveRightDebouncer.nowPressed = input.moveRight
@@ -60,6 +65,10 @@ class InputEventResolver(clock: Clock, private val eventHandler: EventHandler) {
 
     private fun resolveExitInput() {
         exitDebouncer.invokeDebounced()
+    }
+
+    private fun resolveGameOverInput() {
+        gameOverDebouncer.invokeDebounced()
     }
 
     private fun resolveMovementInput(input: RawPlayInput) {

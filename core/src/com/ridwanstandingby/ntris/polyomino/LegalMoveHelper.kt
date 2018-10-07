@@ -26,7 +26,7 @@ class LegalMoveHelper {
                     *backgroundBlockMap.blocks.toTypedArray()))
 
     private fun isLegalBlockMap(blockMap: BlockMap): Boolean =
-            areBlocksNonColliding(blockMap) && areBlocksAllInBounds(blockMap)
+            areBlocksNonColliding(blockMap) and areBlocksAllInBounds(blockMap)
 
     private fun areBlocksNonColliding(blockMap: BlockMap): Boolean {
         val listOfPositions = blockMap.blocks.map { block -> block.position }

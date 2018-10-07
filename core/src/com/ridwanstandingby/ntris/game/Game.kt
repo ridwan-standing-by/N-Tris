@@ -28,6 +28,7 @@ class Game(private val dataManager: DataManager) {
 
     var score = Score(0, 0)
     val highScore = dataManager.highScore.copy()
+    var isGameOver = true
 
     val backgroundBlockMap = BlockMap()
 
@@ -100,16 +101,20 @@ class Game(private val dataManager: DataManager) {
         hasSwappedReserve = false
     }
 
-    private fun gameOver() {
-        // TODO
-    }
-
     private fun updateHighScoreIfNecessary() {
         if (score > highScore)
             dataManager.highScore = score
     }
 
+    private fun gameOver() {
+        isGameOver = true
+    }
+
     fun exit() {
         Gdx.app.exit()
+    }
+
+    fun restartGameAttempt() {
+        if (isGameOver) TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

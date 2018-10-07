@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
 import com.ridwanstandingby.ntris.render.Dimensions
 import com.ridwanstandingby.ntris.render.views.button.ButtonView
+import com.ridwanstandingby.ntris.render.views.gameOver.GameOverView
 import com.ridwanstandingby.ntris.render.views.pieceDisplay.NextView
 import com.ridwanstandingby.ntris.render.views.pieceDisplay.ReserveView
 import com.ridwanstandingby.ntris.render.views.score.ScoreView
@@ -50,7 +51,8 @@ class FontGenerator(private val dimensions: Dimensions) {
                         ButtonView.MOVE_RIGHT_BUTTON_ICON +
                         ButtonView.ROTATE_LEFT_BUTTON_ICON +
                         ButtonView.ROTATE_RIGHT_BUTTON_ICON +
-                        ButtonView.REFLECT_BUTTON_ICON
+                        ButtonView.REFLECT_BUTTON_ICON +
+                        GameOverView.RESTART_ICON
     }
 
 }
