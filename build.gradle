@@ -22,7 +22,7 @@ allprojects {
 
     version = '1.0'
     ext {
-        appName = "N-Tris"
+        appName = "N-tris"
         gdxVersion = '1.9.8'
         ktxVersion = '1.9.8-b3'
         roboVMVersion = '2.3.3'
