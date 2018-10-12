@@ -13,6 +13,9 @@ object KeyInput {
     val SCORE_KEYS = listOf<Int>()
     val NEXT_KEYS = listOf(Input.Keys.CONTROL_LEFT, Input.Keys.CONTROL_RIGHT)
     val PLAY_KEYS = listOf<Int>()
+    val PAUSE_KEYS = listOf<Int>()
+    val RESUME_KEYS = listOf(Input.Keys.P)
+    val RESTART_KEYS = listOf(Input.Keys.R)
     val GAME_OVER_KEYS = listOf(Input.Keys.R)
-    val EXIT_KEYS = listOf(Input.Keys.ESCAPE)
+    val BACK_KEYS = listOf(Input.Keys.ESCAPE, Input.Keys.BACK)
 }

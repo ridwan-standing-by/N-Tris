@@ -38,7 +38,11 @@ object Events {
         game.restartGame()
     })
 
-    class Exit : Event({ game ->
-        game.exit()
+    class Resume : Event({ game ->
+        game.resume()
+    })
+
+    class Back : Event({ game ->
+        game.back()
     })
 }

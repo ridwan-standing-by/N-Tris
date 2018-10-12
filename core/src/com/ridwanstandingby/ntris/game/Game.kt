@@ -114,11 +114,23 @@ class Game(private val dataManager: DataManager) {
         isGameOver = true
     }
 
-    fun exit() {
-        Gdx.app.exit()
+    fun resume() {
+        isPaused = false
+    }
+
+    fun back() {
+        if (isInPlay()) {
+            isPaused = true
+        } else {
+            exit()
+        }
     }
 
     fun restartGame() {
         doRestart = true
+    }
+
+    private fun exit() {
+        Gdx.app.exit()
     }
 }

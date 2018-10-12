@@ -48,8 +48,8 @@ class RawPlayInputProcessor(private val gsm: GameStateManager) {
             }
 
     private fun handleNonViewKeys(rawPlayInput: RawPlayInput) {
-        KeyInput.EXIT_KEYS.forEach { key ->
-            if (Gdx.input.isKeyPressed(key)) rawPlayInput.exit = true
+        KeyInput.BACK_KEYS.forEach { key ->
+            if (Gdx.input.isKeyPressed(key)) rawPlayInput.back = true
         }
     }
 

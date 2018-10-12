@@ -10,8 +10,11 @@ data class RawPlayInput(var moveLeft: Boolean = false,
                         var score: Boolean = false,
                         var next: Boolean = false,
                         var play: Boolean = false,
+                        var pause: Boolean = false,
+                        var resume: Boolean = false,
+                        var restart: Boolean = false,
                         var gameOver: Boolean = false,
-                        var exit: Boolean = false) {
+                        var back: Boolean = false) {
     infix fun or(rawPlayInput: RawPlayInput) = RawPlayInput(
             moveLeft || rawPlayInput.moveLeft,
             moveRight || rawPlayInput.moveRight,
@@ -23,6 +26,9 @@ data class RawPlayInput(var moveLeft: Boolean = false,
             score || rawPlayInput.score,
             next || rawPlayInput.next,
             play || rawPlayInput.play,
+            pause || rawPlayInput.pause,
+            resume || rawPlayInput.resume,
+            restart || rawPlayInput.restart,
             gameOver || rawPlayInput.gameOver,
-            exit || rawPlayInput.exit)
+            back || rawPlayInput.back)
 }

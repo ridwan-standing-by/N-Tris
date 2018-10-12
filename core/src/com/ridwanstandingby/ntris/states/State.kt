@@ -13,6 +13,7 @@ abstract class State(protected var gsm: GameStateManager) {
     init {
         cam.setToOrtho(false, gsm.dimensions.screenWidth.toFloat(), gsm.dimensions.screenHeight.toFloat())
         configureInputProcessor()
+        Gdx.input.isCatchBackKey = true
     }
 
     abstract fun handleInput(): Boolean
