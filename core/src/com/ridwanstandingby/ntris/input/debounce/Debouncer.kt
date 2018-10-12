@@ -3,7 +3,7 @@ package com.ridwanstandingby.ntris.input.debounce
 abstract class Debouncer(protected val block: () -> Unit) {
 
     var nowPressed = false
-    private var wasPressed = false
+    var wasPressed = true
 
     private fun isNewlyPressed() = !wasPressed and nowPressed
     private fun isAlreadyPressed() = wasPressed and nowPressed
@@ -15,6 +15,9 @@ abstract class Debouncer(protected val block: () -> Unit) {
         if (isAlreadyPressed()) {
             handleInvokeAlreadyPressed()
         }
+    }
+
+    fun cycle() {
         wasPressed = nowPressed
     }
 

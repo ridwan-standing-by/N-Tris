@@ -114,6 +114,10 @@ class Game(private val dataManager: DataManager) {
         isGameOver = true
     }
 
+    fun pause() {
+        isPaused = true
+    }
+
     fun resume() {
         isPaused = false
     }

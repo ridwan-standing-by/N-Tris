@@ -4,6 +4,7 @@ import com.ridwanstandingby.ntris.events.Clock
 import com.ridwanstandingby.ntris.events.EventHandler
 import com.ridwanstandingby.ntris.events.Events
 import com.ridwanstandingby.ntris.game.Game
+import com.ridwanstandingby.ntris.input.debounce.ExclusiveDebouncer
 import com.ridwanstandingby.ntris.input.debounce.InputDebounceTimes.MOVE_DOWN_DEBOUNCE_TIME
 import com.ridwanstandingby.ntris.input.debounce.InputDebounceTimes.MOVE_LEFT_DEBOUNCE_TIME
 import com.ridwanstandingby.ntris.input.debounce.InputDebounceTimes.MOVE_RIGHT_DEBOUNCE_TIME
@@ -35,10 +36,13 @@ class InputEventResolver(clock: Clock, private val eventHandler: EventHandler) {
     private val reflectDebouncer = SimpleDebouncer {
         eventHandler.queue(Events.CurrentPieceReflect())
     }
-    private val resumeDebouncer = SimpleDebouncer {
+    private val playDebouncer = SimpleDebouncer {
+        eventHandler.queue(Events.Pause())
+    }
+    private val resumeDebouncer = ExclusiveDebouncer(playDebouncer) {
         eventHandler.queue(Events.Resume())
     }
-    private val restartDebouncer = SimpleDebouncer {
+    private val restartDebouncer = ExclusiveDebouncer(playDebouncer) {
         eventHandler.queue(Events.RestartGame())
     }
     private val gameOverDebouncer = SimpleDebouncer {
@@ -64,8 +68,10 @@ class InputEventResolver(clock: Clock, private val eventHandler: EventHandler) {
                 resolveRotationInput(input)
                 resolveReserveInput()
                 resolveReflectInput()
+                resolvePlayInput()
             }
         }
+        cycleDebouncers()
     }
 
     private fun updateDebouncers(input: RawPlayInput) {
@@ -73,6 +79,7 @@ class InputEventResolver(clock: Clock, private val eventHandler: EventHandler) {
         resumeDebouncer.nowPressed = input.pauseResume
         restartDebouncer.nowPressed = input.pauseRestart
         gameOverDebouncer.nowPressed = input.gameOver
+        playDebouncer.nowPressed = input.play
         moveDownDebouncer.nowPressed = input.moveDown
         moveLeftDebouncer.nowPressed = input.moveLeft
         moveRightDebouncer.nowPressed = input.moveRight
@@ -80,6 +87,21 @@ class InputEventResolver(clock: Clock, private val eventHandler: EventHandler) {
         rotateRightDebouncer.nowPressed = input.rotateRight
         reserveDebouncer.nowPressed = input.reserve
         reflectDebouncer.nowPressed = input.reflect
+    }
+
+    private fun cycleDebouncers() {
+        backDebouncer.cycle()
+        resumeDebouncer.cycle()
+        restartDebouncer.cycle()
+        gameOverDebouncer.cycle()
+        playDebouncer.cycle()
+        moveDownDebouncer.cycle()
+        moveLeftDebouncer.cycle()
+        moveRightDebouncer.cycle()
+        rotateLeftDebouncer.cycle()
+        rotateRightDebouncer.cycle()
+        reserveDebouncer.cycle()
+        reflectDebouncer.cycle()
     }
 
     private fun resolveBackInput() {
@@ -119,5 +141,9 @@ class InputEventResolver(clock: Clock, private val eventHandler: EventHandler) {
 
     private fun resolveReflectInput() {
         reflectDebouncer.invokeDebounced()
+    }
+
+    private fun resolvePlayInput() {
+        playDebouncer.invokeDebounced()
     }
 }

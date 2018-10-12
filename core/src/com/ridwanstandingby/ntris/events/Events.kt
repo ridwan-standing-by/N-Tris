@@ -38,6 +38,10 @@ object Events {
         game.restartGame()
     })
 
+    class Pause : Event({ game ->
+        game.pause()
+    })
+
     class Resume : Event({ game ->
         game.resume()
     })
