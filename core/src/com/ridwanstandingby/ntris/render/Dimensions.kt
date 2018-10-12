@@ -6,8 +6,8 @@ class Dimensions(val screenWidth: Int, val screenHeight: Int) {
 
     private val scale : Float
 
-    private val gameWidth = 1080
-    private val gameHeight = 1920
+    private val gameWidth = 1140 // 19 blocks
+    private val gameHeight = 1920 // 32 blocks
 
     val block = 60f
 
