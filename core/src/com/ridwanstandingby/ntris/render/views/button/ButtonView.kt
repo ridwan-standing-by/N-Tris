@@ -3,6 +3,7 @@ package com.ridwanstandingby.ntris.render.views.button
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import com.badlogic.gdx.math.Vector2
 import com.ridwanstandingby.ntris.game.Game
 import com.ridwanstandingby.ntris.input.KeyInput.MOVE_DOWN_KEYS
 import com.ridwanstandingby.ntris.input.KeyInput.MOVE_LEFT_KEYS
@@ -18,10 +19,9 @@ import com.ridwanstandingby.ntris.render.views.View
 
 
 sealed class ButtonView(dimensions: Dimensions, fonts: Fonts,
-                        originBlocksX: Float, originBlocksY: Float,
-                        blocksWidth: Float, blocksHeight: Float,
+                        originBlocks: Vector2, sizeBlocks: Vector2,
                         private val icon: String) :
-        View(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blocksHeight) {
+        View(dimensions, fonts, originBlocks, sizeBlocks) {
 
     override fun renderShapes(sr: ShapeRenderer, game: Game) {
         renderHighlightIfQueued(sr)
@@ -34,13 +34,13 @@ sealed class ButtonView(dimensions: Dimensions, fonts: Fonts,
 
     private fun renderTextInCentre(sb: SpriteBatch, font: BitmapFont, text: String) {
         val textDims = FontHelper.getDimensionsOfText(font, text)
-        val x = originX + width / 2 - textDims.x / 2
-        val y = originY + height / 2 + textDims.y / 2
+        val x = origin.x + size.x / 2 - textDims.x / 2
+        val y = origin.y + size.y / 2 + textDims.y / 2
         font.draw(sb, text, x, y)
     }
 
-    class MoveDownButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blocksHeight: Float)
-        : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blocksHeight, MOVE_DOWN_BUTTON_ICON) {
+    class MoveDownButtonView(dimensions: Dimensions, fonts: Fonts, originBlocks: Vector2, sizeBlocks: Vector2)
+        : ButtonView(dimensions, fonts, originBlocks, sizeBlocks, MOVE_DOWN_BUTTON_ICON) {
         override val inputKeys = MOVE_DOWN_KEYS
         override fun handleInputIsInView(rawPlayInput: RawPlayInput) {
             queueHighlight = true
@@ -48,8 +48,8 @@ sealed class ButtonView(dimensions: Dimensions, fonts: Fonts,
         }
     }
 
-    class ReflectButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blocksHeight: Float)
-        : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blocksHeight, REFLECT_BUTTON_ICON) {
+    class ReflectButtonView(dimensions: Dimensions, fonts: Fonts, originBlocks: Vector2, sizeBlocks: Vector2)
+        : ButtonView(dimensions, fonts, originBlocks, sizeBlocks, REFLECT_BUTTON_ICON) {
         override val inputKeys = REFLECT_KEYS
         override fun handleInputIsInView(rawPlayInput: RawPlayInput) {
             queueHighlight = true
@@ -57,8 +57,8 @@ sealed class ButtonView(dimensions: Dimensions, fonts: Fonts,
         }
     }
 
-    class MoveLeftButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blocksHeight: Float)
-        : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blocksHeight, MOVE_LEFT_BUTTON_ICON) {
+    class MoveLeftButtonView(dimensions: Dimensions, fonts: Fonts, originBlocks: Vector2, sizeBlocks: Vector2)
+        : ButtonView(dimensions, fonts, originBlocks, sizeBlocks, MOVE_LEFT_BUTTON_ICON) {
         override val inputKeys = MOVE_LEFT_KEYS
         override fun handleInputIsInView(rawPlayInput: RawPlayInput) {
             queueHighlight = true
@@ -66,8 +66,8 @@ sealed class ButtonView(dimensions: Dimensions, fonts: Fonts,
         }
     }
 
-    class MoveRightButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blocksHeight: Float)
-        : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blocksHeight, MOVE_RIGHT_BUTTON_ICON) {
+    class MoveRightButtonView(dimensions: Dimensions, fonts: Fonts, originBlocks: Vector2, sizeBlocks: Vector2)
+        : ButtonView(dimensions, fonts, originBlocks, sizeBlocks, MOVE_RIGHT_BUTTON_ICON) {
         override val inputKeys = MOVE_RIGHT_KEYS
         override fun handleInputIsInView(rawPlayInput: RawPlayInput) {
             queueHighlight = true
@@ -75,8 +75,8 @@ sealed class ButtonView(dimensions: Dimensions, fonts: Fonts,
         }
     }
 
-    class RotateLeftButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blocksHeight: Float)
-        : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blocksHeight, ROTATE_LEFT_BUTTON_ICON) {
+    class RotateLeftButtonView(dimensions: Dimensions, fonts: Fonts, originBlocks: Vector2, sizeBlocks: Vector2)
+        : ButtonView(dimensions, fonts, originBlocks, sizeBlocks, ROTATE_LEFT_BUTTON_ICON) {
         override val inputKeys = ROTATE_LEFT_KEYS
         override fun handleInputIsInView(rawPlayInput: RawPlayInput) {
             queueHighlight = true
@@ -84,8 +84,8 @@ sealed class ButtonView(dimensions: Dimensions, fonts: Fonts,
         }
     }
 
-    class RotateRightButtonView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blocksHeight: Float)
-        : ButtonView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blocksHeight, ROTATE_RIGHT_BUTTON_ICON) {
+    class RotateRightButtonView(dimensions: Dimensions, fonts: Fonts, originBlocks: Vector2, sizeBlocks: Vector2)
+        : ButtonView(dimensions, fonts, originBlocks, sizeBlocks, ROTATE_RIGHT_BUTTON_ICON) {
         override val inputKeys = ROTATE_RIGHT_KEYS
         override fun handleInputIsInView(rawPlayInput: RawPlayInput) {
             queueHighlight = true

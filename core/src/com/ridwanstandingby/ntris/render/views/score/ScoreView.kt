@@ -2,6 +2,7 @@ package com.ridwanstandingby.ntris.render.views.score
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import com.badlogic.gdx.math.Vector2
 import com.ridwanstandingby.ntris.game.Game
 import com.ridwanstandingby.ntris.input.KeyInput.SCORE_KEYS
 import com.ridwanstandingby.ntris.input.RawPlayInput
@@ -10,8 +11,8 @@ import com.ridwanstandingby.ntris.render.fonts.FontHelper
 import com.ridwanstandingby.ntris.render.fonts.Fonts
 import com.ridwanstandingby.ntris.render.views.View
 
-class ScoreView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blocksHeight: Float) :
-        View(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blocksHeight) {
+class ScoreView(dimensions: Dimensions, fonts: Fonts, originBlocks: Vector2, sizeBlocks: Vector2) :
+        View(dimensions, fonts, originBlocks, sizeBlocks) {
 
     private val scaledPadding = dimensions.rescale(TEXT_PADDING)
     private val ySpacing = FontHelper.getDimensionsOfText(fonts.boxInfo, TEXT_SCORE.format(0F)).y + scaledPadding
@@ -37,8 +38,8 @@ class ScoreView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, orig
     }
 
     private fun renderText(sb: SpriteBatch, game: Game) {
-        val x = originX + scaledPadding
-        val y = originY + height - scaledPadding
+        val x = origin.x + scaledPadding
+        val y = origin.y + size.y - scaledPadding
         fonts.boxInfo.draw(sb, TEXT_SCORE.format(game.score.points), x, y)
         fonts.boxInfo.draw(sb, TEXT_LINES.format(game.score.lines), x, y - 1.0f * ySpacing)
         fonts.boxInfo.draw(sb, TEXT_SCORE.format(game.highScore.points), x, y - 2.25f * ySpacing)
@@ -46,14 +47,14 @@ class ScoreView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, orig
     }
 
     private fun renderHighScoreIcon(sb: SpriteBatch) {
-        val x = originX + scaledPadding
-        val y = originY + height - scaledPadding * 2f - 2.25f * ySpacing
+        val x = origin.x + scaledPadding
+        val y = origin.y + size.y - scaledPadding * 2f - 2.25f * ySpacing
         fonts.boxCharacter.draw(sb, HIGH_SCORE_ICON, x, y)
     }
 
     private fun renderCurrentScoreIcon(sb: SpriteBatch) {
-        val x = originX + scaledPadding * 3/2
-        val y = originY + height - scaledPadding * 2f
+        val x = origin.x + scaledPadding * 3/2
+        val y = origin.y + size.y - scaledPadding * 2f
         fonts.boxCharacter.draw(sb, CURRENT_SCORE_ICON, x, y)
     }
 

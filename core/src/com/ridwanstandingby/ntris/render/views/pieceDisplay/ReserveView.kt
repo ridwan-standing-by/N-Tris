@@ -2,14 +2,15 @@ package com.ridwanstandingby.ntris.render.views.pieceDisplay
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import com.badlogic.gdx.math.Vector2
 import com.ridwanstandingby.ntris.game.Game
 import com.ridwanstandingby.ntris.input.KeyInput.RESERVE_KEYS
 import com.ridwanstandingby.ntris.input.RawPlayInput
 import com.ridwanstandingby.ntris.render.Dimensions
 import com.ridwanstandingby.ntris.render.fonts.Fonts
 
-class ReserveView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blocksHeight: Float) :
-        PieceDisplayView(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blocksHeight) {
+class ReserveView(dimensions: Dimensions, fonts: Fonts, originBlocks: Vector2, sizeBlocks: Vector2) :
+        PieceDisplayView(dimensions, fonts, originBlocks, sizeBlocks) {
 
     override val boxInfoText = RESERVE_BOX_INFO_TEXT
     override val boxIcon = RESERVE_BOX_INFO_ICON

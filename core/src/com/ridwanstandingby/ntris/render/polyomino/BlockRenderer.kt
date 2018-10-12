@@ -3,12 +3,13 @@ package com.ridwanstandingby.ntris.render.polyomino
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import com.badlogic.gdx.math.Vector2
 import com.ridwanstandingby.ntris.polyomino.Block
 import com.ridwanstandingby.ntris.polyomino.Polyomino
 import com.ridwanstandingby.ntris.polyomino.geometry.IntVector2
 import com.ridwanstandingby.ntris.render.Dimensions
 
-class BlockRenderer(private val dimensions: Dimensions, private val originX: Float, private val originY: Float) {
+class BlockRenderer(private val dimensions: Dimensions, private val origin: Vector2) {
 
     private val blockTexture = Texture(BLOCK_TEXTURE)
 
@@ -23,7 +24,7 @@ class BlockRenderer(private val dimensions: Dimensions, private val originX: Flo
                 .forEach { block ->
                     sprite.color = block.colour
                     val screenPosition = (block.position + blockOffset) * dimensions.rescaledBlock()
-                    sprite.setPosition(originX + screenPosition.x, originY + screenPosition.y)
+                    sprite.setPosition(origin.x + screenPosition.x, origin.y + screenPosition.y)
                     sprite.draw(sb)
                 }
     }

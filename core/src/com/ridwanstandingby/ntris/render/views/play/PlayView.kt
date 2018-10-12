@@ -2,6 +2,7 @@ package com.ridwanstandingby.ntris.render.views.play
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import com.badlogic.gdx.math.Vector2
 import com.ridwanstandingby.ntris.game.Game
 import com.ridwanstandingby.ntris.input.KeyInput.PLAY_KEYS
 import com.ridwanstandingby.ntris.input.RawPlayInput
@@ -12,10 +13,10 @@ import com.ridwanstandingby.ntris.render.polyomino.BlockRenderer
 import com.ridwanstandingby.ntris.render.views.View
 
 
-class PlayView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, originBlocksY: Float, blocksWidth: Float, blocksHeight: Float) :
-        View(dimensions, fonts, originBlocksX, originBlocksY, blocksWidth, blocksHeight) {
+class PlayView(dimensions: Dimensions, fonts: Fonts, originBlocks: Vector2, sizeBlocks: Vector2) :
+        View(dimensions, fonts, originBlocks, sizeBlocks) {
 
-    private val polyominoRenderer = BlockRenderer(dimensions, originX, originY)
+    private val polyominoRenderer = BlockRenderer(dimensions, origin)
 
     override val inputKeys = PLAY_KEYS
 
@@ -33,10 +34,10 @@ class PlayView(dimensions: Dimensions, fonts: Fonts, originBlocksX: Float, origi
     }
 
     private fun renderBackgroundBlockMap(sb: SpriteBatch, game: Game) {
-        polyominoRenderer.renderBlocks(sb, game.backgroundBlockMap.blocks, IntVector2(blocksWidth, blocksHeight))
+        polyominoRenderer.renderBlocks(sb, game.backgroundBlockMap.blocks, IntVector2(sizeBlocks))
     }
 
     private fun renderCurrentPiece(sb: SpriteBatch, game: Game) {
-        polyominoRenderer.renderPolyomino(sb, game.currentPiece, IntVector2(blocksWidth, blocksHeight))
+        polyominoRenderer.renderPolyomino(sb, game.currentPiece, IntVector2(sizeBlocks))
     }
 }
