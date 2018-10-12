@@ -6,6 +6,9 @@ import com.ridwanstandingby.ntris.render.Dimensions
 import com.ridwanstandingby.ntris.render.fonts.Fonts
 import com.ridwanstandingby.ntris.render.views.button.ButtonView.*
 import com.ridwanstandingby.ntris.render.views.gameOver.GameOverView
+import com.ridwanstandingby.ntris.render.views.pause.PauseRestartView
+import com.ridwanstandingby.ntris.render.views.pause.PauseResumeView
+import com.ridwanstandingby.ntris.render.views.pause.PauseView
 import com.ridwanstandingby.ntris.render.views.pieceDisplay.NextView
 import com.ridwanstandingby.ntris.render.views.pieceDisplay.ReserveView
 import com.ridwanstandingby.ntris.render.views.play.PlayView
@@ -44,5 +47,11 @@ class LayoutArranger(private val dimensions: Dimensions, private val fonts: Font
                 translate(Vector2(00.5f, 01.0f)), GameRules.PLAY_BLOCK_SIZE.toFloat()))
         add(GameOverView(dimensions, fonts,
                 translate(Vector2(01.5f, 13.0f)), Vector2(8.0f, 7.0f)))
+        add(PauseView(dimensions, fonts,
+                translate(Vector2(00.5f, 01.0f)), Vector2(10.0f, 30.0f)))
+        add(PauseResumeView(dimensions, fonts,
+                translate(Vector2(01.5f, 02.0f)), Vector2(8.0f, 7.0f)))
+        add(PauseRestartView(dimensions, fonts,
+                translate(Vector2(01.5f, 10.0f)), Vector2(8.0f, 7.0f)))
     }
 }

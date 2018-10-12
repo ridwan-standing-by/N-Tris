@@ -70,8 +70,8 @@ class InputEventResolver(clock: Clock, private val eventHandler: EventHandler) {
 
     private fun updateDebouncers(input: RawPlayInput) {
         backDebouncer.nowPressed = input.back
-        resumeDebouncer.nowPressed = input.resume
-        restartDebouncer.nowPressed = input.restart
+        resumeDebouncer.nowPressed = input.pauseResume
+        restartDebouncer.nowPressed = input.pauseRestart
         gameOverDebouncer.nowPressed = input.gameOver
         moveDownDebouncer.nowPressed = input.moveDown
         moveLeftDebouncer.nowPressed = input.moveLeft

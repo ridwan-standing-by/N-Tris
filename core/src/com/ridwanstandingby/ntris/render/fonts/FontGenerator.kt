@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
 import com.ridwanstandingby.ntris.render.Dimensions
 import com.ridwanstandingby.ntris.render.views.button.ButtonView
 import com.ridwanstandingby.ntris.render.views.gameOver.GameOverView
+import com.ridwanstandingby.ntris.render.views.pause.PauseRestartView
+import com.ridwanstandingby.ntris.render.views.pause.PauseResumeView
 import com.ridwanstandingby.ntris.render.views.pieceDisplay.NextView
 import com.ridwanstandingby.ntris.render.views.pieceDisplay.ReserveView
 import com.ridwanstandingby.ntris.render.views.score.ScoreView
@@ -42,17 +44,18 @@ class FontGenerator(private val dimensions: Dimensions) {
 
     companion object {
         private const val BOX_CHARACTER_SET = NextView.NEXT_BOX_INFO_ICON +
-                        ReserveView.RESERVE_BOX_INFO_ICON +
-                        ScoreView.CURRENT_SCORE_ICON +
-                        ScoreView.HIGH_SCORE_ICON
+                ReserveView.RESERVE_BOX_INFO_ICON +
+                ScoreView.CURRENT_SCORE_ICON +
+                ScoreView.HIGH_SCORE_ICON
 
         private const val BUTTON_CHARACTER_SET = ButtonView.MOVE_DOWN_BUTTON_ICON +
-                        ButtonView.MOVE_LEFT_BUTTON_ICON +
-                        ButtonView.MOVE_RIGHT_BUTTON_ICON +
-                        ButtonView.ROTATE_LEFT_BUTTON_ICON +
-                        ButtonView.ROTATE_RIGHT_BUTTON_ICON +
-                        ButtonView.REFLECT_BUTTON_ICON +
-                        GameOverView.RESTART_ICON
+                ButtonView.MOVE_LEFT_BUTTON_ICON +
+                ButtonView.MOVE_RIGHT_BUTTON_ICON +
+                ButtonView.ROTATE_LEFT_BUTTON_ICON +
+                ButtonView.ROTATE_RIGHT_BUTTON_ICON +
+                ButtonView.REFLECT_BUTTON_ICON +
+                GameOverView.RESTART_ICON +
+                PauseRestartView.RESTART_ICON +
+                PauseResumeView.RESUME_ICON
     }
-
 }

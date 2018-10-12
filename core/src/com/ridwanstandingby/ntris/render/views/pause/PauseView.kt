@@ -1,4 +1,4 @@
-package com.ridwanstandingby.ntris.render.views
+package com.ridwanstandingby.ntris.render.views.pause
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
@@ -10,6 +10,7 @@ import com.ridwanstandingby.ntris.render.Colours
 import com.ridwanstandingby.ntris.render.Dimensions
 import com.ridwanstandingby.ntris.render.fonts.FontHelper
 import com.ridwanstandingby.ntris.render.fonts.Fonts
+import com.ridwanstandingby.ntris.render.views.View
 
 class PauseView(dimensions: Dimensions, fonts: Fonts, originBlocks: Vector2, sizeBlocks: Vector2) :
         View(dimensions, fonts, originBlocks, sizeBlocks) {
@@ -18,9 +19,7 @@ class PauseView(dimensions: Dimensions, fonts: Fonts, originBlocks: Vector2, siz
 
     override val inputKeys = KeyInput.PAUSE_KEYS
 
-    override fun handleInputIsInView(rawPlayInput: RawPlayInput) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun handleInputIsInView(rawPlayInput: RawPlayInput) {}
 
     override fun renderShapes(sr: ShapeRenderer, game: Game) {
         if (game.isPaused) {
@@ -42,13 +41,13 @@ class PauseView(dimensions: Dimensions, fonts: Fonts, originBlocks: Vector2, siz
 
     private fun renderPauseTitleText(sb: SpriteBatch) {
         val gameOverTitleSize = FontHelper.getDimensionsOfText(fonts.boxInfo, PAUSE_TITLE_TEXT)
-        val x = origin.x + size.x/2 - gameOverTitleSize.x / 2
+        val x = origin.x + size.x / 2 - gameOverTitleSize.x / 2
         val y = origin.y + size.y - scaledPadding
         fonts.boxInfo.draw(sb, PAUSE_TITLE_TEXT, x, y)
     }
 
     companion object {
-        const val TEXT_PADDING = 96
+        const val TEXT_PADDING = 400
         const val PAUSE_TITLE_TEXT = "Paused"
     }
 }
