@@ -3,6 +3,7 @@ package com.ridwanstandingby.ntris.input
 import com.ridwanstandingby.ntris.events.Clock
 import com.ridwanstandingby.ntris.events.EventHandler
 import com.ridwanstandingby.ntris.events.Events
+import com.ridwanstandingby.ntris.game.Game
 import com.ridwanstandingby.ntris.input.debounce.InputDebounceTimes.MOVE_DOWN_DEBOUNCE_TIME
 import com.ridwanstandingby.ntris.input.debounce.InputDebounceTimes.MOVE_LEFT_DEBOUNCE_TIME
 import com.ridwanstandingby.ntris.input.debounce.InputDebounceTimes.MOVE_RIGHT_DEBOUNCE_TIME
@@ -41,14 +42,18 @@ class InputEventResolver(clock: Clock, private val eventHandler: EventHandler) {
         eventHandler.queue((Events.Exit()))
     }
 
-    fun resolveInput(input: RawPlayInput) {
+    fun resolveInput(game: Game, input: RawPlayInput) {
         updateDebouncers(input)
         resolveExitInput()
-        resolveGameOverInput()
-        resolveMovementInput(input)
-        resolveRotationInput(input)
-        resolveReserveInput()
-        resolveReflectInput()
+        if (game.isGameOver) {
+            resolveGameOverInput()
+        }
+        if (game.isInPlay()) {
+            resolveMovementInput(input)
+            resolveRotationInput(input)
+            resolveReserveInput()
+            resolveReflectInput()
+        }
     }
 
     private fun updateDebouncers(input: RawPlayInput) {

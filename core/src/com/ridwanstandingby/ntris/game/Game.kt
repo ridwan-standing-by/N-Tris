@@ -29,6 +29,8 @@ class Game(private val dataManager: DataManager) {
 
     var isGameOver = false
     var doRestart = false
+    var isPaused = false
+    fun isInPlay() = (isGameOver or isPaused).not()
 
     val backgroundBlockMap = BlockMap()
     var currentPiece = polyominoSpawner.generatePolyomino(score).apply { setToPlaySpawnPosition() }
@@ -37,12 +39,14 @@ class Game(private val dataManager: DataManager) {
     private var hasSwappedReserve = false
 
     fun resolvePlayInput(rawPlayInput: RawPlayInput) {
-        inputEventResolver.resolveInput(rawPlayInput)
+        inputEventResolver.resolveInput(this, rawPlayInput)
     }
 
     fun update(dt: Float) {
         eventHandler.handleEvents(this)
-        pulser.invokeDebounced()
+        if (isInPlay()) {
+            pulser.invokeDebounced()
+        }
         clock.tick(dt)
     }
 
@@ -114,7 +118,7 @@ class Game(private val dataManager: DataManager) {
         Gdx.app.exit()
     }
 
-    fun restartGameAttempt() {
-        if (isGameOver) doRestart = true
+    fun restartGame() {
+        doRestart = true
     }
 }

@@ -35,7 +35,7 @@ object Events {
     })
 
     class RestartGame : Event({ game ->
-        game.restartGameAttempt()
+        game.restartGame()
     })
 
     class Exit : Event({ game ->
