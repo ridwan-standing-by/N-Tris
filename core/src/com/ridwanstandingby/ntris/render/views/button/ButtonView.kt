@@ -24,7 +24,9 @@ sealed class ButtonView(dimensions: Dimensions, fonts: Fonts,
         View(dimensions, fonts, originBlocks, sizeBlocks) {
 
     override fun renderShapes(sr: ShapeRenderer, game: Game) {
-        renderHighlightIfQueued(sr)
+        if (game.isInPlay()) {
+            renderHighlightIfQueued(sr)
+        }
         renderBorder(sr)
     }
 
