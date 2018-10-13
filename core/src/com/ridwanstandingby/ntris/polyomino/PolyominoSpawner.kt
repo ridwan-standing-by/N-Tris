@@ -58,9 +58,12 @@ class PolyominoSpawner(private val polyominoBlueprintHolder: PolyominoBlueprintH
 
     private fun randomColour(): Color {
         val hue = random.nextFloat() * 360f
-        val saturation = 1.0f
+        val saturation = 0.7f + random.nextFloat() * 0.3f
         val value = 1.0f
+        return hsvToColour(value, saturation, hue)
+    }
 
+    private fun hsvToColour(value: Float, saturation: Float, hue: Float): Color {
         val chroma = value * saturation  // Chroma, from 0 to 1
         val sector = hue / 60  // Sector, from 0 to 6
         val term = (sector % 2) - 1
