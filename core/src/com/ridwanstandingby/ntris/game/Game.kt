@@ -21,8 +21,10 @@ class Game(private val dataManager: DataManager) {
     private val legalMoveHelper = LegalMoveHelper()
     private val generousPieceManipulator = GenerousPieceManipulator { piece, moves -> tryPieceMoves(piece, moves) }
     private val completeLineChecker = CompleteLineChecker()
-    private val pulser = TimedDebouncer(clock, GameRules.PULSE_TIME) { eventHandler.queue(Events.Pulse()) }
-            .also { it.nowPressed = true }
+    private val pulser = TimedDebouncer(clock, GameRules.PULSE_TIME,
+            { _ -> true },
+            { _, game -> game.isInPlay() },
+            { eventHandler.queue(Events.Pulse()) })
 
     var score = Score(0, 0)
     val highScore = dataManager.highScore.copy()
@@ -40,13 +42,13 @@ class Game(private val dataManager: DataManager) {
 
     fun resolvePlayInput(rawPlayInput: RawPlayInput) {
         inputEventResolver.resolveInput(this, rawPlayInput)
+        pulser.update(RawPlayInput())
+        pulser.invokeDebounced(RawPlayInput(), this)
+        pulser.cycle()
     }
 
     fun update(dt: Float) {
         eventHandler.handleEvents(this)
-        if (isInPlay()) {
-            pulser.invokeDebounced()
-        }
         clock.tick(dt)
     }
 

@@ -15,135 +15,83 @@ import com.ridwanstandingby.ntris.input.debounce.TimedDebouncer
 
 class InputEventResolver(clock: Clock, private val eventHandler: EventHandler) {
 
-    private val moveDownDebouncer = TimedDebouncer(clock, MOVE_DOWN_DEBOUNCE_TIME) {
-        eventHandler.queue(Events.CurrentPieceMoveDown())
-    }
-    private val moveLeftDebouncer = TimedDebouncer(clock, MOVE_LEFT_DEBOUNCE_TIME) {
-        eventHandler.queue(Events.CurrentPieceMoveLeft())
-    }
-    private val moveRightDebouncer = TimedDebouncer(clock, MOVE_RIGHT_DEBOUNCE_TIME) {
-        eventHandler.queue(Events.CurrentPieceMoveRight())
-    }
-    private val rotateLeftDebouncer = TimedDebouncer(clock, ROTATE_LEFT_DEBOUNCE_TIME) {
-        eventHandler.queue(Events.CurrentPieceRotateLeft())
-    }
-    private val rotateRightDebouncer = TimedDebouncer(clock, ROTATE_RIGHT_DEBOUNCE_TIME) {
-        eventHandler.queue(Events.CurrentPieceRotateRight())
-    }
-    private val reserveDebouncer = SimpleDebouncer {
-        eventHandler.queue(Events.SwapReserveAttempt())
-    }
-    private val reflectDebouncer = SimpleDebouncer {
-        eventHandler.queue(Events.CurrentPieceReflect())
-    }
-    private val playDebouncer = SimpleDebouncer {
-        eventHandler.queue(Events.Pause())
-    }
-    private val resumeDebouncer = ExclusiveDebouncer(playDebouncer) {
-        eventHandler.queue(Events.Resume())
-    }
-    private val restartDebouncer = ExclusiveDebouncer(playDebouncer) {
-        eventHandler.queue(Events.RestartGame())
-    }
-    private val gameOverDebouncer = SimpleDebouncer {
-        eventHandler.queue(Events.RestartGame())
-    }
-    private val backDebouncer = SimpleDebouncer {
-        eventHandler.queue((Events.Back()))
-    }
+    private val moveDownDebouncer = TimedDebouncer(clock, MOVE_DOWN_DEBOUNCE_TIME,
+            { input -> input.moveDown },
+            { _, game -> game.isInPlay() },
+            { eventHandler.queue(Events.CurrentPieceMoveDown()) })
+
+    private val moveLeftDebouncer = TimedDebouncer(clock, MOVE_LEFT_DEBOUNCE_TIME,
+            { input -> input.moveLeft },
+            { input, game -> game.isInPlay() and (input.moveLeft and input.moveRight).not() },
+            { eventHandler.queue(Events.CurrentPieceMoveLeft()) })
+
+    private val moveRightDebouncer = TimedDebouncer(clock, MOVE_RIGHT_DEBOUNCE_TIME,
+            { input -> input.moveRight },
+            { input, game -> game.isInPlay() and (input.moveLeft and input.moveRight).not() },
+            { eventHandler.queue(Events.CurrentPieceMoveRight()) })
+
+    private val rotateLeftDebouncer = TimedDebouncer(clock, ROTATE_LEFT_DEBOUNCE_TIME,
+            { input -> input.rotateLeft },
+            { input, game -> game.isInPlay() and (input.rotateLeft and input.rotateRight).not() },
+            { eventHandler.queue(Events.CurrentPieceRotateLeft()) })
+
+    private val rotateRightDebouncer = TimedDebouncer(clock, ROTATE_RIGHT_DEBOUNCE_TIME,
+            { input -> input.rotateRight },
+            { input, game -> game.isInPlay() and (input.rotateLeft and input.rotateRight).not() },
+            { eventHandler.queue(Events.CurrentPieceRotateRight()) })
+
+    private val reserveDebouncer = SimpleDebouncer(
+            { input -> input.reserve },
+            { _, game -> game.isInPlay() },
+            { eventHandler.queue(Events.SwapReserveAttempt()) })
+
+    private val reflectDebouncer = SimpleDebouncer(
+            { input -> input.reflect },
+            { _, game -> game.isInPlay() },
+            { eventHandler.queue(Events.CurrentPieceReflect()) })
+
+    private val playDebouncer = SimpleDebouncer(
+            { input -> input.play },
+            { _, game -> game.isInPlay() },
+            { eventHandler.queue(Events.Pause()) })
+
+    private val resumeDebouncer = ExclusiveDebouncer(playDebouncer,
+            { input -> input.pauseResume },
+            { _, game -> game.isPaused },
+            { eventHandler.queue(Events.Resume()) })
+
+    private val restartDebouncer = ExclusiveDebouncer(playDebouncer,
+            { input -> input.pauseRestart },
+            { _, game -> game.isPaused },
+            { eventHandler.queue(Events.RestartGame()) })
+
+    private val gameOverDebouncer = SimpleDebouncer(
+            { input -> input.gameOver },
+            { _, game -> game.isGameOver },
+            { eventHandler.queue(Events.RestartGame()) })
+
+    private val backDebouncer = SimpleDebouncer(
+            { input -> input.back },
+            { _, _ -> true },
+            { eventHandler.queue(Events.Back()) })
+
+    private val debouncers = listOf(
+            moveDownDebouncer,
+            moveLeftDebouncer,
+            moveRightDebouncer,
+            rotateLeftDebouncer,
+            rotateRightDebouncer,
+            reserveDebouncer,
+            reflectDebouncer,
+            playDebouncer,
+            resumeDebouncer,
+            restartDebouncer,
+            gameOverDebouncer,
+            backDebouncer)
 
     fun resolveInput(game: Game, input: RawPlayInput) {
-        updateDebouncers(input)
-        resolveBackInput()
-        when {
-            game.isPaused -> {
-                resolveResumeInput()
-                resolveRestartInput()
-            }
-            game.isGameOver -> {
-                resolveGameOverInput()
-            }
-            game.isInPlay() -> {
-                resolveMovementInput(input)
-                resolveRotationInput(input)
-                resolveReserveInput()
-                resolveReflectInput()
-                resolvePlayInput()
-            }
-        }
-        cycleDebouncers()
-    }
-
-    private fun updateDebouncers(input: RawPlayInput) {
-        backDebouncer.nowPressed = input.back
-        resumeDebouncer.nowPressed = input.pauseResume
-        restartDebouncer.nowPressed = input.pauseRestart
-        gameOverDebouncer.nowPressed = input.gameOver
-        playDebouncer.nowPressed = input.play
-        moveDownDebouncer.nowPressed = input.moveDown
-        moveLeftDebouncer.nowPressed = input.moveLeft
-        moveRightDebouncer.nowPressed = input.moveRight
-        rotateLeftDebouncer.nowPressed = input.rotateLeft
-        rotateRightDebouncer.nowPressed = input.rotateRight
-        reserveDebouncer.nowPressed = input.reserve
-        reflectDebouncer.nowPressed = input.reflect
-    }
-
-    private fun cycleDebouncers() {
-        backDebouncer.cycle()
-        resumeDebouncer.cycle()
-        restartDebouncer.cycle()
-        gameOverDebouncer.cycle()
-        playDebouncer.cycle()
-        moveDownDebouncer.cycle()
-        moveLeftDebouncer.cycle()
-        moveRightDebouncer.cycle()
-        rotateLeftDebouncer.cycle()
-        rotateRightDebouncer.cycle()
-        reserveDebouncer.cycle()
-        reflectDebouncer.cycle()
-    }
-
-    private fun resolveBackInput() {
-        backDebouncer.invokeDebounced()
-    }
-
-    private fun resolveResumeInput() {
-        resumeDebouncer.invokeDebounced()
-    }
-
-    private fun resolveRestartInput() {
-        restartDebouncer.invokeDebounced()
-    }
-
-    private fun resolveGameOverInput() {
-        gameOverDebouncer.invokeDebounced()
-    }
-
-    private fun resolveMovementInput(input: RawPlayInput) {
-        if ((input.moveLeft and input.moveRight).not()) {
-            moveLeftDebouncer.invokeDebounced()
-            moveRightDebouncer.invokeDebounced()
-        }
-        moveDownDebouncer.invokeDebounced()
-    }
-
-    private fun resolveRotationInput(input: RawPlayInput) {
-        if ((input.rotateLeft and input.rotateRight).not()) {
-            rotateLeftDebouncer.invokeDebounced()
-            rotateRightDebouncer.invokeDebounced()
-        }
-    }
-
-    private fun resolveReserveInput() {
-        reserveDebouncer.invokeDebounced()
-    }
-
-    private fun resolveReflectInput() {
-        reflectDebouncer.invokeDebounced()
-    }
-
-    private fun resolvePlayInput() {
-        playDebouncer.invokeDebounced()
+        debouncers.forEach { it.update(input) }
+        debouncers.forEach { it.invokeDebounced(input, game) }
+        debouncers.forEach { it.cycle() }
     }
 }
