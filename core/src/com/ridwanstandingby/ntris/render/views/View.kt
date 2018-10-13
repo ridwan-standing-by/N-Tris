@@ -30,7 +30,7 @@ abstract class View(val dimensions: Dimensions, val fonts: Fonts, originBlocks: 
         }
     }
 
-    fun wasPointerInView(x: Float, y: Float): Boolean = origin.x <= x && x < (origin.x + size.x)
+    open fun wasPointerInView(x: Float, y: Float): Boolean = origin.x <= x && x < (origin.x + size.x)
             && origin.y <= y && y < origin.y + size.y
 
     abstract val inputKeys: List<Int>

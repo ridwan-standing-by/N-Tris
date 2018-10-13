@@ -15,12 +15,19 @@ import com.ridwanstandingby.ntris.render.views.View
 class PlayView(dimensions: Dimensions, fonts: Fonts, originBlocks: Vector2, sizeBlocks: Vector2) :
         View(dimensions, fonts, originBlocks, sizeBlocks) {
 
+    private val scaledInputPadding = INPUT_PADDING_BLOCKS * dimensions.rescaledBlock()
+
     private val polyominoRenderer = BlockRenderer(dimensions, origin)
 
     override val inputKeys = PLAY_KEYS
 
     override fun handleInputIsInView(rawPlayInput: RawPlayInput) {
         rawPlayInput.play = true
+    }
+
+    override fun wasPointerInView(x: Float, y: Float): Boolean {
+        return origin.x + scaledInputPadding <= x && x < (origin.x + size.x) - scaledInputPadding
+                && origin.y + scaledInputPadding <= y && y < origin.y + size.y - scaledInputPadding
     }
 
     override fun renderBlocks(sb: SpriteBatch, game: Game) {
@@ -38,5 +45,9 @@ class PlayView(dimensions: Dimensions, fonts: Fonts, originBlocks: Vector2, size
 
     private fun renderCurrentPiece(sb: SpriteBatch, game: Game) {
         polyominoRenderer.renderPolyomino(sb, game.currentPiece, IntVector2(sizeBlocks))
+    }
+
+    companion object {
+        private const val INPUT_PADDING_BLOCKS = 1.5f
     }
 }
