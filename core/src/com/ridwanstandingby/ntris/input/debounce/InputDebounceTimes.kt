@@ -1,7 +1,7 @@
 package com.ridwanstandingby.ntris.input.debounce
 
 object InputDebounceTimes {
-    private const val DEBOUNCE_TIME = 0.14f
+    private const val DEBOUNCE_TIME = 0.15f
 
     private const val MOVE_DEBOUNCE_TIME = DEBOUNCE_TIME
     private const val ROTATE_DEBOUNCE_TIME = DEBOUNCE_TIME
