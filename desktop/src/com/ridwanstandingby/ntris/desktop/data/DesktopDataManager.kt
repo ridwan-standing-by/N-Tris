@@ -2,6 +2,7 @@ package com.ridwanstandingby.ntris.desktop.data
 
 import com.ridwanstandingby.ntris.data.DataManager
 import com.ridwanstandingby.ntris.game.Score
+import com.ridwanstandingby.ntris.render.views.LayoutArrangement
 import java.io.File
 
 class DesktopDataManager : DataManager() {
@@ -18,6 +19,12 @@ class DesktopDataManager : DataManager() {
         set(value) {
             setValue(HIGH_SCORE_POINTS_KEY, value.points)
             setValue(HIGH_SCORE_LINES_KEY, value.lines)
+        }
+
+    override var layoutArrangement: LayoutArrangement
+        get() = LayoutArrangement.fromCode(getValue(LAYOUT_ARRANGEMENT_CODE_KEY, LayoutArrangement.DEFAULT_LAYOUT_ARRANGEMENT.code))
+        set(value) {
+            setValue(LAYOUT_ARRANGEMENT_CODE_KEY, value.code)
         }
 
     override val polyominoFileStrings: HashMap<String, String>? = null
@@ -79,5 +86,7 @@ class DesktopDataManager : DataManager() {
 
         private const val HIGH_SCORE_POINTS_KEY = "high_score_points"
         private const val HIGH_SCORE_LINES_KEY = "high_score_lines"
+
+        private const val LAYOUT_ARRANGEMENT_CODE_KEY = "layout_arrangement_code"
     }
 }

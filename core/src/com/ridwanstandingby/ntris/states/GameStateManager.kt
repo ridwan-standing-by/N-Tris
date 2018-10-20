@@ -7,6 +7,7 @@ import com.ridwanstandingby.ntris.game.Game
 import com.ridwanstandingby.ntris.render.Dimensions
 import com.ridwanstandingby.ntris.render.fonts.FontGenerator
 import com.ridwanstandingby.ntris.render.fonts.Fonts
+import com.ridwanstandingby.ntris.render.views.LayoutArrangement
 import java.util.*
 
 class GameStateManager(private val dataManager: DataManager) {
@@ -15,10 +16,12 @@ class GameStateManager(private val dataManager: DataManager) {
 
     lateinit var dimensions: Dimensions
     lateinit var fonts: Fonts
+    lateinit var layoutArrangement: LayoutArrangement
 
     fun calibrateSize(viewPortWidth: Int, viewPortHeight: Int) {
         dimensions = Dimensions(viewPortWidth, viewPortHeight)
         fonts = FontGenerator(dimensions).generate()
+        layoutArrangement = dataManager.layoutArrangement
     }
 
     private val states: Stack<State> = Stack()

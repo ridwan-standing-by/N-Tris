@@ -5,6 +5,7 @@ import com.ridwanstandingby.ntris.game.Score
 import com.ridwanstandingby.ntris.polyomino.PolyominoConstants.MAX_RANK
 import com.ridwanstandingby.ntris.polyomino.PolyominoConstants.MIN_RANK
 import com.ridwanstandingby.ntris.polyomino.blueprint.PolyominoBlueprintLoader
+import com.ridwanstandingby.ntris.render.views.LayoutArrangement
 
 class AndroidDataManager(private val context: Context) : DataManager() {
 
@@ -18,6 +19,17 @@ class AndroidDataManager(private val context: Context) : DataManager() {
             prefs.edit()
                     .putInt(HIGH_SCORE_POINTS_KEY, value.points)
                     .putInt(HIGH_SCORE_LINES_KEY, value.lines)
+                    .apply()
+        }
+
+    override var layoutArrangement: LayoutArrangement
+        get() = LayoutArrangement.fromCode(
+                prefs.getString(LAYOUT_ARRANGEMENT_CODE_KEY,
+                LayoutArrangement.DEFAULT_LAYOUT_ARRANGEMENT.code)?:
+                LayoutArrangement.DEFAULT_LAYOUT_ARRANGEMENT.code)
+        set(value) {
+            prefs.edit()
+                    .putString(LAYOUT_ARRANGEMENT_CODE_KEY, value.code)
                     .apply()
         }
 
@@ -35,5 +47,7 @@ class AndroidDataManager(private val context: Context) : DataManager() {
 
         private const val HIGH_SCORE_POINTS_KEY = "high_score_points"
         private const val HIGH_SCORE_LINES_KEY = "high_score_lines"
+
+        private const val LAYOUT_ARRANGEMENT_CODE_KEY = "layout_arrangement_code"
     }
 }

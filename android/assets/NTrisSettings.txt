@@ -1,2 +1,3 @@
 high_score_points=210
-high_score_lines=14
+high_score_lines=18
+layout_arrangement_code=L

@@ -6,7 +6,9 @@ import com.ridwanstandingby.ntris.render.fonts.Fonts
 import ktx.math.div
 import ktx.math.plus
 
-class LayoutArranger(private val dimensions: Dimensions, private val fonts: Fonts) {
+class LayoutArranger(private val dimensions: Dimensions,
+                     private val fonts: Fonts,
+                     private val layoutArrangement: LayoutArrangement) {
 
     private val originBlocks = calculateOriginBlocks()
 
@@ -15,7 +17,7 @@ class LayoutArranger(private val dimensions: Dimensions, private val fonts: Font
     private fun translate(position: Vector2) = originBlocks + position
 
     fun createViews(): ArrayList<View> = arrayListOf<View>().apply {
-        addAll(LayoutArrangement.LEFT_HANDED.viewRules.map {
+        addAll(layoutArrangement.viewRules.map {
             it.viewConstructor(dimensions, fonts, translate(it.positionBlocks), it.sizeBlocks)
         })
     }

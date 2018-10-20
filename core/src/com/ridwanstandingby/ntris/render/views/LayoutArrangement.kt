@@ -11,9 +11,9 @@ import com.ridwanstandingby.ntris.render.views.pieceDisplay.ReserveView
 import com.ridwanstandingby.ntris.render.views.play.PlayView
 import com.ridwanstandingby.ntris.render.views.score.ScoreView
 
-enum class LayoutArrangement(val viewRules: List<ViewRule>) {
+enum class LayoutArrangement(val code: String, val viewRules: List<ViewRule>) {
 
-    RIGHT_HANDED(listOf(
+    RIGHT_HANDED("R", listOf(
             ViewRule(Vector2(10.5f, 01.0f), Vector2(04.0f, 04.0f), ButtonView::MoveDownButtonView),
             ViewRule(Vector2(14.5f, 01.0f), Vector2(04.0f, 04.0f), ButtonView::ReflectButtonView),
             ViewRule(Vector2(10.5f, 05.0f), Vector2(04.0f, 04.0f), ButtonView::MoveLeftButtonView),
@@ -30,7 +30,7 @@ enum class LayoutArrangement(val viewRules: List<ViewRule>) {
             ViewRule(Vector2(01.5f, 10.0f), Vector2(08.0f, 07.0f), ::PauseRestartView)
     )),
 
-    LEFT_HANDED(listOf(
+    LEFT_HANDED("L", listOf(
             ViewRule(Vector2(04.5f, 01.0f), Vector2(04.0f, 04.0f), ButtonView::MoveDownButtonView),
             ViewRule(Vector2(00.5f, 01.0f), Vector2(04.0f, 04.0f), ButtonView::ReflectButtonView),
             ViewRule(Vector2(00.5f, 05.0f), Vector2(04.0f, 04.0f), ButtonView::MoveLeftButtonView),
@@ -45,5 +45,13 @@ enum class LayoutArrangement(val viewRules: List<ViewRule>) {
             ViewRule(Vector2(08.5f, 01.0f), Vector2(10.0f, 30.0f), ::PauseView),
             ViewRule(Vector2(09.5f, 02.0f), Vector2(08.0f, 07.0f), ::PauseResumeView),
             ViewRule(Vector2(09.5f, 10.0f), Vector2(08.0f, 07.0f), ::PauseRestartView)
-    ))
+    ));
+
+    companion object {
+
+        fun fromCode(code: String): LayoutArrangement = values().firstOrNull { it.code == code }
+                ?: DEFAULT_LAYOUT_ARRANGEMENT
+
+        val DEFAULT_LAYOUT_ARRANGEMENT = RIGHT_HANDED
+    }
 }

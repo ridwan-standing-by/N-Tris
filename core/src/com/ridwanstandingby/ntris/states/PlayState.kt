@@ -9,7 +9,7 @@ import com.ridwanstandingby.ntris.render.views.View
 
 class PlayState(gsm: GameStateManager) : State(gsm) {
 
-    private var views: List<View> = LayoutArranger(gsm.dimensions, gsm.fonts).createViews()
+    private var views: List<View> = LayoutArranger(gsm.dimensions, gsm.fonts, gsm.layoutArrangement).createViews()
     private val rawInputProcessor = RawPlayInputProcessor(gsm)
 
     override fun handleInput(): Boolean {
