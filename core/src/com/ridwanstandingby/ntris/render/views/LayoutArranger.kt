@@ -15,7 +15,7 @@ class LayoutArranger(private val dimensions: Dimensions, private val fonts: Font
     private fun translate(position: Vector2) = originBlocks + position
 
     fun createViews(): ArrayList<View> = arrayListOf<View>().apply {
-        addAll(LayoutArrangement.RIGHT_HANDED.viewRules.map {
+        addAll(LayoutArrangement.LEFT_HANDED.viewRules.map {
             it.viewConstructor(dimensions, fonts, translate(it.positionBlocks), it.sizeBlocks)
         })
     }
