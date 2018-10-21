@@ -15,12 +15,29 @@
         android:padding="12dp"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/howToPlayButton"
+        app:layout_constraintBottom_toTopOf="@+id/handednessSwitch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="spread"
         app:srcCompat="@drawable/logo_alien_encounters" />
+
+    <com.kyleduo.switchbutton.SwitchButton
+        android:id="@+id/handednessSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        style="@style/GdxTheme"
+        app:kswThumbHeight="40dp"
+        app:kswThumbWidth="40dp"
+        app:kswTextAdjust="-4dp"
+        app:kswTextExtra="20dp"
+        app:kswTextOff="@string/left_handed_switch_label"
+        app:kswTextOn="@string/right_handed_switch_label"
+        app:layout_constraintBottom_toTopOf="@+id/howToPlayButton"
+        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
+        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
 
     <Button
         android:id="@+id/howToPlayButton"
@@ -34,7 +51,7 @@
         app:layout_constraintBottom_toTopOf="@+id/playButton"
         app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
         app:layout_constraintStart_toStartOf="@+id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/logo" />
+        app:layout_constraintTop_toBottomOf="@+id/handednessSwitch" />
 
     <Button
         android:id="@+id/playButton"

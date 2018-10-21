@@ -7,6 +7,7 @@ import android.view.View
 import com.ridwanstandingby.ntris.Application
 import com.ridwanstandingby.ntris.R
 import com.ridwanstandingby.ntris.data.DataManager
+import com.ridwanstandingby.ntris.render.views.LayoutArrangement
 import kotlinx.android.synthetic.main.layout_main.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
             beginLoading()
         }
 
+        initHandednessSwitch()
         howToPlayButton.setOnClickListener { launchTutorialActivity() }
     }
 
@@ -57,4 +59,23 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, TutorialActivity::class.java)
         startActivity(intent)
     }
+
+    private fun initHandednessSwitch() {
+        handednessSwitch.setCheckedImmediately(dataManager.layoutArrangement.toBoolean())
+        handednessSwitch.setOnCheckedChangeListener { _, isChecked ->
+            dataManager.layoutArrangement = isChecked.toLayoutArrangement()
+        }
+    }
+
+    private fun LayoutArrangement.toBoolean() =
+            when (this) {
+                LayoutArrangement.RIGHT_HANDED -> true
+                LayoutArrangement.LEFT_HANDED -> false
+            }
+
+    private fun Boolean.toLayoutArrangement() =
+            when (this) {
+                true -> LayoutArrangement.RIGHT_HANDED
+                false -> LayoutArrangement.LEFT_HANDED
+            }
 }

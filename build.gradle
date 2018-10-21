@@ -92,6 +92,9 @@ project(":android") {
 
         // Kotlin
         implementation "org.jetbrains.anko:anko:0.10.7"
+
+        // Custom UI
+        implementation 'com.kyleduo.switchbutton:library:2.0.0'
     }
 }
 
