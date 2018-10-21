@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="GdxTheme" parent="Theme.AppCompat.NoActionBar">
 		<item name="android:windowBackground">@color/dark_grey</item>
@@ -17,6 +17,7 @@
         <item name="android:textSize">20sp</item>
 
         <item name="buttonStyle">@style/Widget.AppCompat.Button.Colored</item>
+        <item name="android:colorControlHighlight" tools:targetApi="lollipop">@color/light_cyan</item>
     </style>
 
 </resources>
