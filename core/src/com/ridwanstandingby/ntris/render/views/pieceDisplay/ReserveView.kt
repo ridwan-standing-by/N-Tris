@@ -25,6 +25,8 @@ class ReserveView(dimensions: Dimensions, fonts: Fonts, originBlocks: Vector2, s
     override fun renderShapes(sr: ShapeRenderer, game: Game) {
         if (game.isInPlay()) {
             renderHighlightIfQueued(sr)
+        } else {
+            queueHighlight = false
         }
         renderBorder(sr)
     }
