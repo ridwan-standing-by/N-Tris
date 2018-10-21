@@ -127,8 +127,11 @@ Thumbs.db
 ## Other Android
 *.jks
 *.apk
-android/release/
-android/debug/
+/android/release/
+/android/debug/
 
 ## N-tris Generated
-android/assets/NTrisSettings\.txt
+/android/assets/NTrisSettings\.txt
+
+## Firebase
+/android/google-services.json
