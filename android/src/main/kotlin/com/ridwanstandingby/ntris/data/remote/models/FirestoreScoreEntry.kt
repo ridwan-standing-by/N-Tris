@@ -3,10 +3,10 @@ package com.ridwanstandingby.ntris.data.remote.models
 import com.google.firebase.Timestamp
 import com.ridwanstandingby.ntris.domain.ScoreEntry
 
-class FirestoreScoreEntry(var time: Timestamp,
-                          var name: String,
-                          var score: Long,
-                          var lines: Long)
+class FirestoreScoreEntry(var time: Timestamp = Timestamp(0, 0),
+                          var name: String = "",
+                          var score: Long = 0,
+                          var lines: Long = 0)
 
 fun FirestoreScoreEntry.toDomainScoreEntry() = ScoreEntry(
         timeStamp = time.seconds,
@@ -15,8 +15,7 @@ fun FirestoreScoreEntry.toDomainScoreEntry() = ScoreEntry(
         lines = lines)
 
 fun ScoreEntry.toFirestoreScoreEntry() = FirestoreScoreEntry(
-        time = Timestamp(timeStamp / MILLIS_IN_SECOND,
-                (timeStamp % MILLIS_IN_SECOND).toInt() * NANOS_IN_MILLI),
+        time = Timestamp(timeStamp / MILLIS_IN_SECOND, (timeStamp % MILLIS_IN_SECOND).toInt() * NANOS_IN_MILLI),
         name = name,
         score = score,
         lines = lines)
