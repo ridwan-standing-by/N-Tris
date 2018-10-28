@@ -4,10 +4,10 @@ android {
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
-            java.srcDirs = ['src']
+            java.srcDirs = ['src/main/kotlin']
             aidl.srcDirs = ['src']
             renderscript.srcDirs = ['src']
-            res.srcDirs = ['res']
+            res.srcDirs = ['src/main/res']
             assets.srcDirs = ['assets']
             jniLibs.srcDirs = ['libs']
         }
