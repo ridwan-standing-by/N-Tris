@@ -1,11 +1,13 @@
 package com.ridwanstandingby.ntris.activities
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.ridwanstandingby.ntris.Application
 import com.ridwanstandingby.ntris.R
+import com.ridwanstandingby.ntris.activities.leaderboard.LeaderboardActivity
 import com.ridwanstandingby.ntris.data.GameDataManager
 import com.ridwanstandingby.ntris.render.views.LayoutArrangement
 import kotlinx.android.synthetic.main.layout_main.*
@@ -28,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         initHandednessSwitch()
+        leaderboardButton.setOnClickListener { launchLeaderboardActivity() }
         howToPlayButton.setOnClickListener { launchTutorialActivity() }
     }
 
@@ -50,13 +53,12 @@ class MainActivity : AppCompatActivity() {
         playButton.setOnClickListener { launchGameActivity() }
     }
 
-    private fun launchGameActivity() {
-        val intent = Intent(this, GameActivity::class.java)
-        startActivity(intent)
-    }
+    private fun launchLeaderboardActivity() = startActivity<LeaderboardActivity>()
+    private fun launchTutorialActivity() = startActivity<TutorialActivity>()
+    private fun launchGameActivity() = startActivity<GameActivity>()
 
-    private fun launchTutorialActivity() {
-        val intent = Intent(this, TutorialActivity::class.java)
+    private inline fun <reified T: Activity> startActivity() {
+        val intent = Intent(this, T::class.java)
         startActivity(intent)
     }
 

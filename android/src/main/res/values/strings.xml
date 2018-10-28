@@ -9,5 +9,6 @@
     <string name="left_handed_switch_label">Left handed</string>
     <string name="right_handed_switch_label">Right handed</string>
     <string name="leaderboard_title">Leaderboard</string>
+    <string name="leaderboard_button_text">Leaderboard</string>
 
 </resources>
