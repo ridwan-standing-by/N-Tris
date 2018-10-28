@@ -8,7 +8,7 @@ import com.ridwanstandingby.ntris.domain.ScoreEntry
 
 class RemoteDataManager {
 
-    val db = FirebaseFirestore.getInstance()
+    private val db = FirebaseFirestore.getInstance()
 
     /** @throws UploadScoreEntryFailureException */
     fun uploadScoreEntry(scoreEntry: ScoreEntry,

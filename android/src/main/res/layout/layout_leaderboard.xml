@@ -4,22 +4,94 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/leaderboardRecyclerView"
-        android:layout_width="match_parent"
+    <TabHost
+        android:id="@+id/leaderboardTabHost"
         android:layout_height="match_parent"
-        android:visibility="invisible"/>
-
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        style="?android:attr/progressBarStyle"
-        android:layout_margin="8dp"
-        android:id="@+id/leaderboardLoadingProgressBar"
+        android:layout_width="match_parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="vertical">
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/steel"
+                android:backgroundTint="@color/dark_grey"/>
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/weeklyTabLayout"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/weeklyLeaderboardRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="invisible"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    <ProgressBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:indeterminate="true"
+                        style="?android:attr/progressBarStyle"
+                        android:layout_margin="8dp"
+                        android:id="@+id/weeklyLeaderboardLoadingProgressBar"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                </android.support.constraint.ConstraintLayout>
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/allTimeTabLayout"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/allTimeLeaderboardRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="invisible"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    <ProgressBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:indeterminate="true"
+                        style="?android:attr/progressBarStyle"
+                        android:layout_margin="8dp"
+                        android:id="@+id/allTimeLeaderboardLoadingProgressBar"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                </android.support.constraint.ConstraintLayout>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </TabHost>
 
 </android.support.constraint.ConstraintLayout>

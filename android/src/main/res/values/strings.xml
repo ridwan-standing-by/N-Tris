@@ -10,5 +10,7 @@
     <string name="right_handed_switch_label">Right handed</string>
     <string name="leaderboard_title">Leaderboard</string>
     <string name="leaderboard_button_text">Leaderboard</string>
+    <string name="weekly_tab_title">Weekly</string>
+    <string name="all_time_tab_title">All Time</string>
 
 </resources>

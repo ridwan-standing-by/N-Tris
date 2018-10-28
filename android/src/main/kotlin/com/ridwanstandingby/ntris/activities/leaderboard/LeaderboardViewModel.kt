@@ -8,18 +8,32 @@ import com.ridwanstandingby.ntris.domain.ScoreEntry
 
 class LeaderboardViewModel : ViewModel() {
 
-    private val scoreEntries: MutableLiveData<List<ScoreEntry>> = MutableLiveData()
+    private val weeklyScoreEntries: MutableLiveData<List<ScoreEntry>> = MutableLiveData()
+    private val allTimeScoreEntries: MutableLiveData<List<ScoreEntry>> = MutableLiveData()
 
-    fun getScoreEntries(remoteDataManager: RemoteDataManager): LiveData<List<ScoreEntry>> {
-        if (scoreEntries.value == null) {
-            loadScoreEntries(remoteDataManager)
+    fun getWeeklyScoreEntries(remoteDataManager: RemoteDataManager): LiveData<List<ScoreEntry>> {
+        if (weeklyScoreEntries.value == null) {
+            loadWeeklyScoreEntries(remoteDataManager)
         }
-        return scoreEntries
+        return weeklyScoreEntries
     }
 
-    private fun loadScoreEntries(remoteDataManager: RemoteDataManager) {
+    fun getAllTimeScoreEntries(remoteDataManager: RemoteDataManager): LiveData<List<ScoreEntry>> {
+        if (allTimeScoreEntries.value == null) {
+            loadAllTimeScoreEntries(remoteDataManager)
+        }
+        return allTimeScoreEntries
+    }
+
+    private fun loadWeeklyScoreEntries(remoteDataManager: RemoteDataManager) {
         remoteDataManager.downloadScoreEntries(
-                onSuccess = { scoreEntries.postValue(it) },
+                onSuccess = { weeklyScoreEntries.postValue(it) },
+                onError = { it.printStackTrace() })
+    }
+
+    private fun loadAllTimeScoreEntries(remoteDataManager: RemoteDataManager) {
+        remoteDataManager.downloadScoreEntries(
+                onSuccess = { allTimeScoreEntries.postValue(it) },
                 onError = { it.printStackTrace() })
     }
 }
