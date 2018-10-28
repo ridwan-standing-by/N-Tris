@@ -7,7 +7,7 @@ import com.ridwanstandingby.ntris.polyomino.PolyominoConstants.MIN_RANK
 import com.ridwanstandingby.ntris.polyomino.blueprint.PolyominoBlueprintLoader
 import com.ridwanstandingby.ntris.render.views.LayoutArrangement
 
-class AndroidDataManager(private val context: Context) : DataManager() {
+class AndroidGameDataManager(private val context: Context) : GameDataManager() {
 
     private val prefs = context.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
 

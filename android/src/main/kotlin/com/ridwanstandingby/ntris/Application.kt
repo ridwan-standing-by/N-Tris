@@ -1,15 +1,15 @@
 package com.ridwanstandingby.ntris
 
 import android.app.Application
-import com.ridwanstandingby.ntris.data.AndroidDataManager
-import com.ridwanstandingby.ntris.data.DataManager
+import com.ridwanstandingby.ntris.data.AndroidGameDataManager
+import com.ridwanstandingby.ntris.data.GameDataManager
 
 class Application : Application() {
 
-    lateinit var dataManager: DataManager
+    lateinit var gameDataManager: GameDataManager
 
     override fun onCreate() {
         super.onCreate()
-        dataManager = AndroidDataManager(this)
+        gameDataManager = AndroidGameDataManager(this)
     }
 }

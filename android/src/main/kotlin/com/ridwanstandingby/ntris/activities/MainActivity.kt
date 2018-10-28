@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.ridwanstandingby.ntris.Application
 import com.ridwanstandingby.ntris.R
-import com.ridwanstandingby.ntris.data.DataManager
+import com.ridwanstandingby.ntris.data.GameDataManager
 import com.ridwanstandingby.ntris.render.views.LayoutArrangement
 import kotlinx.android.synthetic.main.layout_main.*
 import org.jetbrains.anko.doAsync
@@ -14,14 +14,14 @@ import org.jetbrains.anko.uiThread
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var dataManager: DataManager
+    private lateinit var gameDataManager: GameDataManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_main)
-        dataManager = (application as Application).dataManager
+        gameDataManager = (application as Application).gameDataManager
 
-        if (dataManager.polyominoBlueprintHolder != null) {
+        if (gameDataManager.polyominoBlueprintHolder != null) {
             handleFinishedLoading()
         } else {
             beginLoading()
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         loadingProgressBar.visibility = View.VISIBLE
         loadingTextView.visibility = View.VISIBLE
         doAsync {
-            dataManager.loadPolyominoBlueprints()
+            gameDataManager.loadPolyominoBlueprints()
             uiThread {
                 it.handleFinishedLoading()
             }
@@ -61,9 +61,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initHandednessSwitch() {
-        handednessSwitch.setCheckedImmediately(dataManager.layoutArrangement.toBoolean())
+        handednessSwitch.setCheckedImmediately(gameDataManager.layoutArrangement.toBoolean())
         handednessSwitch.setOnCheckedChangeListener { _, isChecked ->
-            dataManager.layoutArrangement = isChecked.toLayoutArrangement()
+            gameDataManager.layoutArrangement = isChecked.toLayoutArrangement()
         }
     }
 

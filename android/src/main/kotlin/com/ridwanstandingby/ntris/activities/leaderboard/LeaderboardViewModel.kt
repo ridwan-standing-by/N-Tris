@@ -8,7 +8,7 @@ import com.ridwanstandingby.ntris.domain.ScoreEntry
 
 class LeaderboardViewModel : ViewModel() {
 
-    var scoreEntries: MutableLiveData<List<ScoreEntry>> = MutableLiveData()
+    val scoreEntries: MutableLiveData<List<ScoreEntry>> = MutableLiveData()
 
     fun getScoreEntries(): LiveData<List<ScoreEntry>> {
 //        if (scoreEntries.value == null) {

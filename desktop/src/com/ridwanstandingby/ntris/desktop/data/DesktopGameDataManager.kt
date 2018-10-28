@@ -1,11 +1,11 @@
 package com.ridwanstandingby.ntris.desktop.data
 
-import com.ridwanstandingby.ntris.data.DataManager
+import com.ridwanstandingby.ntris.data.GameDataManager
 import com.ridwanstandingby.ntris.game.Score
 import com.ridwanstandingby.ntris.render.views.LayoutArrangement
 import java.io.File
 
-class DesktopDataManager : DataManager() {
+class DesktopGameDataManager : GameDataManager() {
 
     init {
         File(PREFS_FILE_NAME).createNewFile()
