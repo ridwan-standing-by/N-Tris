@@ -8,49 +8,53 @@
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/scoreEntryListNumber"
+        android:id="@+id/scoreEntryHeaderNumber"
         android:padding="12dp"
         android:textSize="12sp"
         android:textColor="@color/white"
+        android:text="@string/number_symbol"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/scoreEntryListName"/>
+        app:layout_constraintEnd_toStartOf="@id/scoreEntryHeaderName"/>
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/scoreEntryListName"
+        android:id="@+id/scoreEntryHeaderName"
         android:padding="12dp"
         android:textSize="12sp"
         android:textColor="@color/white"
+        android:text="@string/name"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/scoreEntryListNumber"
-        app:layout_constraintEnd_toStartOf="@id/scoreEntryListLines"/>
+        app:layout_constraintStart_toEndOf="@id/scoreEntryHeaderNumber"
+        app:layout_constraintEnd_toStartOf="@id/scoreEntryHeaderLines"/>
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/scoreEntryListLines"
+        android:id="@+id/scoreEntryHeaderLines"
         android:padding="12dp"
         android:textSize="12sp"
         android:textColor="@color/white"
+        android:text="@string/lines"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/scoreEntryListName"
-        app:layout_constraintEnd_toStartOf="@id/scoreEntryListScore"/>
+        app:layout_constraintStart_toEndOf="@id/scoreEntryHeaderName"
+        app:layout_constraintEnd_toStartOf="@id/scoreEntryHeaderScore"/>
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/scoreEntryListScore"
+        android:id="@+id/scoreEntryHeaderScore"
         android:padding="12dp"
         android:textSize="12sp"
         android:textColor="@color/white"
+        android:text="@string/score"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/scoreEntryListLines"
+        app:layout_constraintStart_toEndOf="@id/scoreEntryHeaderLines"
         app:layout_constraintEnd_toEndOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>
