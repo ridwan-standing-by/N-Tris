@@ -16,5 +16,6 @@
     <string name="name">Name</string>
     <string name="lines">Lines</string>
     <string name="score">Score</string>
+    <string name="nickname">Nickname</string>
 
 </resources>
