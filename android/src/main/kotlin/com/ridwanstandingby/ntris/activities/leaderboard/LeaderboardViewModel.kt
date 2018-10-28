@@ -4,7 +4,12 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.ridwanstandingby.ntris.data.remote.RemoteDataManager
+import com.ridwanstandingby.ntris.domain.LeaderboardConstants.BEGINNING_OF_TIME
+import com.ridwanstandingby.ntris.domain.LeaderboardConstants.ONE_WEEK_AGO
+import com.ridwanstandingby.ntris.domain.LeaderboardConstants.SCORE_ENTRY_LIMIT
 import com.ridwanstandingby.ntris.domain.ScoreEntry
+import java.util.*
+import java.util.concurrent.TimeUnit
 
 class LeaderboardViewModel : ViewModel() {
 
@@ -26,13 +31,17 @@ class LeaderboardViewModel : ViewModel() {
     }
 
     private fun loadWeeklyScoreEntries(remoteDataManager: RemoteDataManager) {
-        remoteDataManager.downloadScoreEntries(
+        remoteDataManager.downloadOrderedScoreEntriesSinceDateLimited(
+                since = ONE_WEEK_AGO,
+                limit = SCORE_ENTRY_LIMIT,
                 onSuccess = { weeklyScoreEntries.postValue(it) },
                 onError = { it.printStackTrace() })
     }
 
     private fun loadAllTimeScoreEntries(remoteDataManager: RemoteDataManager) {
-        remoteDataManager.downloadScoreEntries(
+        remoteDataManager.downloadOrderedScoreEntriesSinceDateLimited(
+                since = BEGINNING_OF_TIME,
+                limit = SCORE_ENTRY_LIMIT,
                 onSuccess = { allTimeScoreEntries.postValue(it) },
                 onError = { it.printStackTrace() })
     }

@@ -1,3 +1,5 @@
 package com.ridwanstandingby.ntris.domain
 
-data class ScoreEntry(val timeStamp: Long, val name: String, val score: Long, val lines: Long)
+import java.util.*
+
+data class ScoreEntry(val time: Date, val name: String, val score: Long, val lines: Long)

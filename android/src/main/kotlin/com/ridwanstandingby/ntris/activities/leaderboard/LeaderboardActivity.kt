@@ -71,14 +71,14 @@ class LeaderboardActivity : AppCompatActivity() {
     }
 
     private fun handleWeeklyScoreEntriesLoaded(list: List<ScoreEntry>) {
-        weeklyScoreEntryAdapter.items = list.sortedByDescending { it.score }
+        weeklyScoreEntryAdapter.items = list
         weeklyScoreEntryAdapter.notifyDataSetChanged()
         weeklyLeaderboardRecyclerView.visibility = View.VISIBLE
         weeklyLeaderboardLoadingProgressBar.visibility = View.INVISIBLE
     }
 
     private fun handleAllTimeScoreEntriesLoaded(list: List<ScoreEntry>) {
-        allTimeScoreEntryAdapter.items = list.sortedByDescending { it.score }
+        allTimeScoreEntryAdapter.items = list
         allTimeScoreEntryAdapter.notifyDataSetChanged()
         allTimeLeaderboardRecyclerView.visibility = View.VISIBLE
         allTimeLeaderboardLoadingProgressBar.visibility = View.INVISIBLE
