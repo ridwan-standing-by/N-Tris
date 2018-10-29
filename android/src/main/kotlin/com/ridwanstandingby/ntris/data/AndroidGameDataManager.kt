@@ -7,30 +7,19 @@ import com.ridwanstandingby.ntris.polyomino.PolyominoConstants.MIN_RANK
 import com.ridwanstandingby.ntris.polyomino.blueprint.PolyominoBlueprintLoader
 import com.ridwanstandingby.ntris.render.views.LayoutArrangement
 
-class AndroidGameDataManager(private val context: Context) : GameDataManager() {
-
-    private val prefs = context.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
+class AndroidGameDataManager(private val context: Context,
+                             private val sharedPreferencesManager: SharedPreferencesManager) : GameDataManager() {
 
     override var highScore: Score
-        get() = Score(
-                prefs.getInt(HIGH_SCORE_POINTS_KEY, 0),
-                prefs.getInt(HIGH_SCORE_LINES_KEY, 0))
+        get() = sharedPreferencesManager.highScore
         set(value) {
-            prefs.edit()
-                    .putInt(HIGH_SCORE_POINTS_KEY, value.points)
-                    .putInt(HIGH_SCORE_LINES_KEY, value.lines)
-                    .apply()
+            sharedPreferencesManager.highScore = value
         }
 
     override var layoutArrangement: LayoutArrangement
-        get() = LayoutArrangement.fromCode(
-                prefs.getString(LAYOUT_ARRANGEMENT_CODE_KEY,
-                LayoutArrangement.DEFAULT_LAYOUT_ARRANGEMENT.code)?:
-                LayoutArrangement.DEFAULT_LAYOUT_ARRANGEMENT.code)
+        get() = sharedPreferencesManager.layoutArrangement
         set(value) {
-            prefs.edit()
-                    .putString(LAYOUT_ARRANGEMENT_CODE_KEY, value.code)
-                    .apply()
+            sharedPreferencesManager.layoutArrangement = value
         }
 
     override val polyominoFileStrings = hashMapOf<String, String>().also { hashMap ->
@@ -39,15 +28,5 @@ class AndroidGameDataManager(private val context: Context) : GameDataManager() {
             val fileText = context.assets.open("polyominos/$fileName.txt").bufferedReader().use { it.readText() }
             hashMap[fileName] = fileText
         }
-    }
-
-
-    companion object {
-        private const val PREFS_FILE_NAME = "NTRIS_PREFS"
-
-        private const val HIGH_SCORE_POINTS_KEY = "high_score_points"
-        private const val HIGH_SCORE_LINES_KEY = "high_score_lines"
-
-        private const val LAYOUT_ARRANGEMENT_CODE_KEY = "layout_arrangement_code"
     }
 }

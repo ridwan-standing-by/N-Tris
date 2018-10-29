@@ -29,11 +29,11 @@ class MainActivity : AppCompatActivity() {
             beginLoading()
         }
 
+        initNicknameEditText()
         initHandednessSwitch()
         leaderboardButton.setOnClickListener { launchLeaderboardActivity() }
         howToPlayButton.setOnClickListener { launchTutorialActivity() }
     }
-
     private fun beginLoading() {
         playButton.visibility = View.INVISIBLE
         loadingProgressBar.visibility = View.VISIBLE
@@ -60,6 +60,10 @@ class MainActivity : AppCompatActivity() {
     private inline fun <reified T: Activity> startActivity() {
         val intent = Intent(this, T::class.java)
         startActivity(intent)
+    }
+
+    private fun initNicknameEditText() {
+
     }
 
     private fun initHandednessSwitch() {
