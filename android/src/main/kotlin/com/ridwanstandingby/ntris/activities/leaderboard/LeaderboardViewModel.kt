@@ -8,8 +8,6 @@ import com.ridwanstandingby.ntris.domain.LeaderboardConstants.BEGINNING_OF_TIME
 import com.ridwanstandingby.ntris.domain.LeaderboardConstants.ONE_WEEK_AGO
 import com.ridwanstandingby.ntris.domain.LeaderboardConstants.SCORE_ENTRY_LIMIT
 import com.ridwanstandingby.ntris.domain.ScoreEntry
-import java.util.*
-import java.util.concurrent.TimeUnit
 
 class LeaderboardViewModel : ViewModel() {
 

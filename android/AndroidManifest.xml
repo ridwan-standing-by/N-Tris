@@ -5,6 +5,7 @@
     <application
         android:name=".Application"
         android:allowBackup="true"
+        android:supportsRtl="true"
         android:hardwareAccelerated="false"
         android:icon="@drawable/ic_launcher"
         android:roundIcon="@drawable/ic_round_launcher"

@@ -46,7 +46,4 @@
 }
 
 ## Models that are used directly in Firestore
--keep class com.ridwanstandingby.ntris.data.remote.models { *; }
-
-## ViewModel classes that are created by reflection
-
+-keep class com.ridwanstandingby.ntris.data.remote.models.** { *; }

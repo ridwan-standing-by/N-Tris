@@ -24,8 +24,6 @@ data class IntVector2(var x: Int, var y: Int) {
     operator fun div(scale: Float) = this * (1 / scale)
     operator fun div(scale: Int) = this / scale.toFloat()
 
-    fun toFloat() = Vector2(this.x.toFloat(), this.y.toFloat())
-
     companion object {
         private fun floorToInt(f: Float) = floor(f).toInt()
     }
