@@ -40,6 +40,6 @@ class AndroidGameDataManager(private val context: Context,
                 name = sharedPreferencesManager.nickname,
                 score = score.points.toLong(),
                 lines = score.lines.toLong())
-        remoteDataManager.uploadScoreEntry(scoreEntry)
+        remoteDataManager.uploadScoreEntry(scoreEntry, onError = { it.printStackTrace() })
     }
 }
