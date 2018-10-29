@@ -1,6 +1,8 @@
 package com.ridwanstandingby.ntris.data.remote
 
+import android.util.Log
 import com.google.firebase.Timestamp
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.google.firebase.firestore.Query
@@ -13,10 +15,26 @@ import java.util.*
 
 class RemoteDataManager {
 
-    private val db = FirebaseFirestore.getInstance().also {
-        it.firestoreSettings = FirebaseFirestoreSettings.Builder()
+    private val db = FirebaseFirestore.getInstance()
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+
+    init {
+        setSettingsForTimestamps()
+        signInIfNecessary()
+    }
+
+    private fun setSettingsForTimestamps() {
+        db.firestoreSettings = FirebaseFirestoreSettings.Builder()
                 .setTimestampsInSnapshotsEnabled(true)
                 .build()
+    }
+
+    private fun signInIfNecessary() {
+        if (auth.currentUser == null) {
+            auth.signInAnonymously()
+                    .addOnSuccessListener { Log.d("FirebaseAuth", "Signed in successfully") }
+                    .addOnFailureListener { it.printStackTrace() }
+        }
     }
 
     /** @throws UploadScoreEntryFailureException */
