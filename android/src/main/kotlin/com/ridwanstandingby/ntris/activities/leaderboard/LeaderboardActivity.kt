@@ -58,21 +58,46 @@ class LeaderboardActivity : AppCompatActivity() {
 
     private fun initLeaderboardViewModel() {
         leaderboardViewModel = ViewModelProviders.of(this).get(LeaderboardViewModel::class.java)
+        observeWeeklyScoreEntries()
+        observeAllTimeScoreEntries()
+    }
+
+    private fun observeWeeklyScoreEntries() {
         leaderboardViewModel.getWeeklyScoreEntries(remoteDbManager).observe(this, Observer {
-            if (it != null) {
+            if (it != null && it.isNotEmpty()) {
                 handleWeeklyScoreEntriesLoaded(it)
+            } else {
+                handleWeeklyScoreEntriesEmpty()
             }
         })
+    }
+
+    private fun observeAllTimeScoreEntries() {
         leaderboardViewModel.getAllTimeScoreEntries(remoteDbManager).observe(this, Observer {
-            if (it != null) {
+            if (it != null && it.isNotEmpty()) {
                 handleAllTimeScoreEntriesLoaded(it)
+            } else {
+                handleAllTimeScoreEntriesLoadFailure()
             }
         })
+    }
+
+    private fun handleWeeklyScoreEntriesEmpty() {
+        weeklyLoadingErrorText.visibility = View.VISIBLE
+        weeklyLeaderboardRecyclerView.visibility = View.INVISIBLE
+        weeklyLeaderboardLoadingProgressBar.visibility = View.INVISIBLE
+    }
+
+    private fun handleAllTimeScoreEntriesLoadFailure() {
+        allTimeLoadingErrorText.visibility = View.VISIBLE
+        allTimeLeaderboardRecyclerView.visibility = View.INVISIBLE
+        allTimeLeaderboardLoadingProgressBar.visibility = View.INVISIBLE
     }
 
     private fun handleWeeklyScoreEntriesLoaded(list: List<ScoreEntry>) {
         weeklyScoreEntryAdapter.items = list
         weeklyScoreEntryAdapter.notifyDataSetChanged()
+        weeklyLoadingErrorText.visibility = View.INVISIBLE
         weeklyLeaderboardRecyclerView.visibility = View.VISIBLE
         weeklyLeaderboardLoadingProgressBar.visibility = View.INVISIBLE
     }
@@ -80,6 +105,7 @@ class LeaderboardActivity : AppCompatActivity() {
     private fun handleAllTimeScoreEntriesLoaded(list: List<ScoreEntry>) {
         allTimeScoreEntryAdapter.items = list
         allTimeScoreEntryAdapter.notifyDataSetChanged()
+        allTimeLoadingErrorText.visibility = View.INVISIBLE
         allTimeLeaderboardRecyclerView.visibility = View.VISIBLE
         allTimeLeaderboardLoadingProgressBar.visibility = View.INVISIBLE
     }

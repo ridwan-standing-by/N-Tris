@@ -31,18 +31,33 @@ class RemoteDataManager {
 
     private fun signInIfNecessary() {
         if (auth.currentUser == null) {
-            auth.signInAnonymously()
-                    .addOnSuccessListener { Log.d("FirebaseAuth", "Signed in successfully") }
-                    .addOnFailureListener { it.printStackTrace() }
+            signIn(onSuccess = { Log.d("FirebaseAuth", "Signed in successfully") },
+                    onError = { it.printStackTrace() })
         }
+    }
+
+    private fun signInAndDo(onError: (Throwable) -> Unit, block: () -> Unit) {
+        if (auth.currentUser == null) {
+            signIn(onSuccess = block, onError = onError)
+        } else {
+            block.invoke()
+        }
+    }
+
+    private fun signIn(onSuccess: () -> Unit, onError: (Throwable) -> Unit) {
+        auth.signInAnonymously()
+                .addOnSuccessListener { onSuccess() }
+                .addOnFailureListener { onError(it) }
     }
 
     /** @throws UploadScoreEntryFailureException */
     fun uploadScoreEntry(scoreEntry: ScoreEntry,
                          onError: (Throwable) -> Unit = { throw it }) {
-        db.collection(SCORES_COLLECTION_KEY)
-                .add(scoreEntry.toFirestoreScoreEntry())
-                .addOnFailureListener { onError(UploadScoreEntryFailureException(it)) }
+        signInAndDo(onError) {
+            db.collection(SCORES_COLLECTION_KEY)
+                    .add(scoreEntry.toFirestoreScoreEntry())
+                    .addOnFailureListener { onError(UploadScoreEntryFailureException(it)) }
+        }
     }
 
     class UploadScoreEntryFailureException(cause: Exception?) : Exception(cause)
@@ -52,10 +67,12 @@ class RemoteDataManager {
                                                     limit: Long,
                                                     onSuccess: (List<ScoreEntry>) -> Unit = {},
                                                     onError: (Throwable) -> Unit = { throw it }) {
-        if (since == BEGINNING_OF_TIME) {
-            downloadAllOrderedScoreEntriesLimited(limit, onSuccess, onError)
-        } else {
-            downloadScoreEntriesSinceDateThenOrderAndLimit(since, limit, onSuccess, onError)
+        signInAndDo(onError) {
+            if (since == BEGINNING_OF_TIME) {
+                downloadAllOrderedScoreEntriesLimited(limit, onSuccess, onError)
+            } else {
+                downloadScoreEntriesSinceDateThenOrderAndLimit(since, limit, onSuccess, onError)
+            }
         }
     }
 

@@ -33,7 +33,7 @@ class LeaderboardViewModel : ViewModel() {
                 since = ONE_WEEK_AGO,
                 limit = SCORE_ENTRY_LIMIT,
                 onSuccess = { weeklyScoreEntries.postValue(it) },
-                onError = { it.printStackTrace() })
+                onError = { it.printStackTrace(); weeklyScoreEntries.postValue(null) })
     }
 
     private fun loadAllTimeScoreEntries(remoteDataManager: RemoteDataManager) {
@@ -41,6 +41,6 @@ class LeaderboardViewModel : ViewModel() {
                 since = BEGINNING_OF_TIME,
                 limit = SCORE_ENTRY_LIMIT,
                 onSuccess = { allTimeScoreEntries.postValue(it) },
-                onError = { it.printStackTrace() })
+                onError = { it.printStackTrace(); allTimeScoreEntries.postValue(null) })
     }
 }
