@@ -29,6 +29,8 @@ class DesktopGameDataManager : GameDataManager() {
 
     override val polyominoFileStrings: HashMap<String, String>? = null
 
+    override fun onGameOver(score: Score) {}
+
     private inline fun <reified T> getValue(key: String, default: T): T =
             try {
                 getAllLinesFromFile()

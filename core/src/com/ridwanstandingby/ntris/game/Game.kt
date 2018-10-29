@@ -114,6 +114,7 @@ class Game(private val gameDataManager: GameDataManager) {
 
     private fun gameOver() {
         isGameOver = true
+        gameDataManager.registerScore(score)
     }
 
     fun pause() {

@@ -16,6 +16,6 @@ class Application : Application() {
         super.onCreate()
         remoteDataManager = RemoteDataManager()
         sharedPreferencesManager = SharedPreferencesManager(this)
-        gameDataManager = AndroidGameDataManager(this, sharedPreferencesManager)
+        gameDataManager = AndroidGameDataManager(this, sharedPreferencesManager, remoteDataManager)
     }
 }
