@@ -1,7 +1,7 @@
 package com.ridwanstandingby.ntris.game
 
 import com.badlogic.gdx.Gdx
-import com.ridwanstandingby.ntris.data.DataManager
+import com.ridwanstandingby.ntris.data.GameDataManager
 import com.ridwanstandingby.ntris.events.Clock
 import com.ridwanstandingby.ntris.events.EventHandler
 import com.ridwanstandingby.ntris.events.Events
@@ -11,12 +11,12 @@ import com.ridwanstandingby.ntris.input.debounce.TimedDebouncer
 import com.ridwanstandingby.ntris.polyomino.*
 import com.ridwanstandingby.ntris.polyomino.blueprint.PolyominoBlueprintLoader
 
-class Game(private val dataManager: DataManager) {
+class Game(private val gameDataManager: GameDataManager) {
 
     private val clock = Clock()
     private val eventHandler = EventHandler()
     private val inputEventResolver = InputEventResolver(clock, eventHandler)
-    private val polyominoBlueprintHolder = dataManager.polyominoBlueprintHolder?: PolyominoBlueprintLoader().load()
+    private val polyominoBlueprintHolder = gameDataManager.polyominoBlueprintHolder?: PolyominoBlueprintLoader().load()
     private val polyominoSpawner = PolyominoSpawner(polyominoBlueprintHolder)
     private val legalMoveHelper = LegalMoveHelper()
     private val generousPieceManipulator = GenerousPieceManipulator { piece, moves -> tryPieceMoves(piece, moves) }
@@ -27,7 +27,7 @@ class Game(private val dataManager: DataManager) {
             { eventHandler.queue(Events.Pulse()) })
 
     var score = Score(0, 0)
-    val highScore = dataManager.highScore.copy()
+    val highScore = gameDataManager.highScore.copy()
 
     var isGameOver = false
     var doRestart = false
@@ -109,11 +109,12 @@ class Game(private val dataManager: DataManager) {
 
     private fun updateHighScoreIfNecessary() {
         if (score > highScore)
-            dataManager.highScore = score
+            gameDataManager.highScore = score
     }
 
     private fun gameOver() {
         isGameOver = true
+        gameDataManager.registerScore(score)
     }
 
     fun pause() {

@@ -5,7 +5,7 @@ import com.ridwanstandingby.ntris.polyomino.blueprint.PolyominoBlueprintHolder
 import com.ridwanstandingby.ntris.polyomino.blueprint.PolyominoBlueprintLoader
 import com.ridwanstandingby.ntris.render.views.LayoutArrangement
 
-abstract class DataManager {
+abstract class GameDataManager {
 
     abstract var highScore: Score
     abstract var layoutArrangement: LayoutArrangement
@@ -13,6 +13,8 @@ abstract class DataManager {
     abstract val polyominoFileStrings: HashMap<String, String>?
 
     var polyominoBlueprintHolder: PolyominoBlueprintHolder? = null
+
+    abstract fun registerScore(score: Score)
 
     fun loadPolyominoBlueprints() {
         polyominoBlueprintHolder = PolyominoBlueprintLoader(polyominoFileStrings).load()

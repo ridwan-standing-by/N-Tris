@@ -19,6 +19,7 @@
 #   public *;
 #}
 
+## Auto generated
 -verbose
 
 -dontwarn android.support.**
@@ -43,3 +44,6 @@
    boolean reportFixture(long);
    float   reportRayFixture(long, float, float, float, float, float);
 }
+
+## Models that are used directly in Firestore
+-keep class com.ridwanstandingby.ntris.data.remote.models.** { *; }

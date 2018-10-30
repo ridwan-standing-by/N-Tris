@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">N-tris</string>
+    <string name="how_to_play">How to play</string>
+    <string name="play">Play</string>
+    <string name="loading">Loading…</string>
+    <string name="ntris_logo">ntris_logo</string>
+    <string name="left_handed_switch_label">Left handed</string>
+    <string name="right_handed_switch_label">Right handed</string>
+    <string name="leaderboard_title">Leaderboard</string>
+    <string name="leaderboard_button_text">Leaderboard</string>
+    <string name="weekly_tab_title">Weekly</string>
+    <string name="all_time_tab_title">All Time</string>
+    <string name="number_symbol">#</string>
+    <string name="name">Name</string>
+    <string name="lines">Lines</string>
+    <string name="score">Score</string>
+    <string name="nickname">Nickname</string>
+    <string name="score_loading_connection_error_message">Whoops. Looks like it\'s empty. Check your internet connection I guess?</string>
+
+</resources>

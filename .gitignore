@@ -134,4 +134,4 @@ Thumbs.db
 /android/assets/NTrisSettings\.txt
 
 ## Firebase
-/android/google-services.json
+**/google-services.json

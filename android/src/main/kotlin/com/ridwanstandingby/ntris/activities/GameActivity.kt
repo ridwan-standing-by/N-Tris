@@ -13,6 +13,6 @@ class GameActivity : AndroidApplication() {
         val config = AndroidApplicationConfiguration()
         config.useWakelock = true
 
-        initialize(NTrisApplication((application as Application).dataManager), config)
+        initialize(NTrisApplication((application as Application).gameDataManager), config)
     }
 }
