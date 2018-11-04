@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.ridwanstandingby.ntris.data.GameDataManager
 import com.ridwanstandingby.ntris.game.Game
+import com.ridwanstandingby.ntris.game.GameFactory
 import com.ridwanstandingby.ntris.render.Dimensions
 import com.ridwanstandingby.ntris.render.fonts.FontGenerator
 import com.ridwanstandingby.ntris.render.fonts.Fonts
@@ -12,7 +13,7 @@ import java.util.*
 
 class GameStateManager(private val gameDataManager: GameDataManager) {
 
-    var game = Game(gameDataManager)
+    var game = GameFactory(gameDataManager).newGame()
 
     lateinit var dimensions: Dimensions
     lateinit var fonts: Fonts
@@ -41,7 +42,7 @@ class GameStateManager(private val gameDataManager: GameDataManager) {
 
     fun update(dt: Float) {
         states.peek().update(dt)
-        if (game.doRestart) game = Game(gameDataManager)
+        if (game.doRestart) game = GameFactory(gameDataManager).newGame()
     }
 
     fun render(sb: SpriteBatch, sr: ShapeRenderer) {
