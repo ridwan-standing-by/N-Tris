@@ -3,8 +3,8 @@ package com.ridwanstandingby.ntris.game
 import com.badlogic.gdx.Gdx
 import com.ridwanstandingby.ntris.data.GameDataManager
 import com.ridwanstandingby.ntris.events.Clock
+import com.ridwanstandingby.ntris.events.Event
 import com.ridwanstandingby.ntris.events.EventHandler
-import com.ridwanstandingby.ntris.events.Events
 import com.ridwanstandingby.ntris.input.InputEventResolver
 import com.ridwanstandingby.ntris.input.RawPlayInput
 import com.ridwanstandingby.ntris.input.debounce.TimedDebouncer
@@ -24,7 +24,7 @@ class Game(private val gameDataManager: GameDataManager) {
     private val pulser = TimedDebouncer(clock, GameRules.PULSE_TIME,
             { _ -> true },
             { _, game -> game.isInPlay() },
-            { eventHandler.queue(Events.Pulse()) })
+            { eventHandler.queue(Event.Pulse()) })
 
     var score = Score(0, 0)
     val highScore = gameDataManager.highScore.copy()
