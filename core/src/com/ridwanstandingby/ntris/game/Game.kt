@@ -133,6 +133,18 @@ class Game(private val gameDataManager: GameDataManager,
         doRestart = true
     }
 
+    fun save() = SavedGame(
+            clock = clock,
+            score = score,
+            isGameOver = isGameOver,
+            doRestart = doRestart,
+            isPaused = isPaused,
+            backgroundBlockMap = backgroundBlockMap,
+            currentPiece = currentPiece,
+            nextPiece = nextPiece,
+            reservePiece = reservePiece,
+            hasSwappedReserve = hasSwappedReserve)
+
     private fun exit() {
         Gdx.app.exit()
     }
