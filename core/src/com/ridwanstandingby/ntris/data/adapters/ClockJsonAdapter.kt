@@ -1,4 +1,4 @@
-package com.ridwanstandingby.ntris.data.local.adapters
+package com.ridwanstandingby.ntris.data.adapters
 
 import com.ridwanstandingby.ntris.events.Clock
 import org.json.JSONException
@@ -13,7 +13,7 @@ fun Clock.toJson(): JSONObject =
 /** @throws JSONException */
 fun JSONObject.toClock(): Clock =
         Clock(
-                t = getDouble(T).toFloat()
+                t = getDouble(com.ridwanstandingby.ntris.data.adapters.T).toFloat()
         )
 
 private const val T = "t"

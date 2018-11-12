@@ -1,4 +1,4 @@
-package com.ridwanstandingby.ntris.data.local.adapters
+package com.ridwanstandingby.ntris.data.adapters
 
 import com.badlogic.gdx.graphics.Color
 import org.json.JSONException
@@ -16,10 +16,10 @@ fun Color.toJson() =
 /** @throws JSONException */
 fun JSONObject.toColor(): Color =
         Color(
-                getDouble(R).toFloat(),
-                getDouble(G).toFloat(),
-                getDouble(B).toFloat(),
-                getDouble(A).toFloat()
+                getDouble(com.ridwanstandingby.ntris.data.adapters.R).toFloat(),
+                getDouble(com.ridwanstandingby.ntris.data.adapters.G).toFloat(),
+                getDouble(com.ridwanstandingby.ntris.data.adapters.B).toFloat(),
+                getDouble(com.ridwanstandingby.ntris.data.adapters.A).toFloat()
         )
 
 private const val R = "r"

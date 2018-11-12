@@ -1,8 +1,6 @@
-package com.ridwanstandingby.ntris.data.local.adapters
+package com.ridwanstandingby.ntris.data.adapters
 
 import com.ridwanstandingby.ntris.polyomino.BlockMap
-import com.ridwanstandingby.ntris.tools.getJSONArrayAsList
-import com.ridwanstandingby.ntris.tools.toJsonArray
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -15,7 +13,7 @@ fun BlockMap.toJson(): JSONObject =
 /** @throws JSONException */
 fun JSONObject.toBlockMap(): BlockMap =
         BlockMap(
-                blocks = getJSONArrayAsList(BLOCKS) { getJSONObject(it).toBlock() }.toMutableList()
+                blocks = getJSONArrayAsList(com.ridwanstandingby.ntris.data.adapters.BLOCKS) { getJSONObject(it).toBlock() }.toMutableList()
         )
 
 private const val BLOCKS = "blocks"

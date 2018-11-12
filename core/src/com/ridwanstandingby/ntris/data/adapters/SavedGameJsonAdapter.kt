@@ -1,4 +1,4 @@
-package com.ridwanstandingby.ntris.data.local.adapters
+package com.ridwanstandingby.ntris.data.adapters
 
 import com.ridwanstandingby.ntris.game.SavedGame
 import org.json.JSONException
@@ -22,16 +22,16 @@ fun SavedGame.toJson(): JSONObject =
 /** @throws JSONException */
 fun JSONObject.toSavedGame(): SavedGame =
         SavedGame(
-                clock = getJSONObject(CLOCK).toClock(),
-                score = getJSONObject(SCORE).toScore(),
-                isGameOver = getBoolean(IS_GAME_OVER),
-                doRestart = getBoolean(DO_RESTART),
-                isPaused = getBoolean(IS_PAUSED),
-                backgroundBlockMap = getJSONObject(BACKGROUND_BLOCK_MAP).toBlockMap(),
-                currentPiece = getJSONObject(CURRENT_PIECE).toPolyomino(),
-                nextPiece = getJSONObject(NEXT_PIECE).toPolyomino(),
-                reservePiece = getJSONObject(RESERVE_PIECE).toPolyomino(),
-                hasSwappedReserve = getBoolean(HAS_SWAPPED_RESERVE)
+                clock = getJSONObject(com.ridwanstandingby.ntris.data.adapters.CLOCK).toClock(),
+                score = getJSONObject(com.ridwanstandingby.ntris.data.adapters.SCORE).toScore(),
+                isGameOver = getBoolean(com.ridwanstandingby.ntris.data.adapters.IS_GAME_OVER),
+                doRestart = getBoolean(com.ridwanstandingby.ntris.data.adapters.DO_RESTART),
+                isPaused = getBoolean(com.ridwanstandingby.ntris.data.adapters.IS_PAUSED),
+                backgroundBlockMap = getJSONObject(com.ridwanstandingby.ntris.data.adapters.BACKGROUND_BLOCK_MAP).toBlockMap(),
+                currentPiece = getJSONObject(com.ridwanstandingby.ntris.data.adapters.CURRENT_PIECE).toPolyomino(),
+                nextPiece = getJSONObject(com.ridwanstandingby.ntris.data.adapters.NEXT_PIECE).toPolyomino(),
+                reservePiece = getJSONObject(com.ridwanstandingby.ntris.data.adapters.RESERVE_PIECE).toPolyomino(),
+                hasSwappedReserve = getBoolean(com.ridwanstandingby.ntris.data.adapters.HAS_SWAPPED_RESERVE)
         )
 
 private const val CLOCK = "clock"

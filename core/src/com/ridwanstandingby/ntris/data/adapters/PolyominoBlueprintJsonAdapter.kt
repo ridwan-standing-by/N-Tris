@@ -1,4 +1,4 @@
-package com.ridwanstandingby.ntris.data.local.adapters
+package com.ridwanstandingby.ntris.data.adapters
 
 import com.ridwanstandingby.ntris.polyomino.blueprint.PolyominoBlueprint
 import org.json.JSONException
@@ -15,9 +15,9 @@ fun PolyominoBlueprint.toJson(): JSONObject =
 /** @throws JSONException */
 fun JSONObject.toPolyominoBlueprint(): PolyominoBlueprint =
         PolyominoBlueprint(
-                rank = getInt(RANK),
-                index = getInt(INDEX),
-                blockMatrix = getJSONObject(BLOCK_MATRIX).toArray2DBoolean()
+                rank = getInt(com.ridwanstandingby.ntris.data.adapters.RANK),
+                index = getInt(com.ridwanstandingby.ntris.data.adapters.INDEX),
+                blockMatrix = getJSONObject(com.ridwanstandingby.ntris.data.adapters.BLOCK_MATRIX).toArray2DBoolean()
         )
 
 private const val RANK = "rank"

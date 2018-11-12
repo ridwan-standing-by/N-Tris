@@ -1,4 +1,4 @@
-package com.ridwanstandingby.ntris.data.local.adapters
+package com.ridwanstandingby.ntris.data.adapters
 
 import com.badlogic.gdx.math.Vector2
 import org.json.JSONException
@@ -14,8 +14,8 @@ fun Vector2.toJson(): JSONObject =
 /** @throws JSONException */
 fun JSONObject.toVector2(): Vector2 =
         Vector2(
-                getDouble(X).toFloat(),
-                getDouble(Y).toFloat()
+                getDouble(com.ridwanstandingby.ntris.data.adapters.X).toFloat(),
+                getDouble(com.ridwanstandingby.ntris.data.adapters.Y).toFloat()
         )
 
 private const val X = "x"

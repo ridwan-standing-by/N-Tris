@@ -1,4 +1,4 @@
-package com.ridwanstandingby.ntris.data.local.adapters
+package com.ridwanstandingby.ntris.data.adapters
 
 import com.ridwanstandingby.ntris.game.Score
 import org.json.JSONException
@@ -14,8 +14,8 @@ fun Score.toJson(): JSONObject =
 /** @throws JSONException */
 fun JSONObject.toScore(): Score =
         Score(
-                points = getInt(POINTS),
-                lines = getInt(LINES)
+                points = getInt(com.ridwanstandingby.ntris.data.adapters.POINTS),
+                lines = getInt(com.ridwanstandingby.ntris.data.adapters.LINES)
         )
 
 private const val POINTS = "points"

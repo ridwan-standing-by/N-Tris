@@ -1,4 +1,4 @@
-package com.ridwanstandingby.ntris.tools
+package com.ridwanstandingby.ntris.data.adapters
 
 import org.json.JSONArray
 import org.json.JSONException

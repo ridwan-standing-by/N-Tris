@@ -1,4 +1,4 @@
-package com.ridwanstandingby.ntris.data.local.adapters
+package com.ridwanstandingby.ntris.data.adapters
 
 import com.ridwanstandingby.ntris.polyomino.Block
 import org.json.JSONException
@@ -14,8 +14,8 @@ fun Block.toJson(): JSONObject =
 /** @throws JSONException */
 fun JSONObject.toBlock(): Block =
         Block(
-                position = getJSONObject(POSITION).toIntVector2(),
-                colour = getJSONObject(COLOUR).toColor()
+                position = getJSONObject(com.ridwanstandingby.ntris.data.adapters.POSITION).toIntVector2(),
+                colour = getJSONObject(com.ridwanstandingby.ntris.data.adapters.COLOUR).toColor()
         )
 
 private const val POSITION = "position"

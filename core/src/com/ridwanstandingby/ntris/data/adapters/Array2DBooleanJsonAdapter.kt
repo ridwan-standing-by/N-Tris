@@ -1,9 +1,6 @@
-package com.ridwanstandingby.ntris.data.local.adapters
+package com.ridwanstandingby.ntris.data.adapters
 
 import com.ridwanstandingby.ntris.polyomino.geometry.Array2D
-import com.ridwanstandingby.ntris.tools.getJSONArrayAsList
-import com.ridwanstandingby.ntris.tools.toJsonArray
-import com.ridwanstandingby.ntris.tools.toList
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -20,7 +17,7 @@ fun Array2D<Boolean?>.toJson(): JSONObject =
 /** @throws JSONException */
 fun JSONObject.toArray2DBoolean(): Array2D<Boolean?> =
         Array2D(
-                array = getJSONArrayAsList(ARRAY) { outerIndex ->
+                array = getJSONArrayAsList(com.ridwanstandingby.ntris.data.adapters.ARRAY) { outerIndex ->
                     this.getJSONArray(outerIndex).toList { innerIndex ->
                         try {
                             this.getBoolean(innerIndex)

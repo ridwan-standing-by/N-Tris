@@ -1,8 +1,6 @@
-package com.ridwanstandingby.ntris.data.local.adapters
+package com.ridwanstandingby.ntris.data.adapters
 
 import com.ridwanstandingby.ntris.polyomino.Polyomino
-import com.ridwanstandingby.ntris.tools.getJSONArrayAsList
-import com.ridwanstandingby.ntris.tools.toJsonArray
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -18,10 +16,10 @@ fun Polyomino.toJson(): JSONObject =
 /** @throws JSONException */
 fun JSONObject.toPolyomino(): Polyomino =
         Polyomino(
-                polyominoBlueprint = getJSONObject(POLYOMINO_BLUEPRINT).toPolyominoBlueprint(),
-                colour = getJSONObject(COLOUR).toColor(),
-                position = getJSONObject(POSITION).toVector2(),
-                relativeCoordinates = getJSONArrayAsList(RELATIVE_COORDINATES) { getJSONObject(it).toVector2() }.toSet()
+                polyominoBlueprint = getJSONObject(com.ridwanstandingby.ntris.data.adapters.POLYOMINO_BLUEPRINT).toPolyominoBlueprint(),
+                colour = getJSONObject(com.ridwanstandingby.ntris.data.adapters.COLOUR).toColor(),
+                position = getJSONObject(com.ridwanstandingby.ntris.data.adapters.POSITION).toVector2(),
+                relativeCoordinates = getJSONArrayAsList(com.ridwanstandingby.ntris.data.adapters.RELATIVE_COORDINATES) { getJSONObject(it).toVector2() }.toSet()
         )
 
 private const val POLYOMINO_BLUEPRINT = "polyominoBlueprint"
