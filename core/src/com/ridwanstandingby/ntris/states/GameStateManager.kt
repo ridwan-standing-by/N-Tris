@@ -13,7 +13,7 @@ import java.util.*
 
 class GameStateManager(private val gameDataManager: GameDataManager) {
 
-    var game = GameFactory(gameDataManager).newGame()
+    var game = GameFactory(gameDataManager).fromSavedGame(gameDataManager.savedGame)
 
     lateinit var dimensions: Dimensions
     lateinit var fonts: Fonts

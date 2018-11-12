@@ -1,4 +1,4 @@
-package com.ridwanstandingby.ntris.data
+package com.ridwanstandingby.ntris.data.local
 
 import android.content.Context
 import com.ridwanstandingby.ntris.game.Score

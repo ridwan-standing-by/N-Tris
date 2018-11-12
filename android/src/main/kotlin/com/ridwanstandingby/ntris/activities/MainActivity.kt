@@ -11,7 +11,7 @@ import com.ridwanstandingby.ntris.Application
 import com.ridwanstandingby.ntris.R
 import com.ridwanstandingby.ntris.activities.leaderboard.LeaderboardActivity
 import com.ridwanstandingby.ntris.data.GameDataManager
-import com.ridwanstandingby.ntris.data.SharedPreferencesManager
+import com.ridwanstandingby.ntris.data.local.SharedPreferencesManager
 import com.ridwanstandingby.ntris.render.views.LayoutArrangement
 import kotlinx.android.synthetic.main.layout_main.*
 import org.jetbrains.anko.doAsync

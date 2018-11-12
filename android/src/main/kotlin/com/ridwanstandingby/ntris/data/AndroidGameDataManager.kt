@@ -1,8 +1,10 @@
 package com.ridwanstandingby.ntris.data
 
 import android.content.Context
+import com.ridwanstandingby.ntris.data.local.SharedPreferencesManager
 import com.ridwanstandingby.ntris.data.remote.RemoteDataManager
 import com.ridwanstandingby.ntris.domain.ScoreEntry
+import com.ridwanstandingby.ntris.game.SavedGame
 import com.ridwanstandingby.ntris.game.Score
 import com.ridwanstandingby.ntris.polyomino.PolyominoConstants.MAX_RANK
 import com.ridwanstandingby.ntris.polyomino.PolyominoConstants.MIN_RANK
@@ -13,6 +15,10 @@ import java.util.*
 class AndroidGameDataManager(private val context: Context,
                              private val sharedPreferencesManager: SharedPreferencesManager,
                              private val remoteDataManager: RemoteDataManager) : GameDataManager() {
+
+    override var savedGame: SavedGame?
+        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
+        set(value) {}
 
     override var highScore: Score
         get() = sharedPreferencesManager.highScore

@@ -27,19 +27,24 @@ class GameFactory(private val gameDataManager: GameDataManager) {
                 reservePiece = polyominoSpawner.generatePolyomino(score))
     }
 
-    fun fromSavedGame(savedGame: SavedGame) = Game(
-            gameDataManager = gameDataManager,
-            polyominoSpawner = createPolyominoSpawner(),
-            clock = savedGame.clock,
-            score = savedGame.score,
-            isGameOver = savedGame.isGameOver,
-            doRestart = savedGame.doRestart,
-            isPaused = savedGame.isPaused,
-            hasSwappedReserve = savedGame.hasSwappedReserve,
-            backgroundBlockMap = savedGame.backgroundBlockMap,
-            currentPiece = savedGame.currentPiece,
-            nextPiece = savedGame.nextPiece,
-            reservePiece = savedGame.reservePiece)
+    fun fromSavedGame(savedGame: SavedGame?) =
+            if (savedGame == null) {
+                newGame()
+            } else {
+                Game(
+                        gameDataManager = gameDataManager,
+                        polyominoSpawner = createPolyominoSpawner(),
+                        clock = savedGame.clock,
+                        score = savedGame.score,
+                        isGameOver = savedGame.isGameOver,
+                        doRestart = savedGame.doRestart,
+                        isPaused = savedGame.isPaused,
+                        hasSwappedReserve = savedGame.hasSwappedReserve,
+                        backgroundBlockMap = savedGame.backgroundBlockMap,
+                        currentPiece = savedGame.currentPiece,
+                        nextPiece = savedGame.nextPiece,
+                        reservePiece = savedGame.reservePiece)
+            }
 
     private fun createPolyominoSpawner(): PolyominoSpawner {
         val polyominoBlueprintHolder = gameDataManager.polyominoBlueprintHolder

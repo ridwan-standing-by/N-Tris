@@ -1,6 +1,7 @@
 package com.ridwanstandingby.ntris.desktop.data
 
 import com.ridwanstandingby.ntris.data.GameDataManager
+import com.ridwanstandingby.ntris.game.SavedGame
 import com.ridwanstandingby.ntris.game.Score
 import com.ridwanstandingby.ntris.render.views.LayoutArrangement
 import java.io.File
@@ -10,6 +11,8 @@ class DesktopGameDataManager : GameDataManager() {
     init {
         File(PREFS_FILE_NAME).createNewFile()
     }
+
+    override var savedGame: SavedGame? = null
 
     override var highScore: Score
         get() = Score(

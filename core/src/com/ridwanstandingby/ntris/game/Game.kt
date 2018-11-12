@@ -30,7 +30,7 @@ class Game(private val gameDataManager: GameDataManager,
     private val generousPieceManipulator = GenerousPieceManipulator { piece, moves -> tryPieceMoves(piece, moves) }
     private val completeLineChecker = CompleteLineChecker()
     private val pulser = TimedDebouncer(clock, GameRules.PULSE_TIME,
-            { _ -> true },
+            { true },
             { _, game -> game.isInPlay() },
             { eventHandler.queue(Event.Pulse()) })
 
