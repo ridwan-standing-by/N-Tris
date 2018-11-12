@@ -3,7 +3,7 @@ package com.ridwanstandingby.ntris
 import android.support.multidex.MultiDexApplication
 import com.ridwanstandingby.ntris.data.AndroidGameDataManager
 import com.ridwanstandingby.ntris.data.GameDataManager
-import com.ridwanstandingby.ntris.data.SharedPreferencesManager
+import com.ridwanstandingby.ntris.data.local.SharedPreferencesManager
 import com.ridwanstandingby.ntris.data.remote.RemoteDataManager
 
 class Application : MultiDexApplication() {

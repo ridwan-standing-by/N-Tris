@@ -1,6 +1,9 @@
 package com.ridwanstandingby.ntris.desktop.data
 
 import com.ridwanstandingby.ntris.data.GameDataManager
+import com.ridwanstandingby.ntris.data.adapters.toJson
+import com.ridwanstandingby.ntris.data.adapters.toSavedGame
+import com.ridwanstandingby.ntris.game.SavedGame
 import com.ridwanstandingby.ntris.game.Score
 import com.ridwanstandingby.ntris.render.views.LayoutArrangement
 import java.io.File
@@ -10,6 +13,12 @@ class DesktopGameDataManager : GameDataManager() {
     init {
         File(PREFS_FILE_NAME).createNewFile()
     }
+
+    override var savedGame: SavedGame?
+        get() = getValue<String?>(SAVED_GAME_KEY, null)?.toJson()?.toSavedGame()
+        set(value) {
+            setValue(SAVED_GAME_KEY, value?.toJson().toString())
+        }
 
     override var highScore: Score
         get() = Score(
@@ -90,5 +99,7 @@ class DesktopGameDataManager : GameDataManager() {
         private const val HIGH_SCORE_LINES_KEY = "high_score_lines"
 
         private const val LAYOUT_ARRANGEMENT_CODE_KEY = "layout_arrangement_code"
+
+        private const val SAVED_GAME_KEY = "saved_game"
     }
 }

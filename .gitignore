@@ -131,7 +131,7 @@ Thumbs.db
 /android/debug/
 
 ## N-tris Generated
-/android/assets/NTrisSettings\.txt
+/android/assets/NTrisSettings.txt
 
 ## Firebase
 **/google-services.json

@@ -7,11 +7,16 @@ import com.ridwanstandingby.ntris.polyomino.blueprint.PolyominoBlueprint
 import com.ridwanstandingby.ntris.polyomino.geometry.IntVector2
 import ktx.math.plus
 
-class Polyomino(private val polyominoBlueprint: PolyominoBlueprint,
-                private val colour: Color,
-                private var position: Vector2 = Vector2(0f, 0f)) {
+class Polyomino(val polyominoBlueprint: PolyominoBlueprint,
+                val colour: Color,
+                var position: Vector2 = Vector2(0f, 0f),
+                var relativeCoordinates: Set<Vector2> = setOf()) {
 
-    private var relativeCoordinates: Set<Vector2> = calculateRelativeCoordinates()
+    init {
+        if (relativeCoordinates.isEmpty()) {
+            relativeCoordinates = calculateRelativeCoordinates()
+        }
+    }
 
     private fun calculateRelativeCoordinates(): Set<Vector2> {
         val absoluteCoordinates = polyominoBlueprint.generateAbsoluteCoordinates()

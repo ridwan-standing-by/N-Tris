@@ -9,36 +9,32 @@ import com.ridwanstandingby.ntris.input.InputEventResolver
 import com.ridwanstandingby.ntris.input.RawPlayInput
 import com.ridwanstandingby.ntris.input.debounce.TimedDebouncer
 import com.ridwanstandingby.ntris.polyomino.*
-import com.ridwanstandingby.ntris.polyomino.blueprint.PolyominoBlueprintLoader
 
-class Game(private val gameDataManager: GameDataManager) {
+class Game(private val gameDataManager: GameDataManager,
+           private val polyominoSpawner: PolyominoSpawner,
+           private val clock: Clock = Clock(),
+           var score: Score = Score(0, 0),
+           var isGameOver: Boolean = false,
+           var doRestart: Boolean = false,
+           var isPaused: Boolean = false,
+           private var hasSwappedReserve: Boolean = false,
+           val backgroundBlockMap: BlockMap = BlockMap(),
+           var currentPiece: Polyomino,
+           var nextPiece: Polyomino,
+           var reservePiece: Polyomino) {
 
-    private val clock = Clock()
+    val highScore = gameDataManager.highScore.copy()
     private val eventHandler = EventHandler()
     private val inputEventResolver = InputEventResolver(clock, eventHandler)
-    private val polyominoBlueprintHolder = gameDataManager.polyominoBlueprintHolder?: PolyominoBlueprintLoader().load()
-    private val polyominoSpawner = PolyominoSpawner(polyominoBlueprintHolder)
     private val legalMoveHelper = LegalMoveHelper()
     private val generousPieceManipulator = GenerousPieceManipulator { piece, moves -> tryPieceMoves(piece, moves) }
     private val completeLineChecker = CompleteLineChecker()
     private val pulser = TimedDebouncer(clock, GameRules.PULSE_TIME,
-            { _ -> true },
+            { true },
             { _, game -> game.isInPlay() },
             { eventHandler.queue(Event.Pulse()) })
 
-    var score = Score(0, 0)
-    val highScore = gameDataManager.highScore.copy()
-
-    var isGameOver = false
-    var doRestart = false
-    var isPaused = false
     fun isInPlay() = (isGameOver or isPaused).not()
-
-    val backgroundBlockMap = BlockMap()
-    var currentPiece = polyominoSpawner.generatePolyomino(score).apply { setToPlaySpawnPosition() }
-    var nextPiece = polyominoSpawner.generatePolyomino(score)
-    var reservePiece = polyominoSpawner.generatePolyomino(score)
-    private var hasSwappedReserve = false
 
     fun resolvePlayInput(rawPlayInput: RawPlayInput) {
         inputEventResolver.resolveInput(this, rawPlayInput)
@@ -87,6 +83,7 @@ class Game(private val gameDataManager: GameDataManager) {
             }
             else -> gameOver()
         }
+        save()
     }
 
     private fun tryCyclePiece(): Boolean {
@@ -135,6 +132,20 @@ class Game(private val gameDataManager: GameDataManager) {
 
     fun restartGame() {
         doRestart = true
+    }
+
+    private fun save() {
+        gameDataManager.savedGame = SavedGame(
+                clock = clock,
+                score = score,
+                isGameOver = isGameOver,
+                doRestart = doRestart,
+                isPaused = isPaused,
+                backgroundBlockMap = backgroundBlockMap,
+                currentPiece = currentPiece,
+                nextPiece = nextPiece,
+                reservePiece = reservePiece,
+                hasSwappedReserve = hasSwappedReserve)
     }
 
     private fun exit() {
