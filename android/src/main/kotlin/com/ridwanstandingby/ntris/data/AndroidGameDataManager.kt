@@ -17,8 +17,10 @@ class AndroidGameDataManager(private val context: Context,
                              private val remoteDataManager: RemoteDataManager) : GameDataManager() {
 
     override var savedGame: SavedGame?
-        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
-        set(value) {}
+        get() = sharedPreferencesManager.savedGame
+        set(value) {
+            sharedPreferencesManager.savedGame = value
+        }
 
     override var highScore: Score
         get() = sharedPreferencesManager.highScore

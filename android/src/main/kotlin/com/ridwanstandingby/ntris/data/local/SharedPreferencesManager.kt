@@ -1,6 +1,9 @@
 package com.ridwanstandingby.ntris.data.local
 
 import android.content.Context
+import com.ridwanstandingby.ntris.data.adapters.toJson
+import com.ridwanstandingby.ntris.data.adapters.toSavedGame
+import com.ridwanstandingby.ntris.game.SavedGame
 import com.ridwanstandingby.ntris.game.Score
 import com.ridwanstandingby.ntris.render.views.LayoutArrangement
 
@@ -36,6 +39,14 @@ class SharedPreferencesManager(context: Context) {
                     .apply()
         }
 
+    var savedGame: SavedGame?
+        get() = prefs.getString(SAVED_GAME_KEY, null)?.toJson()?.toSavedGame()
+        set(value) {
+            prefs.edit()
+                    .putString(SAVED_GAME_KEY, value?.toJson().toString())
+                    .apply()
+        }
+
     companion object {
         private const val PREFS_FILE_NAME = "NTRIS_PREFS"
 
@@ -45,5 +56,7 @@ class SharedPreferencesManager(context: Context) {
         private const val HIGH_SCORE_LINES_KEY = "high_score_lines"
 
         private const val LAYOUT_ARRANGEMENT_CODE_KEY = "layout_arrangement_code"
+
+        private const val SAVED_GAME_KEY = "saved_game"
     }
 }
