@@ -6,13 +6,14 @@ import com.ridwanstandingby.ntris.data.adapters.toSavedGame
 import com.ridwanstandingby.ntris.game.SavedGame
 import com.ridwanstandingby.ntris.game.Score
 import com.ridwanstandingby.ntris.render.views.LayoutArrangement
+import org.json.JSONException
 
 class SharedPreferencesManager(context: Context) {
 
     private val prefs = context.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
 
     var nickname: String
-        get() = prefs.getString(NICKNAME_KEY, "")?: ""
+        get() = prefs.getString(NICKNAME_KEY, "") ?: ""
         set(value) {
             prefs.edit().putString(NICKNAME_KEY, value).apply()
         }
@@ -40,11 +41,19 @@ class SharedPreferencesManager(context: Context) {
         }
 
     var savedGame: SavedGame?
-        get() = prefs.getString(SAVED_GAME_KEY, null)?.toJson()?.toSavedGame()
+        get() = try {
+            prefs.getString(SAVED_GAME_KEY, null)?.toJson()?.toSavedGame()
+        } catch (e: JSONException) {
+            null
+        }
         set(value) {
-            prefs.edit()
-                    .putString(SAVED_GAME_KEY, value?.toJson().toString())
-                    .apply()
+            try {
+                prefs.edit()
+                        .putString(SAVED_GAME_KEY, value?.toJson().toString())
+                        .apply()
+            } catch (e: JSONException) {
+
+            }
         }
 
     companion object {
