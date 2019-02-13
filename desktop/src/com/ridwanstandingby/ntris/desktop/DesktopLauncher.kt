@@ -7,7 +7,7 @@ import com.ridwanstandingby.ntris.desktop.data.DesktopGameDataManager
 
 object DesktopLauncher {
     @JvmStatic
-    fun main(arg: Array<String>) {
+    fun main() {
         val config = LwjglApplicationConfiguration()
         config.width = 393
         config.height = 660

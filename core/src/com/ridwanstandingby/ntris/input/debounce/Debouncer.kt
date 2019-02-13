@@ -7,7 +7,7 @@ abstract class Debouncer(private val updateNowPressed: (input: RawPlayInput) -> 
                          private val doInvokeCondition: (input: RawPlayInput, game: Game) -> Boolean,
                          protected val block: () -> Unit) {
 
-    var nowPressed = false
+    private var nowPressed = false
     var wasPressed = true
 
     private fun isNewlyPressed() = !wasPressed and nowPressed

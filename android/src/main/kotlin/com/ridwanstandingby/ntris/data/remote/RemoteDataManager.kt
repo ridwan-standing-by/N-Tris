@@ -4,7 +4,6 @@ import android.util.Log
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.google.firebase.firestore.Query
 import com.ridwanstandingby.ntris.data.remote.models.FirestoreScoreEntry
 import com.ridwanstandingby.ntris.data.remote.models.toDomainScoreEntry
@@ -19,14 +18,7 @@ class RemoteDataManager {
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     init {
-        setSettingsForTimestamps()
         signInIfNecessary()
-    }
-
-    private fun setSettingsForTimestamps() {
-        db.firestoreSettings = FirebaseFirestoreSettings.Builder()
-                .setTimestampsInSnapshotsEnabled(true)
-                .build()
     }
 
     private fun signInIfNecessary() {
@@ -85,11 +77,13 @@ class RemoteDataManager {
                 .get()
                 .addOnSuccessListener { snapshot ->
                     val scoreEntryList = snapshot.documents
+                            .asSequence()
                             .map { document -> document.toObject(FirestoreScoreEntry::class.java) }
                             .map { it?.toDomainScoreEntry() }
                             .filterNotNull()
                             .sortedByDescending { it.score }
                             .take(limit.toInt())
+                            .toList()
                     onSuccess(scoreEntryList)
                 }
                 .addOnFailureListener { onError(DownloadScoreEntryFailureException(it)) }
@@ -105,8 +99,7 @@ class RemoteDataManager {
                 .addOnSuccessListener { snapshot ->
                     val scoreEntryList = snapshot.documents
                             .map { document -> document.toObject(FirestoreScoreEntry::class.java) }
-                            .map { it?.toDomainScoreEntry() }
-                            .filterNotNull()
+                            .mapNotNull { it?.toDomainScoreEntry() }
                     onSuccess(scoreEntryList)
                 }
                 .addOnFailureListener { onError(DownloadScoreEntryFailureException(it)) }
