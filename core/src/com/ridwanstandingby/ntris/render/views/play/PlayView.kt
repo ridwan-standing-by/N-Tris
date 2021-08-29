@@ -13,7 +13,7 @@ import com.ridwanstandingby.ntris.render.polyomino.BlockRenderer
 import com.ridwanstandingby.ntris.render.views.View
 
 class PlayView(dimensions: Dimensions, fonts: Fonts, originBlocks: Vector2, sizeBlocks: Vector2) :
-        View(dimensions, fonts, originBlocks, sizeBlocks) {
+    View(dimensions, fonts, originBlocks, sizeBlocks) {
 
     private val scaledInputPadding = INPUT_PADDING_BLOCKS * dimensions.rescaledBlock()
 

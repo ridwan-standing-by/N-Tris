@@ -9,8 +9,12 @@ import com.ridwanstandingby.ntris.input.RawPlayInput
 import com.ridwanstandingby.ntris.render.Dimensions
 import com.ridwanstandingby.ntris.render.fonts.Fonts
 
-class ReserveView(dimensions: Dimensions, fonts: Fonts, originBlocks: Vector2, sizeBlocks: Vector2) :
-        PieceDisplayView(dimensions, fonts, originBlocks, sizeBlocks) {
+class ReserveView(
+    dimensions: Dimensions,
+    fonts: Fonts,
+    originBlocks: Vector2,
+    sizeBlocks: Vector2
+) : PieceDisplayView(dimensions, fonts, originBlocks, sizeBlocks) {
 
     override val boxInfoText = RESERVE_BOX_INFO_TEXT
     override val boxIcon = RESERVE_BOX_INFO_ICON

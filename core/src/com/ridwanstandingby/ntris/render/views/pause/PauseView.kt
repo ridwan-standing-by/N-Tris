@@ -13,7 +13,7 @@ import com.ridwanstandingby.ntris.render.fonts.Fonts
 import com.ridwanstandingby.ntris.render.views.View
 
 class PauseView(dimensions: Dimensions, fonts: Fonts, originBlocks: Vector2, sizeBlocks: Vector2) :
-        View(dimensions, fonts, originBlocks, sizeBlocks) {
+    View(dimensions, fonts, originBlocks, sizeBlocks) {
 
     private val scaledPadding = dimensions.rescale(TEXT_PADDING)
 
@@ -30,7 +30,16 @@ class PauseView(dimensions: Dimensions, fonts: Fonts, originBlocks: Vector2, siz
 
     private fun renderBackground(sr: ShapeRenderer) {
         sr.set(ShapeRenderer.ShapeType.Filled)
-        sr.rect(origin.x, origin.y, size.x, size.y, Colours.BACKGROUND_COLOUR, Colours.BACKGROUND_COLOUR, Colours.BACKGROUND_COLOUR, Colours.BACKGROUND_COLOUR)
+        sr.rect(
+            origin.x,
+            origin.y,
+            size.x,
+            size.y,
+            Colours.BACKGROUND_COLOUR,
+            Colours.BACKGROUND_COLOUR,
+            Colours.BACKGROUND_COLOUR,
+            Colours.BACKGROUND_COLOUR
+        )
     }
 
     override fun renderSprites(sb: SpriteBatch, game: Game) {

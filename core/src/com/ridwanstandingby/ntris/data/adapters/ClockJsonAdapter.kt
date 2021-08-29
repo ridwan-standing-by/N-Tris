@@ -6,14 +6,14 @@ import org.json.JSONObject
 
 /** @throws JSONException */
 fun Clock.toJson(): JSONObject =
-        JSONObject().apply {
-            put(T, t.toDouble())
-        }
+    JSONObject().apply {
+        put(T, t.toDouble())
+    }
 
 /** @throws JSONException */
 fun JSONObject.toClock(): Clock =
-        Clock(
-                t = getDouble(com.ridwanstandingby.ntris.data.adapters.T).toFloat()
-        )
+    Clock(
+        t = getDouble(T).toFloat()
+    )
 
 private const val T = "t"

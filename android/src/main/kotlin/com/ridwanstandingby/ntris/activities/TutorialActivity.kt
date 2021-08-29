@@ -1,7 +1,7 @@
 package com.ridwanstandingby.ntris.activities
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.ridwanstandingby.ntris.R
 
 class TutorialActivity : AppCompatActivity() {

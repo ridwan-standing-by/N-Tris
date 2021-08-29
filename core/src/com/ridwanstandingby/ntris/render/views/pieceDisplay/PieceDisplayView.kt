@@ -10,8 +10,12 @@ import com.ridwanstandingby.ntris.render.fonts.Fonts
 import com.ridwanstandingby.ntris.render.polyomino.BlockRenderer
 import com.ridwanstandingby.ntris.render.views.View
 
-abstract class PieceDisplayView(dimensions: Dimensions, fonts: Fonts, originBlocks: Vector2, sizeBlocks: Vector2) :
-        View(dimensions, fonts, originBlocks, sizeBlocks) {
+abstract class PieceDisplayView(
+    dimensions: Dimensions,
+    fonts: Fonts,
+    originBlocks: Vector2,
+    sizeBlocks: Vector2
+) : View(dimensions, fonts, originBlocks, sizeBlocks) {
 
     private val polyominoRenderer = BlockRenderer(dimensions, origin)
 

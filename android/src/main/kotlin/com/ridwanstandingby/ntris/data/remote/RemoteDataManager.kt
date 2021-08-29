@@ -24,7 +24,7 @@ class RemoteDataManager {
     private fun signInIfNecessary() {
         if (auth.currentUser == null) {
             signIn(onSuccess = { Log.d("FirebaseAuth", "Signed in successfully") },
-                    onError = { it.printStackTrace() })
+                onError = { it.printStackTrace() })
         }
     }
 
@@ -38,27 +38,31 @@ class RemoteDataManager {
 
     private fun signIn(onSuccess: () -> Unit, onError: (Throwable) -> Unit) {
         auth.signInAnonymously()
-                .addOnSuccessListener { onSuccess() }
-                .addOnFailureListener { onError(it) }
+            .addOnSuccessListener { onSuccess() }
+            .addOnFailureListener { onError(it) }
     }
 
     /** @throws UploadScoreEntryFailureException */
-    fun uploadScoreEntry(scoreEntry: ScoreEntry,
-                         onError: (Throwable) -> Unit = { throw it }) {
+    fun uploadScoreEntry(
+        scoreEntry: ScoreEntry,
+        onError: (Throwable) -> Unit = { throw it }
+    ) {
         signInAndDo(onError) {
             db.collection(SCORES_COLLECTION_KEY)
-                    .add(scoreEntry.toFirestoreScoreEntry())
-                    .addOnFailureListener { onError(UploadScoreEntryFailureException(it)) }
+                .add(scoreEntry.toFirestoreScoreEntry())
+                .addOnFailureListener { onError(UploadScoreEntryFailureException(it)) }
         }
     }
 
     class UploadScoreEntryFailureException(cause: Exception?) : Exception(cause)
 
     /** @throws DownloadScoreEntryFailureException */
-    fun downloadOrderedScoreEntriesSinceDateLimited(since: Date,
-                                                    limit: Long,
-                                                    onSuccess: (List<ScoreEntry>) -> Unit = {},
-                                                    onError: (Throwable) -> Unit = { throw it }) {
+    fun downloadOrderedScoreEntriesSinceDateLimited(
+        since: Date,
+        limit: Long,
+        onSuccess: (List<ScoreEntry>) -> Unit = {},
+        onError: (Throwable) -> Unit = { throw it }
+    ) {
         signInAndDo(onError) {
             if (since == BEGINNING_OF_TIME) {
                 downloadAllOrderedScoreEntriesLimited(limit, onSuccess, onError)
@@ -68,41 +72,45 @@ class RemoteDataManager {
         }
     }
 
-    private fun downloadScoreEntriesSinceDateThenOrderAndLimit(since: Date,
-                                                               limit: Long,
-                                                               onSuccess: (List<ScoreEntry>) -> Unit,
-                                                               onError: (Throwable) -> Unit) {
+    private fun downloadScoreEntriesSinceDateThenOrderAndLimit(
+        since: Date,
+        limit: Long,
+        onSuccess: (List<ScoreEntry>) -> Unit,
+        onError: (Throwable) -> Unit
+    ) {
         db.collection(SCORES_COLLECTION_KEY)
-                .whereGreaterThan(SCORE_TIME_KEY, Timestamp(since))
-                .get()
-                .addOnSuccessListener { snapshot ->
-                    val scoreEntryList = snapshot.documents
-                            .asSequence()
-                            .map { document -> document.toObject(FirestoreScoreEntry::class.java) }
-                            .map { it?.toDomainScoreEntry() }
-                            .filterNotNull()
-                            .sortedByDescending { it.score }
-                            .take(limit.toInt())
-                            .toList()
-                    onSuccess(scoreEntryList)
-                }
-                .addOnFailureListener { onError(DownloadScoreEntryFailureException(it)) }
+            .whereGreaterThan(SCORE_TIME_KEY, Timestamp(since))
+            .get()
+            .addOnSuccessListener { snapshot ->
+                val scoreEntryList = snapshot.documents
+                    .asSequence()
+                    .map { document -> document.toObject(FirestoreScoreEntry::class.java) }
+                    .map { it?.toDomainScoreEntry() }
+                    .filterNotNull()
+                    .sortedByDescending { it.score }
+                    .take(limit.toInt())
+                    .toList()
+                onSuccess(scoreEntryList)
+            }
+            .addOnFailureListener { onError(DownloadScoreEntryFailureException(it)) }
     }
 
-    private fun downloadAllOrderedScoreEntriesLimited(limit: Long,
-                                                      onSuccess: (List<ScoreEntry>) -> Unit = {},
-                                                      onError: (Throwable) -> Unit = { throw it }) {
+    private fun downloadAllOrderedScoreEntriesLimited(
+        limit: Long,
+        onSuccess: (List<ScoreEntry>) -> Unit = {},
+        onError: (Throwable) -> Unit = { throw it }
+    ) {
         db.collection(SCORES_COLLECTION_KEY)
-                .orderBy(SCORE_SCORE_KEY, Query.Direction.DESCENDING)
-                .limit(limit)
-                .get()
-                .addOnSuccessListener { snapshot ->
-                    val scoreEntryList = snapshot.documents
-                            .map { document -> document.toObject(FirestoreScoreEntry::class.java) }
-                            .mapNotNull { it?.toDomainScoreEntry() }
-                    onSuccess(scoreEntryList)
-                }
-                .addOnFailureListener { onError(DownloadScoreEntryFailureException(it)) }
+            .orderBy(SCORE_SCORE_KEY, Query.Direction.DESCENDING)
+            .limit(limit)
+            .get()
+            .addOnSuccessListener { snapshot ->
+                val scoreEntryList = snapshot.documents
+                    .map { document -> document.toObject(FirestoreScoreEntry::class.java) }
+                    .mapNotNull { it?.toDomainScoreEntry() }
+                onSuccess(scoreEntryList)
+            }
+            .addOnFailureListener { onError(DownloadScoreEntryFailureException(it)) }
     }
 
     class DownloadScoreEntryFailureException(cause: Exception?) : Exception(cause)

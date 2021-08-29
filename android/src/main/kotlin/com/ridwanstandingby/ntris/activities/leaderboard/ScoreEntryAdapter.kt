@@ -1,7 +1,6 @@
 package com.ridwanstandingby.ntris.activities.leaderboard
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,14 +9,16 @@ import com.ridwanstandingby.ntris.R
 import com.ridwanstandingby.ntris.domain.ScoreEntry
 import kotlinx.android.synthetic.main.score_entry_list_item.view.*
 
-class ScoreEntryAdapter(private val context: Context)
-    : RecyclerView.Adapter<ScoreEntryAdapter.ScoreEntryViewHolder>() {
+class ScoreEntryAdapter(private val context: Context) :
+    RecyclerView.Adapter<ScoreEntryAdapter.ScoreEntryViewHolder>() {
 
     var items: List<ScoreEntry> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ScoreEntryViewHolder =
-            ScoreEntryViewHolder(LayoutInflater.from(context)
-                    .inflate(R.layout.score_entry_list_item, parent, false))
+        ScoreEntryViewHolder(
+            LayoutInflater.from(context)
+                .inflate(R.layout.score_entry_list_item, parent, false)
+        )
 
     override fun getItemCount(): Int = items.size
 

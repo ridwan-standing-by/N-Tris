@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.ridwanstandingby.ntris.desktop
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication

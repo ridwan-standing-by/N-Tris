@@ -10,29 +10,32 @@ import com.ridwanstandingby.ntris.input.RawPlayInput
 import com.ridwanstandingby.ntris.input.debounce.TimedDebouncer
 import com.ridwanstandingby.ntris.polyomino.*
 
-class Game(private val gameDataManager: GameDataManager,
-           private val polyominoSpawner: PolyominoSpawner,
-           private val clock: Clock = Clock(),
-           var score: Score = Score(0, 0),
-           var isGameOver: Boolean = false,
-           var doRestart: Boolean = false,
-           var isPaused: Boolean = false,
-           private var hasSwappedReserve: Boolean = false,
-           val backgroundBlockMap: BlockMap = BlockMap(),
-           var currentPiece: Polyomino,
-           var nextPiece: Polyomino,
-           var reservePiece: Polyomino) {
+class Game(
+    private val gameDataManager: GameDataManager,
+    private val polyominoSpawner: PolyominoSpawner,
+    private val clock: Clock = Clock(),
+    var score: Score = Score(0, 0),
+    var isGameOver: Boolean = false,
+    var doRestart: Boolean = false,
+    var isPaused: Boolean = false,
+    private var hasSwappedReserve: Boolean = false,
+    val backgroundBlockMap: BlockMap = BlockMap(),
+    var currentPiece: Polyomino,
+    var nextPiece: Polyomino,
+    var reservePiece: Polyomino
+) {
 
     val highScore = gameDataManager.highScore.copy()
     private val eventHandler = EventHandler()
     private val inputEventResolver = InputEventResolver(clock, eventHandler)
     private val legalMoveHelper = LegalMoveHelper()
-    private val generousPieceManipulator = GenerousPieceManipulator { piece, moves -> tryPieceMoves(piece, moves) }
+    private val generousPieceManipulator =
+        GenerousPieceManipulator { piece, moves -> tryPieceMoves(piece, moves) }
     private val completeLineChecker = CompleteLineChecker()
     private val pulser = TimedDebouncer(clock, GameRules.PULSE_TIME,
-            { true },
-            { _, game -> game.isInPlay() },
-            { eventHandler.queue(Event.Pulse()) })
+        { true },
+        { _, game -> game.isInPlay() },
+        { eventHandler.queue(Event.Pulse()) })
 
     fun isInPlay() = (isGameOver or isPaused).not()
 
@@ -49,10 +52,13 @@ class Game(private val gameDataManager: GameDataManager,
     }
 
     private fun tryPieceMove(polyomino: Polyomino, move: Polyomino.() -> Unit): Boolean =
-            tryPieceMoves(polyomino, listOf(move))
+        tryPieceMoves(polyomino, listOf(move))
 
-    private fun tryPieceMoves(polyomino: Polyomino, moves: Iterable<Polyomino.() -> Unit>): Boolean =
-            legalMoveHelper.ifMoveSequenceIsLegalThenDoMoves(polyomino, backgroundBlockMap, moves)
+    private fun tryPieceMoves(
+        polyomino: Polyomino,
+        moves: Iterable<Polyomino.() -> Unit>
+    ): Boolean =
+        legalMoveHelper.ifMoveSequenceIsLegalThenDoMoves(polyomino, backgroundBlockMap, moves)
 
     fun currentPieceMoveDown() = tryPieceMove(currentPiece) { moveDown() }
 
@@ -97,7 +103,9 @@ class Game(private val gameDataManager: GameDataManager,
     }
 
     private fun doCyclePieceAndResolveLines() {
-        score += completeLineChecker.checkAndDestroyLinesAndCalculateScoreIncrease(backgroundBlockMap)
+        score += completeLineChecker.checkAndDestroyLinesAndCalculateScoreIncrease(
+            backgroundBlockMap
+        )
         updateHighScoreIfNecessary()
         currentPiece = nextPiece
         nextPiece = polyominoSpawner.generatePolyomino(score)
@@ -136,16 +144,17 @@ class Game(private val gameDataManager: GameDataManager,
 
     private fun save() {
         gameDataManager.savedGame = SavedGame(
-                clock = clock,
-                score = score,
-                isGameOver = isGameOver,
-                doRestart = doRestart,
-                isPaused = isPaused,
-                backgroundBlockMap = backgroundBlockMap,
-                currentPiece = currentPiece,
-                nextPiece = nextPiece,
-                reservePiece = reservePiece,
-                hasSwappedReserve = hasSwappedReserve)
+            clock = clock,
+            score = score,
+            isGameOver = isGameOver,
+            doRestart = doRestart,
+            isPaused = isPaused,
+            backgroundBlockMap = backgroundBlockMap,
+            currentPiece = currentPiece,
+            nextPiece = nextPiece,
+            reservePiece = reservePiece,
+            hasSwappedReserve = hasSwappedReserve
+        )
     }
 
     private fun exit() {

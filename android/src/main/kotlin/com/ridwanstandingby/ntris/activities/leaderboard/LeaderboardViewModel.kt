@@ -1,8 +1,8 @@
 package com.ridwanstandingby.ntris.activities.leaderboard
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.ridwanstandingby.ntris.data.remote.RemoteDataManager
 import com.ridwanstandingby.ntris.domain.LeaderboardConstants.BEGINNING_OF_TIME
 import com.ridwanstandingby.ntris.domain.LeaderboardConstants.ONE_WEEK_AGO
@@ -30,17 +30,17 @@ class LeaderboardViewModel : ViewModel() {
 
     private fun loadWeeklyScoreEntries(remoteDataManager: RemoteDataManager) {
         remoteDataManager.downloadOrderedScoreEntriesSinceDateLimited(
-                since = ONE_WEEK_AGO,
-                limit = SCORE_ENTRY_LIMIT,
-                onSuccess = { weeklyScoreEntries.postValue(it) },
-                onError = { it.printStackTrace(); weeklyScoreEntries.postValue(null) })
+            since = ONE_WEEK_AGO,
+            limit = SCORE_ENTRY_LIMIT,
+            onSuccess = { weeklyScoreEntries.postValue(it) },
+            onError = { it.printStackTrace(); weeklyScoreEntries.postValue(null) })
     }
 
     private fun loadAllTimeScoreEntries(remoteDataManager: RemoteDataManager) {
         remoteDataManager.downloadOrderedScoreEntriesSinceDateLimited(
-                since = BEGINNING_OF_TIME,
-                limit = SCORE_ENTRY_LIMIT,
-                onSuccess = { allTimeScoreEntries.postValue(it) },
-                onError = { it.printStackTrace(); allTimeScoreEntries.postValue(null) })
+            since = BEGINNING_OF_TIME,
+            limit = SCORE_ENTRY_LIMIT,
+            onSuccess = { allTimeScoreEntries.postValue(it) },
+            onError = { it.printStackTrace(); allTimeScoreEntries.postValue(null) })
     }
 }

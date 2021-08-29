@@ -12,10 +12,10 @@ class EventHandler {
 
     fun handleEvents(game: Game) {
         eventQueue.filter { event -> !event.done }
-                .forEach { event ->
-                    event.block(game)
-                    event.done = true
-                }
+            .forEach { event ->
+                event.block(game)
+                event.done = true
+            }
         eventQueue.removeAll { event -> event.done }
     }
 }

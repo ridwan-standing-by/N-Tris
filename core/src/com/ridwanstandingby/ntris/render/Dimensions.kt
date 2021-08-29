@@ -21,8 +21,9 @@ class Dimensions(val screenWidth: Int, val screenHeight: Int) {
         scale = min(scaleX, scaleY)
 
         extraBlocks = Vector2(
-                calculateExtraBlocks(screenWidth, gameWidth),
-                calculateExtraBlocks(screenHeight, gameHeight))
+            calculateExtraBlocks(screenWidth, gameWidth),
+            calculateExtraBlocks(screenHeight, gameHeight)
+        )
     }
 
     private fun calculateExtraBlocks(screenPixels: Int, gameDim: Int): Float {

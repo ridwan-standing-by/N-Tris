@@ -1,12 +1,12 @@
 package com.ridwanstandingby.ntris
 
-import android.support.multidex.MultiDexApplication
+import android.app.Application
 import com.ridwanstandingby.ntris.data.AndroidGameDataManager
 import com.ridwanstandingby.ntris.data.GameDataManager
 import com.ridwanstandingby.ntris.data.local.SharedPreferencesManager
 import com.ridwanstandingby.ntris.data.remote.RemoteDataManager
 
-class Application : MultiDexApplication() {
+class Application : Application() {
 
     lateinit var gameDataManager: GameDataManager
     lateinit var sharedPreferencesManager: SharedPreferencesManager

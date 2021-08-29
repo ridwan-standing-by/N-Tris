@@ -1,12 +1,10 @@
 package com.ridwanstandingby.ntris.activities.leaderboard
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.TabHost
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.ridwanstandingby.ntris.Application
 import com.ridwanstandingby.ntris.R
 import com.ridwanstandingby.ntris.domain.ScoreEntry
@@ -38,8 +36,10 @@ class LeaderboardActivity : AppCompatActivity() {
 
     private fun initTabs() {
         leaderboardTabHost.setup()
-        weeklyTab = leaderboardTabHost.newTabSpec(WEEKLY_TAB_TAG).setIndicator(getString(R.string.weekly_tab_title)).setContent(R.id.weeklyTabLayout)
-        allTimeTab = leaderboardTabHost.newTabSpec(ALL_TIME_TAB_TAG).setIndicator(getString(R.string.all_time_tab_title)).setContent(R.id.allTimeTabLayout)
+        weeklyTab = leaderboardTabHost.newTabSpec(WEEKLY_TAB_TAG)
+            .setIndicator(getString(R.string.weekly_tab_title)).setContent(R.id.weeklyTabLayout)
+        allTimeTab = leaderboardTabHost.newTabSpec(ALL_TIME_TAB_TAG)
+            .setIndicator(getString(R.string.all_time_tab_title)).setContent(R.id.allTimeTabLayout)
         leaderboardTabHost.addTab(weeklyTab)
         leaderboardTabHost.addTab(allTimeTab)
     }

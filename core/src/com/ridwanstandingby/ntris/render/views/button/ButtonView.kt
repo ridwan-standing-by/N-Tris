@@ -17,11 +17,11 @@ import com.ridwanstandingby.ntris.render.fonts.FontHelper
 import com.ridwanstandingby.ntris.render.fonts.Fonts
 import com.ridwanstandingby.ntris.render.views.View
 
-
-sealed class ButtonView(dimensions: Dimensions, fonts: Fonts,
-                        originBlocks: Vector2, sizeBlocks: Vector2,
-                        private val icon: String) :
-        View(dimensions, fonts, originBlocks, sizeBlocks) {
+sealed class ButtonView(
+    dimensions: Dimensions, fonts: Fonts,
+    originBlocks: Vector2, sizeBlocks: Vector2,
+    private val icon: String
+) : View(dimensions, fonts, originBlocks, sizeBlocks) {
 
     override fun renderShapes(sr: ShapeRenderer, game: Game) {
         if (game.isInPlay()) {
@@ -43,8 +43,12 @@ sealed class ButtonView(dimensions: Dimensions, fonts: Fonts,
         font.draw(sb, text, x, y)
     }
 
-    class MoveDownButtonView(dimensions: Dimensions, fonts: Fonts, originBlocks: Vector2, sizeBlocks: Vector2)
-        : ButtonView(dimensions, fonts, originBlocks, sizeBlocks, MOVE_DOWN_BUTTON_ICON) {
+    class MoveDownButtonView(
+        dimensions: Dimensions,
+        fonts: Fonts,
+        originBlocks: Vector2,
+        sizeBlocks: Vector2
+    ) : ButtonView(dimensions, fonts, originBlocks, sizeBlocks, MOVE_DOWN_BUTTON_ICON) {
         override val inputKeys = MOVE_DOWN_KEYS
         override fun handleInputIsInView(rawPlayInput: RawPlayInput) {
             queueHighlight = true
@@ -52,8 +56,12 @@ sealed class ButtonView(dimensions: Dimensions, fonts: Fonts,
         }
     }
 
-    class ReflectButtonView(dimensions: Dimensions, fonts: Fonts, originBlocks: Vector2, sizeBlocks: Vector2)
-        : ButtonView(dimensions, fonts, originBlocks, sizeBlocks, REFLECT_BUTTON_ICON) {
+    class ReflectButtonView(
+        dimensions: Dimensions,
+        fonts: Fonts,
+        originBlocks: Vector2,
+        sizeBlocks: Vector2
+    ) : ButtonView(dimensions, fonts, originBlocks, sizeBlocks, REFLECT_BUTTON_ICON) {
         override val inputKeys = REFLECT_KEYS
         override fun handleInputIsInView(rawPlayInput: RawPlayInput) {
             queueHighlight = true
@@ -61,8 +69,12 @@ sealed class ButtonView(dimensions: Dimensions, fonts: Fonts,
         }
     }
 
-    class MoveLeftButtonView(dimensions: Dimensions, fonts: Fonts, originBlocks: Vector2, sizeBlocks: Vector2)
-        : ButtonView(dimensions, fonts, originBlocks, sizeBlocks, MOVE_LEFT_BUTTON_ICON) {
+    class MoveLeftButtonView(
+        dimensions: Dimensions,
+        fonts: Fonts,
+        originBlocks: Vector2,
+        sizeBlocks: Vector2
+    ) : ButtonView(dimensions, fonts, originBlocks, sizeBlocks, MOVE_LEFT_BUTTON_ICON) {
         override val inputKeys = MOVE_LEFT_KEYS
         override fun handleInputIsInView(rawPlayInput: RawPlayInput) {
             queueHighlight = true
@@ -70,8 +82,12 @@ sealed class ButtonView(dimensions: Dimensions, fonts: Fonts,
         }
     }
 
-    class MoveRightButtonView(dimensions: Dimensions, fonts: Fonts, originBlocks: Vector2, sizeBlocks: Vector2)
-        : ButtonView(dimensions, fonts, originBlocks, sizeBlocks, MOVE_RIGHT_BUTTON_ICON) {
+    class MoveRightButtonView(
+        dimensions: Dimensions,
+        fonts: Fonts,
+        originBlocks: Vector2,
+        sizeBlocks: Vector2
+    ) : ButtonView(dimensions, fonts, originBlocks, sizeBlocks, MOVE_RIGHT_BUTTON_ICON) {
         override val inputKeys = MOVE_RIGHT_KEYS
         override fun handleInputIsInView(rawPlayInput: RawPlayInput) {
             queueHighlight = true
@@ -79,8 +95,12 @@ sealed class ButtonView(dimensions: Dimensions, fonts: Fonts,
         }
     }
 
-    class RotateLeftButtonView(dimensions: Dimensions, fonts: Fonts, originBlocks: Vector2, sizeBlocks: Vector2)
-        : ButtonView(dimensions, fonts, originBlocks, sizeBlocks, ROTATE_LEFT_BUTTON_ICON) {
+    class RotateLeftButtonView(
+        dimensions: Dimensions,
+        fonts: Fonts,
+        originBlocks: Vector2,
+        sizeBlocks: Vector2
+    ) : ButtonView(dimensions, fonts, originBlocks, sizeBlocks, ROTATE_LEFT_BUTTON_ICON) {
         override val inputKeys = ROTATE_LEFT_KEYS
         override fun handleInputIsInView(rawPlayInput: RawPlayInput) {
             queueHighlight = true
@@ -88,8 +108,12 @@ sealed class ButtonView(dimensions: Dimensions, fonts: Fonts,
         }
     }
 
-    class RotateRightButtonView(dimensions: Dimensions, fonts: Fonts, originBlocks: Vector2, sizeBlocks: Vector2)
-        : ButtonView(dimensions, fonts, originBlocks, sizeBlocks, ROTATE_RIGHT_BUTTON_ICON) {
+    class RotateRightButtonView(
+        dimensions: Dimensions,
+        fonts: Fonts,
+        originBlocks: Vector2,
+        sizeBlocks: Vector2
+    ) : ButtonView(dimensions, fonts, originBlocks, sizeBlocks, ROTATE_RIGHT_BUTTON_ICON) {
         override val inputKeys = ROTATE_RIGHT_KEYS
         override fun handleInputIsInView(rawPlayInput: RawPlayInput) {
             queueHighlight = true

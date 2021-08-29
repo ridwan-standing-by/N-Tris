@@ -5,8 +5,8 @@ import com.ridwanstandingby.ntris.game.Score
 import com.ridwanstandingby.ntris.polyomino.PolyominoConstants.MIN_RANK
 import com.ridwanstandingby.ntris.polyomino.blueprint.PolyominoBlueprintHolder
 import com.ridwanstandingby.ntris.polyomino.blueprint.PolyominoBlueprintHolder.Companion.rankToIndex
-import java.lang.Math.pow
 import java.util.*
+import kotlin.math.pow
 import kotlin.math.roundToInt
 
 class PolyominoSpawner(private val polyominoBlueprintHolder: PolyominoBlueprintHolder) {
@@ -22,21 +22,20 @@ class PolyominoSpawner(private val polyominoBlueprintHolder: PolyominoBlueprintH
     }
 
     private fun scoreToRank(score: Score): Int =
-            when {
-                score.lines < 5 -> randomRankDifficultyIndex(2)
-                score.lines < 15 -> randomRankDifficultyIndex(3)
-                score.lines < 30 -> randomRankDifficultyIndex(4)
-                score.lines < 50 -> randomRankDifficultyIndex(5)
-                score.lines < 75 -> randomRankDifficultyIndex(6)
-                else -> randomRankDifficultyIndex(7)
-            }
+        when {
+            score.lines < 5 -> randomRankDifficultyIndex(2)
+            score.lines < 15 -> randomRankDifficultyIndex(3)
+            score.lines < 30 -> randomRankDifficultyIndex(4)
+            score.lines < 50 -> randomRankDifficultyIndex(5)
+            score.lines < 75 -> randomRankDifficultyIndex(6)
+            else -> randomRankDifficultyIndex(7)
+        }
 
     private fun randomRankDifficultyIndex(d: Int): Int {
         when (d) {
             0 -> return 4
             1 -> {
-                val r = random.nextInt(8)
-                return when (r) {
+                return when (random.nextInt(8)) {
                     0 -> 5
                     else -> 4
                 }
@@ -54,7 +53,8 @@ class PolyominoSpawner(private val polyominoBlueprintHolder: PolyominoBlueprintH
         }
     }
 
-    private fun randomIndex(rank: Int) = random.nextInt(polyominoBlueprintHolder.polyominoBlueprints[rankToIndex(rank)].size)
+    private fun randomIndex(rank: Int) =
+        random.nextInt(polyominoBlueprintHolder.polyominoBlueprints[rankToIndex(rank)].size)
 
     private fun randomColour(): Color {
         val hue = random.nextFloat() * 360f
@@ -87,6 +87,6 @@ class PolyominoSpawner(private val polyominoBlueprintHolder: PolyominoBlueprintH
     }
 
     companion object {
-        private fun twoToThe(n: Int) = pow(2.toDouble(), n.toDouble()).roundToInt()
+        private fun twoToThe(n: Int) = 2.toDouble().pow(n.toDouble()).roundToInt()
     }
 }

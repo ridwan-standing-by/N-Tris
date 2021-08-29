@@ -19,28 +19,32 @@ class PolyominoBlueprintLoader(private val polyominoFileStrings: HashMap<String,
     }
 
     private fun parseLinesAndAddPolyominosToList(lines: Iterator<String>, rank: Int) =
-            mutableListOf<PolyominoBlueprint>().also { list ->
-                while (lines.hasNext()) {
-                    val line = lines.next()
-                    if (line[0] == INFO_LINE_BEGINNING_CHARACTER) {
-                        list.add(parsePolyomino(line, lines, rank))
-                    }
+        mutableListOf<PolyominoBlueprint>().also { list ->
+            while (lines.hasNext()) {
+                val line = lines.next()
+                if (line[0] == INFO_LINE_BEGINNING_CHARACTER) {
+                    list.add(parsePolyomino(line, lines, rank))
                 }
             }
+        }
 
     private fun loadFileLines(rank: Int): Iterator<String> =
-            if (polyominoFileStrings != null) {
-                (polyominoFileStrings[BLUEPRINT_FILE_NAME_TEMPLATE.format(rank)]
-                        ?.split(LINE_SEPARATOR) ?: listOf())
-                        .iterator()
-            } else {
-                Gdx.files.internal(BLUEPRINT_FILE_PATH_TEMPLATE.format(rank))
-                        .readString()
-                        .split(LINE_SEPARATOR)
-                        .iterator()
-            }
+        if (polyominoFileStrings != null) {
+            (polyominoFileStrings[BLUEPRINT_FILE_NAME_TEMPLATE.format(rank)]
+                ?.split(LINE_SEPARATOR) ?: listOf())
+                .iterator()
+        } else {
+            Gdx.files.internal(BLUEPRINT_FILE_PATH_TEMPLATE.format(rank))
+                .readString()
+                .split(LINE_SEPARATOR)
+                .iterator()
+        }
 
-    private fun parsePolyomino(line: String, lines: Iterator<String>, rank: Int): PolyominoBlueprint {
+    private fun parsePolyomino(
+        line: String,
+        lines: Iterator<String>,
+        rank: Int
+    ): PolyominoBlueprint {
         val index = line.substring(INDEX_POSITION).stripWhitespaceAndConvertToInt()
         val width = line.substring(WIDTH_POSITION).stripWhitespaceAndConvertToInt()
         val height = line.substring(HEIGHT_POSITION).stripWhitespaceAndConvertToInt()
@@ -51,14 +55,14 @@ class PolyominoBlueprintLoader(private val polyominoFileStrings: HashMap<String,
     private fun String.stripWhitespaceAndConvertToInt() = replace(" ", "").toInt()
 
     private fun parseBlockMatrix(width: Int, height: Int, lines: Iterator<String>) =
-            Array2D<Boolean>(width, height).also { matrix ->
-                (0 until height).forEach { y ->
-                    val row = lines.next()
-                    row.forEachIndexed { x, c ->
-                        matrix[x, y] = c == BLOCK_CHARACTER
-                    }
+        Array2D<Boolean>(width, height).also { matrix ->
+            (0 until height).forEach { y ->
+                val row = lines.next()
+                row.forEachIndexed { x, c ->
+                    matrix[x, y] = c == BLOCK_CHARACTER
                 }
             }
+        }
 
     private fun removeEmptyLists(polyominoBlueprintHolder: PolyominoBlueprintHolder) {
         // Creating a list of lists has the side effect of creating an empty one at the beginning
