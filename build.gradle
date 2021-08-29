@@ -1,5 +1,25 @@
 buildscript {
-    ext.kotlinVersion = '1.5.30'
+    ext {
+        appName = "N-tris"
+
+        kotlinVersion = '1.5.30'
+
+        gdxVersion = '1.9.8'
+        ktxVersion = '1.9.8-b3'
+        roboVMVersion = '2.3.3'
+        box2DLightsVersion = '1.4'
+        ashleyVersion = '1.7.0'
+        aiVersion = '1.8.0'
+
+        androidAppcompatVersion = "1.3.1"
+        androidCoreKtxVersion = "1.6.0"
+        androidLifecycleVersion = "2.3.1"
+        androidActivityComposeVersion = "1.3.1"
+
+        koinVersion = '3.1.0'
+
+        jsonVersion = '20210307'
+    }
 
     repositories {
         mavenLocal()
@@ -20,21 +40,6 @@ allprojects {
     apply plugin: "idea"
 
     version = '1.3.1'
-    ext {
-        appName = "N-tris"
-        gdxVersion = '1.9.8'
-        ktxVersion = '1.9.8-b3'
-        roboVMVersion = '2.3.3'
-        box2DLightsVersion = '1.4'
-        ashleyVersion = '1.7.0'
-        aiVersion = '1.8.0'
-        jsonVersion = '20210307'
-
-        androidAppcompatVersion = "1.3.1"
-        androidCoreKtxVersion = "1.6.0"
-        androidLifecycleVersion = "2.3.1"
-        androidActivityComposeVersion = "1.3.1"
-    }
 
     repositories {
         mavenLocal()
@@ -101,6 +106,11 @@ project(":android") {
         implementation "androidx.activity:activity-compose:$androidActivityComposeVersion"
 
         // Kotlin
+
+        // Koin
+        implementation "io.insert-koin:koin-core:$koinVersion"
+        implementation "io.insert-koin:koin-android:$koinVersion"
+        implementation "io.insert-koin:koin-androidx-compose:$koinVersion"
 
         // Custom UI
 

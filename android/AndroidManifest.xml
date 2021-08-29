@@ -3,7 +3,7 @@
     package="com.ridwanstandingby.ntris">
 
     <application
-        android:name=".Application"
+        android:name=".NTrisAndroidApplication"
         android:allowBackup="true"
         android:supportsRtl="true"
         android:hardwareAccelerated="false"

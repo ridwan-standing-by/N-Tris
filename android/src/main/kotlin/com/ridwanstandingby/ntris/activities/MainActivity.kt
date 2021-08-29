@@ -7,7 +7,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.ridwanstandingby.ntris.Application
 import com.ridwanstandingby.ntris.R
 import com.ridwanstandingby.ntris.activities.leaderboard.LeaderboardActivity
 import com.ridwanstandingby.ntris.data.GameDataManager
@@ -16,17 +15,16 @@ import com.ridwanstandingby.ntris.render.views.LayoutArrangement
 import kotlinx.android.synthetic.main.layout_main.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var gameDataManager: GameDataManager
-    private lateinit var sharedPreferencesManager: SharedPreferencesManager
+    private val gameDataManager: GameDataManager by inject()
+    private val sharedPreferencesManager: SharedPreferencesManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_main)
-        sharedPreferencesManager = (application as Application).sharedPreferencesManager
-        gameDataManager = (application as Application).gameDataManager
 
         if (gameDataManager.polyominoBlueprintHolder != null) {
             handleFinishedLoading()

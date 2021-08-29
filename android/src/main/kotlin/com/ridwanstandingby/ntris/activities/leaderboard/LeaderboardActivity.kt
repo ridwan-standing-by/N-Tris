@@ -4,17 +4,15 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TabHost
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import com.ridwanstandingby.ntris.Application
+import androidx.lifecycle.ViewModelProviders
 import com.ridwanstandingby.ntris.R
 import com.ridwanstandingby.ntris.domain.ScoreEntry
 import kotlinx.android.synthetic.main.layout_leaderboard.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LeaderboardActivity : AppCompatActivity() {
 
-    private val remoteDbManager by lazy { (application as Application).remoteDataManager }
-
-    private lateinit var leaderboardViewModel: LeaderboardViewModel
+    private val leaderboardViewModel: LeaderboardViewModel by viewModel()
 
     private lateinit var weeklyScoreEntryAdapter: ScoreEntryAdapter
     private lateinit var allTimeScoreEntryAdapter: ScoreEntryAdapter
@@ -63,23 +61,23 @@ class LeaderboardActivity : AppCompatActivity() {
     }
 
     private fun observeWeeklyScoreEntries() {
-        leaderboardViewModel.getWeeklyScoreEntries(remoteDbManager).observe(this, Observer {
+        leaderboardViewModel.getWeeklyScoreEntries().observe(this) {
             if (it != null && it.isNotEmpty()) {
                 handleWeeklyScoreEntriesLoaded(it)
             } else {
                 handleWeeklyScoreEntriesEmpty()
             }
-        })
+        }
     }
 
     private fun observeAllTimeScoreEntries() {
-        leaderboardViewModel.getAllTimeScoreEntries(remoteDbManager).observe(this, Observer {
+        leaderboardViewModel.getAllTimeScoreEntries().observe(this) {
             if (it != null && it.isNotEmpty()) {
                 handleAllTimeScoreEntriesLoaded(it)
             } else {
                 handleAllTimeScoreEntriesLoadFailure()
             }
-        })
+        }
     }
 
     private fun handleWeeklyScoreEntriesEmpty() {

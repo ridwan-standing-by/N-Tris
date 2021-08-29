@@ -9,26 +9,26 @@ import com.ridwanstandingby.ntris.domain.LeaderboardConstants.ONE_WEEK_AGO
 import com.ridwanstandingby.ntris.domain.LeaderboardConstants.SCORE_ENTRY_LIMIT
 import com.ridwanstandingby.ntris.domain.ScoreEntry
 
-class LeaderboardViewModel : ViewModel() {
+class LeaderboardViewModel(private val remoteDataManager: RemoteDataManager) : ViewModel() {
 
     private val weeklyScoreEntries: MutableLiveData<List<ScoreEntry>> = MutableLiveData()
     private val allTimeScoreEntries: MutableLiveData<List<ScoreEntry>> = MutableLiveData()
 
-    fun getWeeklyScoreEntries(remoteDataManager: RemoteDataManager): LiveData<List<ScoreEntry>> {
+    fun getWeeklyScoreEntries(): LiveData<List<ScoreEntry>> {
         if (weeklyScoreEntries.value == null) {
-            loadWeeklyScoreEntries(remoteDataManager)
+            loadWeeklyScoreEntries()
         }
         return weeklyScoreEntries
     }
 
-    fun getAllTimeScoreEntries(remoteDataManager: RemoteDataManager): LiveData<List<ScoreEntry>> {
+    fun getAllTimeScoreEntries(): LiveData<List<ScoreEntry>> {
         if (allTimeScoreEntries.value == null) {
-            loadAllTimeScoreEntries(remoteDataManager)
+            loadAllTimeScoreEntries()
         }
         return allTimeScoreEntries
     }
 
-    private fun loadWeeklyScoreEntries(remoteDataManager: RemoteDataManager) {
+    private fun loadWeeklyScoreEntries() {
         remoteDataManager.downloadOrderedScoreEntriesSinceDateLimited(
             since = ONE_WEEK_AGO,
             limit = SCORE_ENTRY_LIMIT,
@@ -36,7 +36,7 @@ class LeaderboardViewModel : ViewModel() {
             onError = { it.printStackTrace(); weeklyScoreEntries.postValue(null) })
     }
 
-    private fun loadAllTimeScoreEntries(remoteDataManager: RemoteDataManager) {
+    private fun loadAllTimeScoreEntries() {
         remoteDataManager.downloadOrderedScoreEntriesSinceDateLimited(
             since = BEGINNING_OF_TIME,
             limit = SCORE_ENTRY_LIMIT,
