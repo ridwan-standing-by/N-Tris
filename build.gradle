@@ -3,6 +3,8 @@ buildscript {
         appName = "N-tris"
 
         kotlinVersion = '1.5.30'
+        kotlinCoroutinesCoreVersion = "1.5.1"
+        kotlinCoroutinesAndroidVersion = "1.5.1"
 
         gdxVersion = '1.9.8'
         ktxVersion = '1.9.8-b3'
@@ -15,6 +17,7 @@ buildscript {
         androidCoreKtxVersion = "1.6.0"
         androidLifecycleVersion = "2.3.1"
         androidActivityComposeVersion = "1.3.1"
+        androidComposePreview= "1.0.1"
 
         koinVersion = '3.1.0'
 
@@ -36,7 +39,6 @@ buildscript {
 }
 
 allprojects {
-    apply plugin: "eclipse"
     apply plugin: "idea"
 
     version = '1.3.1'
@@ -63,7 +65,7 @@ project(":desktop") {
         implementation "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
 
         // JSON
-        implementation 'org.json:json:20210307'
+        implementation "org.json:json:$jsonVersion"
     }
 }
 
@@ -104,15 +106,17 @@ project(":android") {
         implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$androidLifecycleVersion"
         implementation "androidx.lifecycle:lifecycle-runtime-ktx:$androidLifecycleVersion"
         implementation "androidx.activity:activity-compose:$androidActivityComposeVersion"
+        implementation 'androidx.compose.ui:ui-tooling-preview:1.0.1'
 
         // Kotlin
+        implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutinesCoreVersion"
+        implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutinesAndroidVersion"
 
         // Koin
         implementation "io.insert-koin:koin-core:$koinVersion"
         implementation "io.insert-koin:koin-android:$koinVersion"
         implementation "io.insert-koin:koin-androidx-compose:$koinVersion"
-
-        // Custom UI
+        debugImplementation "androidx.compose.ui:ui-tooling-preview:$androidComposePreview"
 
         // Firebase
         implementation 'com.google.firebase:firebase-core:19.0.1'
@@ -142,8 +146,4 @@ project(":core") {
         // JSON
         implementation "org.json:json:$jsonVersion"
     }
-}
-
-tasks.eclipse.doLast {
-    delete ".project"
 }

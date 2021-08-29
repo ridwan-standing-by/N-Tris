@@ -19,7 +19,9 @@ abstract class GameDataManager {
 
     abstract fun registerScore(score: Score)
 
-    fun loadPolyominoBlueprints() {
-        polyominoBlueprintHolder = PolyominoBlueprintLoader(polyominoFileStrings).load()
+    fun loadPolyominoBlueprintsIfNecessary() {
+        if (polyominoBlueprintHolder == null) {
+            polyominoBlueprintHolder = PolyominoBlueprintLoader(polyominoFileStrings).load()
+        }
     }
 }

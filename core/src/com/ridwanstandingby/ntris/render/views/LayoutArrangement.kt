@@ -70,8 +70,8 @@ enum class LayoutArrangement(val code: String, val viewRules: List<ViewRule>) {
     companion object {
 
         fun fromCode(code: String): LayoutArrangement = values().firstOrNull { it.code == code }
-            ?: DEFAULT_LAYOUT_ARRANGEMENT
+            ?: DEFAULT
 
-        val DEFAULT_LAYOUT_ARRANGEMENT = RIGHT_HANDED
+        val DEFAULT = RIGHT_HANDED
     }
 }

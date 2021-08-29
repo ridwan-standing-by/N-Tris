@@ -34,7 +34,7 @@ class DesktopGameDataManager : GameDataManager() {
         get() = LayoutArrangement.fromCode(
             getValue(
                 LAYOUT_ARRANGEMENT_CODE_KEY,
-                LayoutArrangement.DEFAULT_LAYOUT_ARRANGEMENT.code
+                LayoutArrangement.DEFAULT.code
             )
         )
         set(value) {

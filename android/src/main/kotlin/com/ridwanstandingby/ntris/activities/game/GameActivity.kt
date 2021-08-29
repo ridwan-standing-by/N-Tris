@@ -1,4 +1,4 @@
-package com.ridwanstandingby.ntris.activities
+package com.ridwanstandingby.ntris.activities.game
 
 import android.os.Bundle
 import com.badlogic.gdx.backends.android.AndroidApplication

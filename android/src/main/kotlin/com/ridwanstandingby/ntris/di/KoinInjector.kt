@@ -1,6 +1,7 @@
 package com.ridwanstandingby.ntris.di
 
 import com.ridwanstandingby.ntris.activities.leaderboard.LeaderboardViewModel
+import com.ridwanstandingby.ntris.activities.menu.MenuViewModel
 import com.ridwanstandingby.ntris.data.AndroidGameDataManager
 import com.ridwanstandingby.ntris.data.GameDataManager
 import com.ridwanstandingby.ntris.data.local.SharedPreferencesManager
@@ -25,6 +26,7 @@ object KoinInjector {
     }
 
     private fun Module.defineUiComponents() {
+        viewModel { MenuViewModel(get(), get()) }
         viewModel { LeaderboardViewModel(get()) }
     }
 }

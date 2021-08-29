@@ -34,9 +34,9 @@ class SharedPreferencesManager(context: Context) {
         get() = LayoutArrangement.fromCode(
             prefs.getString(
                 LAYOUT_ARRANGEMENT_CODE_KEY,
-                LayoutArrangement.DEFAULT_LAYOUT_ARRANGEMENT.code
+                LayoutArrangement.DEFAULT.code
             )
-                ?: LayoutArrangement.DEFAULT_LAYOUT_ARRANGEMENT.code
+                ?: LayoutArrangement.DEFAULT.code
         )
         set(value) {
             prefs.edit()

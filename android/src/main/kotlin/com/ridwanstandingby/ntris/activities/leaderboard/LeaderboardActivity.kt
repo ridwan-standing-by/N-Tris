@@ -55,7 +55,6 @@ class LeaderboardActivity : AppCompatActivity() {
     }
 
     private fun initLeaderboardViewModel() {
-        leaderboardViewModel = ViewModelProviders.of(this).get(LeaderboardViewModel::class.java)
         observeWeeklyScoreEntries()
         observeAllTimeScoreEntries()
     }
