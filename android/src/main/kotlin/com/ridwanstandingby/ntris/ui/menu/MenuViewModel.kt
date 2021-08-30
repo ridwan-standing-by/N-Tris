@@ -35,12 +35,17 @@ class MenuViewModel(
     }
 
     fun updateNickname(nickname: String) {
-        sharedPreferencesManager.nickname = nickname
-        _nickname.value = nickname
+        val verifiedNickname = nickname.take(NICKNAME_CHAR_LIMIT)
+        sharedPreferencesManager.nickname = verifiedNickname
+        _nickname.value = verifiedNickname
     }
 
     fun updateLayoutArrangement(layoutArrangement: LayoutArrangement) {
         sharedPreferencesManager.layoutArrangement = layoutArrangement
         _layoutArrangement.value = layoutArrangement
+    }
+
+    companion object {
+        private const val NICKNAME_CHAR_LIMIT = 20
     }
 }

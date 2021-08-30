@@ -22,6 +22,11 @@ class MenuActivity : AppCompatActivity() {
         menuViewModel.start()
     }
 
+    override fun onResume() {
+        super.onResume()
+        currentFocus?.clearFocus()
+    }
+
     inner class Launcher {
         fun launchLeaderboardActivity() = startActivity<LeaderboardActivity>()
         fun launchTutorialActivity() = startActivity<TutorialActivity>()
