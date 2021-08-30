@@ -1,144 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/constraintLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:focusable="true"
-    android:focusableInTouchMode="true">
+<LinearLayout
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    xmlns:android="http://schemas.android.com/apk/res/android" />
+<!--<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    android:id="@+id/constraintLayout"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:focusable="true"-->
+<!--    android:focusableInTouchMode="true">-->
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/ntris_logo"
-        android:scaleType="fitCenter"
-        android:layout_marginTop="12dp"
-        android:padding="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/nicknameTextInputLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread"
-        app:srcCompat="@drawable/logo_alien_encounters" />
+<!--    <ImageView-->
+<!--        android:id="@+id/logo"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:adjustViewBounds="true"-->
+<!--        android:contentDescription="@string/ntris_logo"-->
+<!--        android:scaleType="fitCenter"-->
+<!--        android:layout_marginTop="12dp"-->
+<!--        android:padding="12dp"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/nicknameTextInputLayout"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_chainStyle="spread"-->
+<!--        app:srcCompat="@drawable/logo_alien_encounters" />-->
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/nicknameTextInputLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:hint="@string/nickname"
-        app:layout_constraintTop_toBottomOf="@id/logo"
-        app:layout_constraintBottom_toTopOf="@id/handednessSwitch"
-        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
-        app:layout_constraintStart_toStartOf="@+id/leftGuideline">
+<!--    <android.support.design.widget.TextInputLayout-->
+<!--        android:id="@+id/nicknameTextInputLayout"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:hint="@string/nickname"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/logo"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/handednessSwitch"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/leftGuideline">-->
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/nicknameEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:imeOptions="actionDone"
-            android:inputType="text"
-            android:maxLines="1"
-            android:maxLength="20"/>
-    </android.support.design.widget.TextInputLayout>
+<!--        <android.support.design.widget.TextInputEditText-->
+<!--            android:id="@+id/nicknameEditText"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:imeOptions="actionDone"-->
+<!--            android:inputType="text"-->
+<!--            android:maxLines="1"-->
+<!--            android:maxLength="20"/>-->
+<!--    </android.support.design.widget.TextInputLayout>-->
 
-    <com.kyleduo.switchbutton.SwitchButton
-        android:id="@+id/handednessSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        style="@style/GdxTheme"
-        app:kswThumbHeight="40dp"
-        app:kswThumbWidth="40dp"
-        app:kswTextAdjust="-4dp"
-        app:kswTextExtra="20dp"
-        app:kswTextOff="@string/left_handed_switch_label"
-        app:kswTextOn="@string/right_handed_switch_label"
-        app:layout_constraintBottom_toTopOf="@+id/leaderboardButton"
-        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
-        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/nicknameTextInputLayout" />
+<!--    <com.kyleduo.switchbutton.SwitchButton-->
+<!--        android:id="@+id/handednessSwitch"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:gravity="center"-->
+<!--        style="@style/GdxTheme"-->
+<!--        app:kswThumbHeight="40dp"-->
+<!--        app:kswThumbWidth="40dp"-->
+<!--        app:kswTextAdjust="-4dp"-->
+<!--        app:kswTextExtra="20dp"-->
+<!--        app:kswTextOff="@string/left_handed_switch_label"-->
+<!--        app:kswTextOn="@string/right_handed_switch_label"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/leaderboardButton"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/leftGuideline"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/nicknameTextInputLayout" />-->
 
-    <Button
-        android:id="@+id/leaderboardButton"
-        style="@style/GdxTheme"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:padding="18dp"
-        android:text="@string/leaderboard_button_text"
-        app:layout_constraintBottom_toTopOf="@+id/howToPlayButton"
-        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
-        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/handednessSwitch" />
+<!--    <Button-->
+<!--        android:id="@+id/leaderboardButton"-->
+<!--        style="@style/GdxTheme"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:padding="18dp"-->
+<!--        android:text="@string/leaderboard_button_text"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/howToPlayButton"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/leftGuideline"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/handednessSwitch" />-->
 
-    <Button
-        android:id="@+id/howToPlayButton"
-        style="@style/GdxTheme"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:padding="18dp"
-        android:text="@string/how_to_play"
-        app:layout_constraintBottom_toTopOf="@+id/playButton"
-        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
-        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/leaderboardButton" />
+<!--    <Button-->
+<!--        android:id="@+id/howToPlayButton"-->
+<!--        style="@style/GdxTheme"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:padding="18dp"-->
+<!--        android:text="@string/how_to_play"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/playButton"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/leftGuideline"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/leaderboardButton" />-->
 
-    <Button
-        android:id="@+id/playButton"
-        style="@style/GdxTheme"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:padding="18dp"
-        android:text="@string/play"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
-        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/howToPlayButton" />
+<!--    <Button-->
+<!--        android:id="@+id/playButton"-->
+<!--        style="@style/GdxTheme"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:padding="18dp"-->
+<!--        android:text="@string/play"-->
+<!--        android:visibility="invisible"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/leftGuideline"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/howToPlayButton" />-->
 
-    <android.support.constraint.Guideline
-        android:id="@+id/leftGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.2" />
+<!--    <android.support.constraint.Guideline-->
+<!--        android:id="@+id/leftGuideline"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical"-->
+<!--        app:layout_constraintGuide_percent="0.2" />-->
 
-    <android.support.constraint.Guideline
-        android:id="@+id/rightGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.8" />
+<!--    <android.support.constraint.Guideline-->
+<!--        android:id="@+id/rightGuideline"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical"-->
+<!--        app:layout_constraintGuide_percent="0.8" />-->
 
-    <ProgressBar
-        android:id="@+id/loadingProgressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
-        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/loadingTextView"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+<!--    <ProgressBar-->
+<!--        android:id="@+id/loadingProgressBar"-->
+<!--        style="?android:attr/progressBarStyle"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="8dp"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/leftGuideline"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/loadingTextView"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"/>-->
 
-    <TextView
-        android:id="@+id/loadingTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/loading"
-        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
-        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
-        app:layout_constraintTop_toTopOf="@+id/playButton" />
+<!--    <TextView-->
+<!--        android:id="@+id/loadingTextView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:text="@string/loading"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/leftGuideline"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/playButton" />-->
 
-</android.support.constraint.ConstraintLayout>
+<!--</android.support.constraint.ConstraintLayout>-->

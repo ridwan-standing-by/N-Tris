@@ -1,4 +1,4 @@
-package com.ridwanstandingby.ntris.activities.leaderboard
+package com.ridwanstandingby.ntris.ui.leaderboard
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

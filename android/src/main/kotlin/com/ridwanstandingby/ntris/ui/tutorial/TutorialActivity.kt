@@ -1,4 +1,4 @@
-package com.ridwanstandingby.ntris.activities.tutorial
+package com.ridwanstandingby.ntris.ui.tutorial
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

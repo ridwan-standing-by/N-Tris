@@ -1,166 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<LinearLayout
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    xmlns:android="http://schemas.android.com/apk/res/android" />
+<!--<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto">-->
 
-    <TabHost
-        android:id="@+id/leaderboardTabHost"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+<!--    <TabHost-->
+<!--        android:id="@+id/leaderboardTabHost"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_width="match_parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent">-->
 
-        <LinearLayout
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:orientation="vertical">
+<!--        <LinearLayout-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:orientation="vertical">-->
 
-            <TabWidget
-                android:id="@android:id/tabs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/dark_grey" />
+<!--            <TabWidget-->
+<!--                android:id="@android:id/tabs"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@color/dark_grey" />-->
 
-            <FrameLayout
-                android:id="@android:id/tabcontent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+<!--            <FrameLayout-->
+<!--                android:id="@android:id/tabcontent"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent" >-->
 
-                <android.support.constraint.ConstraintLayout
-                    android:id="@+id/weeklyTabLayout"
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent">
+<!--                <android.support.constraint.ConstraintLayout-->
+<!--                    android:id="@+id/weeklyTabLayout"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_width="match_parent">-->
 
-                    <include layout="@layout/score_entry_list_header"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/weeklyLeaderboardListHeader"
-                        android:layout_marginTop="36dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toTopOf="@id/weeklyHeaderDivider"/>
+<!--                    <include layout="@layout/score_entry_list_header"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:id="@+id/weeklyLeaderboardListHeader"-->
+<!--                        android:layout_marginTop="36dp"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        app:layout_constraintBottom_toTopOf="@id/weeklyHeaderDivider"/>-->
 
-                    <View
-                        android:id="@+id/weeklyHeaderDivider"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/steel"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/weeklyLeaderboardListHeader"
-                        app:layout_constraintBottom_toTopOf="@id/weeklyLeaderboardRecyclerView"/>
+<!--                    <View-->
+<!--                        android:id="@+id/weeklyHeaderDivider"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="1dp"-->
+<!--                        android:background="@color/steel"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@id/weeklyLeaderboardListHeader"-->
+<!--                        app:layout_constraintBottom_toTopOf="@id/weeklyLeaderboardRecyclerView"/>-->
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/weeklyLeaderboardRecyclerView"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:visibility="invisible"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/weeklyHeaderDivider"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
+<!--                    <android.support.v7.widget.RecyclerView-->
+<!--                        android:id="@+id/weeklyLeaderboardRecyclerView"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:visibility="invisible"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@id/weeklyHeaderDivider"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"/>-->
 
-                    <ProgressBar
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:indeterminate="true"
-                        style="?android:attr/progressBarStyle"
-                        android:layout_margin="8dp"
-                        android:id="@+id/weeklyLeaderboardLoadingProgressBar"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/weeklyLeaderboardListHeader"
-                        app:layout_constraintBottom_toBottomOf="parent" />
+<!--                    <ProgressBar-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:indeterminate="true"-->
+<!--                        style="?android:attr/progressBarStyle"-->
+<!--                        android:layout_margin="8dp"-->
+<!--                        android:id="@+id/weeklyLeaderboardLoadingProgressBar"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@id/weeklyLeaderboardListHeader"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent" />-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="30dp"
-                        android:gravity="center"
-                        android:id="@+id/weeklyLoadingErrorText"
-                        android:text="@string/score_loading_connection_error_message"
-                        android:textSize="14sp"
-                        android:visibility="invisible"
-                        android:textColor="@color/white"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/weeklyLeaderboardListHeader"
-                        app:layout_constraintBottom_toBottomOf="parent" />
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:padding="30dp"-->
+<!--                        android:gravity="center"-->
+<!--                        android:id="@+id/weeklyLoadingErrorText"-->
+<!--                        android:text="@string/score_loading_connection_error_message"-->
+<!--                        android:textSize="14sp"-->
+<!--                        android:visibility="invisible"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@id/weeklyLeaderboardListHeader"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent" />-->
 
-                </android.support.constraint.ConstraintLayout>
+<!--                </android.support.constraint.ConstraintLayout>-->
 
-                <android.support.constraint.ConstraintLayout
-                    android:id="@+id/allTimeTabLayout"
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent">
+<!--                <android.support.constraint.ConstraintLayout-->
+<!--                    android:id="@+id/allTimeTabLayout"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_width="match_parent">-->
 
-                    <include layout="@layout/score_entry_list_header"
-                        android:id="@+id/allTimeLeaderboardListHeader"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="36dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toTopOf="@id/allTimeHeaderDivider"/>
+<!--                    <include layout="@layout/score_entry_list_header"-->
+<!--                        android:id="@+id/allTimeLeaderboardListHeader"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="36dp"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        app:layout_constraintBottom_toTopOf="@id/allTimeHeaderDivider"/>-->
 
-                    <View
-                        android:id="@+id/allTimeHeaderDivider"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/steel"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/allTimeLeaderboardListHeader"
-                        app:layout_constraintBottom_toTopOf="@id/allTimeLeaderboardRecyclerView"/>
+<!--                    <View-->
+<!--                        android:id="@+id/allTimeHeaderDivider"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="1dp"-->
+<!--                        android:background="@color/steel"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@id/allTimeLeaderboardListHeader"-->
+<!--                        app:layout_constraintBottom_toTopOf="@id/allTimeLeaderboardRecyclerView"/>-->
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/allTimeLeaderboardRecyclerView"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:visibility="invisible"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/allTimeHeaderDivider"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
+<!--                    <android.support.v7.widget.RecyclerView-->
+<!--                        android:id="@+id/allTimeLeaderboardRecyclerView"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:visibility="invisible"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@id/allTimeHeaderDivider"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"/>-->
 
-                    <ProgressBar
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:indeterminate="true"
-                        style="?android:attr/progressBarStyle"
-                        android:layout_margin="8dp"
-                        android:id="@+id/allTimeLeaderboardLoadingProgressBar"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/allTimeLeaderboardListHeader"
-                        app:layout_constraintBottom_toBottomOf="parent" />
+<!--                    <ProgressBar-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:indeterminate="true"-->
+<!--                        style="?android:attr/progressBarStyle"-->
+<!--                        android:layout_margin="8dp"-->
+<!--                        android:id="@+id/allTimeLeaderboardLoadingProgressBar"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@id/allTimeLeaderboardListHeader"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent" />-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="30dp"
-                        android:gravity="center"
-                        android:id="@+id/allTimeLoadingErrorText"
-                        android:text="@string/score_loading_connection_error_message"
-                        android:textColor="@color/white"
-                        android:textSize="14sp"
-                        android:visibility="invisible"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/allTimeLeaderboardListHeader"
-                        app:layout_constraintBottom_toBottomOf="parent" />
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:padding="30dp"-->
+<!--                        android:gravity="center"-->
+<!--                        android:id="@+id/allTimeLoadingErrorText"-->
+<!--                        android:text="@string/score_loading_connection_error_message"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:textSize="14sp"-->
+<!--                        android:visibility="invisible"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@id/allTimeLeaderboardListHeader"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent" />-->
 
-                </android.support.constraint.ConstraintLayout>
+<!--                </android.support.constraint.ConstraintLayout>-->
 
-            </FrameLayout>
+<!--            </FrameLayout>-->
 
-        </LinearLayout>
+<!--        </LinearLayout>-->
 
-    </TabHost>
+<!--    </TabHost>-->
 
-</android.support.constraint.ConstraintLayout>
+<!--</android.support.constraint.ConstraintLayout>-->

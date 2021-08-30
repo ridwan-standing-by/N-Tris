@@ -1,4 +1,4 @@
-package com.ridwanstandingby.ntris.activities.menu
+package com.ridwanstandingby.ntris.ui.menu
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
