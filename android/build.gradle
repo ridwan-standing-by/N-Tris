@@ -17,9 +17,9 @@ android {
     }
     defaultConfig {
         applicationId "com.ridwanstandingby.ntris"
-        minSdkVersion 24
+        minSdkVersion 21
         targetSdkVersion 31
-        versionCode 6
+        versionCode 8
         versionName "1.4.0"
         multiDexEnabled true
     }
@@ -27,6 +27,9 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            ndk {
+                debugSymbolLevel = "full"
+            }
         }
     }
 }
