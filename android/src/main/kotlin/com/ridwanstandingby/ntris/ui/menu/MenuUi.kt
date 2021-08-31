@@ -76,7 +76,7 @@ fun MenuUi(
 fun Logo() {
     Image(
         painter = painterResource(R.drawable.logo_alien_encounters),
-        contentDescription = null,
+        contentDescription = stringResource(R.string.ntris_logo),
         modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 96.dp, bottom = 32.dp)
     )
 }
