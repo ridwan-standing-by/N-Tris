@@ -12,9 +12,11 @@ import com.ridwanstandingby.ntris.polyomino.blueprint.PolyominoBlueprintLoader
 import com.ridwanstandingby.ntris.render.views.LayoutArrangement
 import java.util.*
 
-class AndroidGameDataManager(private val context: Context,
-                             private val sharedPreferencesManager: SharedPreferencesManager,
-                             private val remoteDataManager: RemoteDataManager) : GameDataManager() {
+class AndroidGameDataManager(
+    private val context: Context,
+    private val sharedPreferencesManager: SharedPreferencesManager,
+    private val remoteDataManager: RemoteDataManager
+) : GameDataManager() {
 
     override var savedGame: SavedGame?
         get() = sharedPreferencesManager.savedGame
@@ -37,17 +39,19 @@ class AndroidGameDataManager(private val context: Context,
     override val polyominoFileStrings = hashMapOf<String, String>().also { hashMap ->
         (MIN_RANK..MAX_RANK).forEach { rank ->
             val fileName = PolyominoBlueprintLoader.BLUEPRINT_FILE_NAME_TEMPLATE.format(rank)
-            val fileText = context.assets.open("polyominos/$fileName.txt").bufferedReader().use { it.readText() }
+            val fileText = context.assets.open("polyominos/$fileName.txt").bufferedReader()
+                .use { it.readText() }
             hashMap[fileName] = fileText
         }
     }
 
     override fun registerScore(score: Score) {
         val scoreEntry = ScoreEntry(
-                time = Date(),
-                name = sharedPreferencesManager.nickname,
-                score = score.points.toLong(),
-                lines = score.lines.toLong())
+            time = Date(),
+            name = sharedPreferencesManager.nickname,
+            score = score.points.toLong(),
+            lines = score.lines.toLong()
+        )
         remoteDataManager.uploadScoreEntry(scoreEntry, onError = { it.printStackTrace() })
     }
 }

@@ -16,36 +16,39 @@ class RawPlayInputProcessor(private val gsm: GameStateManager) {
     }
 
     private fun checkRawPointerInputInViews(views: List<View>, pointers: List<Vector2>) =
-            RawPlayInput().also { rawPlayInput ->
-                pointers.forEach { pointer ->
-                    views.forEach { view ->
-                        if (view.wasPointerInView(pointer.x, pointer.y))
-                            view.handleInputIsInView(rawPlayInput)
-                    }
+        RawPlayInput().also { rawPlayInput ->
+            pointers.forEach { pointer ->
+                views.forEach { view ->
+                    if (view.wasPointerInView(pointer.x, pointer.y))
+                        view.handleInputIsInView(rawPlayInput)
                 }
             }
+        }
 
     private fun getAllPointers(): List<Vector2> =
-            (0 until MAX_POINTERS).mapNotNull { i ->
-                if (Gdx.input.isTouched(i))
-                    getPositionOfPointer(i)
-                else
-                    null
-            }
+        (0 until MAX_POINTERS).mapNotNull { i ->
+            if (Gdx.input.isTouched(i))
+                getPositionOfPointer(i)
+            else
+                null
+        }
 
     private fun getPositionOfPointer(i: Int): Vector2 = // NOTE: y is from top on input.getY
-            Vector2(Gdx.input.getX(i).toFloat(), gsm.dimensions.screenHeight.toFloat() - Gdx.input.getY(i))
+        Vector2(
+            Gdx.input.getX(i).toFloat(),
+            gsm.dimensions.screenHeight.toFloat() - Gdx.input.getY(i)
+        )
 
     private fun getKeyboardInput(views: List<View>): RawPlayInput =
-            RawPlayInput().also { rawPlayInput ->
-                views.forEach { view ->
-                    view.inputKeys.forEach { key ->
-                        if (Gdx.input.isKeyPressed(key))
-                            view.handleInputIsInView(rawPlayInput)
-                    }
+        RawPlayInput().also { rawPlayInput ->
+            views.forEach { view ->
+                view.inputKeys.forEach { key ->
+                    if (Gdx.input.isKeyPressed(key))
+                        view.handleInputIsInView(rawPlayInput)
                 }
-                handleNonViewKeys(rawPlayInput)
             }
+            handleNonViewKeys(rawPlayInput)
+        }
 
     private fun handleNonViewKeys(rawPlayInput: RawPlayInput) {
         KeyInput.BACK_KEYS.forEach { key ->

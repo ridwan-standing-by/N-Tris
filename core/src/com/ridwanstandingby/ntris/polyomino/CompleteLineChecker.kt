@@ -32,5 +32,5 @@ class CompleteLineChecker {
     }
 
     private fun calculateScoreIncrease(numberOfLines: Int) =
-            Score(GameRules.linesToScore(numberOfLines), numberOfLines)
+        Score(GameRules.linesToScore(numberOfLines), numberOfLines)
 }

@@ -47,7 +47,12 @@ class NTrisApplication(private val gameDataManager: GameDataManager) : Applicati
 
     private fun clearScreen() = Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
 
-    private fun setBackgroundColour() = Gdx.gl.glClearColor(BACKGROUND_COLOUR.r, BACKGROUND_COLOUR.g, BACKGROUND_COLOUR.b, BACKGROUND_COLOUR.a)
+    private fun setBackgroundColour() = Gdx.gl.glClearColor(
+        BACKGROUND_COLOUR.r,
+        BACKGROUND_COLOUR.g,
+        BACKGROUND_COLOUR.b,
+        BACKGROUND_COLOUR.a
+    )
 
     override fun dispose() {
         batch.dispose()

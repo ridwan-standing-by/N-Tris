@@ -4,11 +4,13 @@ import com.ridwanstandingby.ntris.events.Clock
 import com.ridwanstandingby.ntris.game.Game
 import com.ridwanstandingby.ntris.input.RawPlayInput
 
-class TimedDebouncer(private val clock: Clock,
-                     private val debounceTime: Float,
-                     updateNowPressed: (input: RawPlayInput) -> Boolean,
-                     doInvokeCondition: (input: RawPlayInput, game: Game) -> Boolean,
-                     block: () -> Unit): Debouncer(updateNowPressed, doInvokeCondition, block) {
+class TimedDebouncer(
+    private val clock: Clock,
+    private val debounceTime: Float,
+    updateNowPressed: (input: RawPlayInput) -> Boolean,
+    doInvokeCondition: (input: RawPlayInput, game: Game) -> Boolean,
+    block: () -> Unit
+) : Debouncer(updateNowPressed, doInvokeCondition, block) {
 
     private var lastInvoked: Float = 0F
 

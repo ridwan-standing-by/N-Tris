@@ -7,10 +7,12 @@ import com.ridwanstandingby.ntris.polyomino.blueprint.PolyominoBlueprint
 import com.ridwanstandingby.ntris.polyomino.geometry.IntVector2
 import ktx.math.plus
 
-class Polyomino(val polyominoBlueprint: PolyominoBlueprint,
-                val colour: Color,
-                var position: Vector2 = Vector2(0f, 0f),
-                var relativeCoordinates: Set<Vector2> = setOf()) {
+class Polyomino(
+    val polyominoBlueprint: PolyominoBlueprint,
+    val colour: Color,
+    var position: Vector2 = Vector2(0f, 0f),
+    var relativeCoordinates: Set<Vector2> = setOf()
+) {
 
     init {
         if (relativeCoordinates.isEmpty()) {
@@ -20,8 +22,14 @@ class Polyomino(val polyominoBlueprint: PolyominoBlueprint,
 
     private fun calculateRelativeCoordinates(): Set<Vector2> {
         val absoluteCoordinates = polyominoBlueprint.generateAbsoluteCoordinates()
-        val absoluteCentre = getCentre(absoluteCoordinates.map { Vector2(it.x.toFloat(), it.y.toFloat()) }.toSet())
-        return absoluteCoordinates.map { Vector2(it.x.toFloat() - absoluteCentre.x, it.y.toFloat() - absoluteCentre.y) }.toSet()
+        val absoluteCentre =
+            getCentre(absoluteCoordinates.map { Vector2(it.x.toFloat(), it.y.toFloat()) }.toSet())
+        return absoluteCoordinates.map {
+            Vector2(
+                it.x.toFloat() - absoluteCentre.x,
+                it.y.toFloat() - absoluteCentre.y
+            )
+        }.toSet()
     }
 
     fun resetPositionToOrigin() {
@@ -30,8 +38,9 @@ class Polyomino(val polyominoBlueprint: PolyominoBlueprint,
 
     fun setToPlaySpawnPosition() {
         position = Vector2(
-                (GameRules.PLAY_BLOCK_SIZE.x / 2).toFloat(),
-                GameRules.PLAY_BLOCK_SIZE.y - 1f + getCentre(relativeCoordinates).y)
+            (GameRules.PLAY_BLOCK_SIZE.x / 2).toFloat(),
+            GameRules.PLAY_BLOCK_SIZE.y - 1f + getCentre(relativeCoordinates).y
+        )
     }
 
     fun copy(): Polyomino = Polyomino(polyominoBlueprint, colour, position).also {
@@ -73,10 +82,14 @@ class Polyomino(val polyominoBlueprint: PolyominoBlueprint,
     companion object {
 
         private fun getSize(coordinates: Set<Vector2>) = Vector2(
-                (coordinates.maxBy { it.x }?.x ?: 0f) - (coordinates.minBy { it.x }?.x ?: 0f),
-                (coordinates.maxBy { it.y }?.y ?: 0f) - (coordinates.minBy { it.y }?.y ?: 0f))
+            (coordinates.maxByOrNull { it.x }?.x ?: 0f)
+                    - (coordinates.minByOrNull { it.x }?.x ?: 0f),
+            (coordinates.maxByOrNull { it.y }?.y ?: 0f)
+                    - (coordinates.minByOrNull { it.y }?.y ?: 0f)
+        )
 
-        private fun getCentre(coordinates: Set<Vector2>) = getSize(coordinates).let { Vector2(it.x / 2f, it.y / 2f) }
+        private fun getCentre(coordinates: Set<Vector2>) =
+            getSize(coordinates).let { Vector2(it.x / 2f, it.y / 2f) }
 
         private val rotateLeftRule = { v: Vector2 -> Vector2(-v.y, v.x) }
         private val rotateRightRule = { v: Vector2 -> Vector2(v.y, -v.x) }

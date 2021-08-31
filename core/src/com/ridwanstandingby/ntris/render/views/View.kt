@@ -10,7 +10,12 @@ import com.ridwanstandingby.ntris.render.Dimensions
 import com.ridwanstandingby.ntris.render.fonts.Fonts
 import ktx.math.times
 
-abstract class View(val dimensions: Dimensions, val fonts: Fonts, originBlocks: Vector2, val sizeBlocks: Vector2) {
+abstract class View(
+    val dimensions: Dimensions,
+    val fonts: Fonts,
+    originBlocks: Vector2,
+    val sizeBlocks: Vector2
+) {
 
     val origin = originBlocks * dimensions.rescaledBlock()
     val size = sizeBlocks * dimensions.rescaledBlock()
@@ -25,13 +30,23 @@ abstract class View(val dimensions: Dimensions, val fonts: Fonts, originBlocks: 
     fun renderHighlightIfQueued(sr: ShapeRenderer) {
         if (queueHighlight) {
             sr.set(ShapeRenderer.ShapeType.Filled)
-            sr.rect(origin.x, origin.y, size.x, size.y, HIGHLIGHT_COLOUR, HIGHLIGHT_COLOUR, HIGHLIGHT_COLOUR, HIGHLIGHT_COLOUR)
+            sr.rect(
+                origin.x,
+                origin.y,
+                size.x,
+                size.y,
+                HIGHLIGHT_COLOUR,
+                HIGHLIGHT_COLOUR,
+                HIGHLIGHT_COLOUR,
+                HIGHLIGHT_COLOUR
+            )
             queueHighlight = false
         }
     }
 
-    open fun wasPointerInView(x: Float, y: Float): Boolean = origin.x <= x && x < (origin.x + size.x)
-            && origin.y <= y && y < origin.y + size.y
+    open fun wasPointerInView(x: Float, y: Float): Boolean =
+        origin.x <= x && x < (origin.x + size.x)
+                && origin.y <= y && y < origin.y + size.y
 
     abstract val inputKeys: List<Int>
     abstract fun handleInputIsInView(rawPlayInput: RawPlayInput)

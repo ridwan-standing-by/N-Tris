@@ -3,9 +3,11 @@ package com.ridwanstandingby.ntris.input.debounce
 import com.ridwanstandingby.ntris.game.Game
 import com.ridwanstandingby.ntris.input.RawPlayInput
 
-abstract class Debouncer(private val updateNowPressed: (input: RawPlayInput) -> Boolean,
-                         private val doInvokeCondition: (input: RawPlayInput, game: Game) -> Boolean,
-                         protected val block: () -> Unit) {
+abstract class Debouncer(
+    private val updateNowPressed: (input: RawPlayInput) -> Boolean,
+    private val doInvokeCondition: (input: RawPlayInput, game: Game) -> Boolean,
+    protected val block: () -> Unit
+) {
 
     private var nowPressed = false
     var wasPressed = true

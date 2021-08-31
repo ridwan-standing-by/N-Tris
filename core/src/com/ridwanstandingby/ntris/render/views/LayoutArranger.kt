@@ -6,9 +6,11 @@ import com.ridwanstandingby.ntris.render.fonts.Fonts
 import ktx.math.div
 import ktx.math.plus
 
-class LayoutArranger(private val dimensions: Dimensions,
-                     private val fonts: Fonts,
-                     private val layoutArrangement: LayoutArrangement) {
+class LayoutArranger(
+    private val dimensions: Dimensions,
+    private val fonts: Fonts,
+    private val layoutArrangement: LayoutArrangement
+) {
 
     private val originBlocks = calculateOriginBlocks()
 

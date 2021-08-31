@@ -13,7 +13,6 @@ import com.ridwanstandingby.ntris.render.views.pieceDisplay.ReserveView
 import com.ridwanstandingby.ntris.render.views.score.ScoreView
 import ktx.freetype.generateFont
 
-
 class FontGenerator(private val dimensions: Dimensions) {
 
     fun generate(): Fonts {
@@ -34,7 +33,10 @@ class FontGenerator(private val dimensions: Dimensions) {
         return Fonts(boxInfo, boxCharacter, buttonCharacter, dummy)
     }
 
-    private fun generateFont(path: String, parameters: FreeTypeFontGenerator.FreeTypeFontParameter.() -> Unit): BitmapFont {
+    private fun generateFont(
+        path: String,
+        parameters: FreeTypeFontGenerator.FreeTypeFontParameter.() -> Unit
+    ): BitmapFont {
         FreeTypeFontGenerator(Gdx.files.internal(path)).let {
             val font = it.generateFont { parameters() }
             it.dispose()

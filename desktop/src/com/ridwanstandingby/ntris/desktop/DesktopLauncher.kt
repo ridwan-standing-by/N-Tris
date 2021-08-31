@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.ridwanstandingby.ntris.desktop
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication
@@ -7,7 +9,7 @@ import com.ridwanstandingby.ntris.desktop.data.DesktopGameDataManager
 
 object DesktopLauncher {
     @JvmStatic
-    fun main() {
+    fun main(vararg args: String) {
         val config = LwjglApplicationConfiguration()
         config.width = 393
         config.height = 660

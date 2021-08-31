@@ -5,18 +5,20 @@ import com.ridwanstandingby.ntris.game.GameRules
 class GenerousPieceManipulator(private val ifLegalThenDo: (piece: Polyomino, moves: Iterable<Polyomino.() -> Unit>) -> Boolean) {
 
     fun tryPieceRotateLeft(piece: Polyomino): Boolean =
-            tryPieceGenerousManipulate(piece, { rotateLeft() }, { moveLeft() }, { moveRight() })
+        tryPieceGenerousManipulate(piece, { rotateLeft() }, { moveLeft() }, { moveRight() })
 
     fun tryPieceRotateRight(piece: Polyomino): Boolean =
-            tryPieceGenerousManipulate(piece, { rotateRight() }, { moveRight() }, { moveLeft() })
+        tryPieceGenerousManipulate(piece, { rotateRight() }, { moveRight() }, { moveLeft() })
 
     fun tryPieceReflect(piece: Polyomino): Boolean =
-            tryPieceGenerousManipulate(piece, { reflect() }, { moveLeft() }, { moveRight() })
+        tryPieceGenerousManipulate(piece, { reflect() }, { moveLeft() }, { moveRight() })
 
-    private fun tryPieceGenerousManipulate(piece: Polyomino,
-                                           manipulateMove: Polyomino.() -> Unit,
-                                           movePrimaryDirection: Polyomino.() -> Unit,
-                                           moveSecondaryDirection: Polyomino.() -> Unit): Boolean {
+    private fun tryPieceGenerousManipulate(
+        piece: Polyomino,
+        manipulateMove: Polyomino.() -> Unit,
+        movePrimaryDirection: Polyomino.() -> Unit,
+        moveSecondaryDirection: Polyomino.() -> Unit
+    ): Boolean {
         (0..GameRules.GENEROUS_MANIPULATION_MAX_MOVES).forEach { move ->
             val primaryMoveList = List(move) { movePrimaryDirection } + manipulateMove
             val secondaryMoveList = List(move) { moveSecondaryDirection } + manipulateMove

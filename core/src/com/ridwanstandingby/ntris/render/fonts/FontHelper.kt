@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.GlyphLayout
 import com.badlogic.gdx.math.Vector2
 
-
 object FontHelper {
 
     fun getDimensionsOfText(font: BitmapFont, text: String): Vector2 {

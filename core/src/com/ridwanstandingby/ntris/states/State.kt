@@ -11,7 +11,11 @@ abstract class State(protected var gsm: GameStateManager) {
     protected val cam: OrthographicCamera = OrthographicCamera()
 
     init {
-        cam.setToOrtho(false, gsm.dimensions.screenWidth.toFloat(), gsm.dimensions.screenHeight.toFloat())
+        cam.setToOrtho(
+            false,
+            gsm.dimensions.screenWidth.toFloat(),
+            gsm.dimensions.screenHeight.toFloat()
+        )
         configureInputProcessor()
         Gdx.input.isCatchBackKey = true
     }
@@ -24,8 +28,12 @@ abstract class State(protected var gsm: GameStateManager) {
     private fun configureInputProcessor() {
         Gdx.input.inputProcessor = object : InputAdapter() {
             override fun keyDown(keycode: Int) = handleInput()
-            override fun touchUp(screenX: Int, screenY: Int, pointer: Int, button: Int) = handleInput()
-            override fun touchDown(screenX: Int, screenY: Int, pointer: Int, button: Int) = handleInput()
+            override fun touchUp(screenX: Int, screenY: Int, pointer: Int, button: Int) =
+                handleInput()
+
+            override fun touchDown(screenX: Int, screenY: Int, pointer: Int, button: Int) =
+                handleInput()
+
             override fun touchDragged(screenX: Int, screenY: Int, pointer: Int) = handleInput()
             override fun keyUp(keycode: Int) = handleInput()
         }

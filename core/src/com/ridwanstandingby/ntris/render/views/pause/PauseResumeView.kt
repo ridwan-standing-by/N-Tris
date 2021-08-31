@@ -12,8 +12,12 @@ import com.ridwanstandingby.ntris.render.fonts.FontHelper
 import com.ridwanstandingby.ntris.render.fonts.Fonts
 import com.ridwanstandingby.ntris.render.views.View
 
-class PauseResumeView(dimensions: Dimensions, fonts: Fonts, originBlocks: Vector2, sizeBlocks: Vector2) :
-        View(dimensions, fonts, originBlocks, sizeBlocks) {
+class PauseResumeView(
+    dimensions: Dimensions,
+    fonts: Fonts,
+    originBlocks: Vector2,
+    sizeBlocks: Vector2
+) : View(dimensions, fonts, originBlocks, sizeBlocks) {
 
     override val inputKeys: List<Int> = KeyInput.PAUSE_RESUME_KEYS
 
@@ -30,7 +34,16 @@ class PauseResumeView(dimensions: Dimensions, fonts: Fonts, originBlocks: Vector
 
     private fun renderBackground(sr: ShapeRenderer) {
         sr.set(ShapeRenderer.ShapeType.Filled)
-        sr.rect(origin.x, origin.y, size.x, size.y, Colours.BACKGROUND_COLOUR, Colours.BACKGROUND_COLOUR, Colours.BACKGROUND_COLOUR, Colours.BACKGROUND_COLOUR)
+        sr.rect(
+            origin.x,
+            origin.y,
+            size.x,
+            size.y,
+            Colours.BACKGROUND_COLOUR,
+            Colours.BACKGROUND_COLOUR,
+            Colours.BACKGROUND_COLOUR,
+            Colours.BACKGROUND_COLOUR
+        )
     }
 
     override fun renderSprites(sb: SpriteBatch, game: Game) {

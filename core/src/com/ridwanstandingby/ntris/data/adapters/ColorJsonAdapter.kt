@@ -6,21 +6,21 @@ import org.json.JSONObject
 
 /** @throws JSONException */
 fun Color.toJson() =
-        JSONObject().apply {
-            put(R, r.toDouble())
-            put(G, g.toDouble())
-            put(B, b.toDouble())
-            put(A, a.toDouble())
-        }
+    JSONObject().apply {
+        put(R, r.toDouble())
+        put(G, g.toDouble())
+        put(B, b.toDouble())
+        put(A, a.toDouble())
+    }
 
 /** @throws JSONException */
 fun JSONObject.toColor(): Color =
-        Color(
-                getDouble(com.ridwanstandingby.ntris.data.adapters.R).toFloat(),
-                getDouble(com.ridwanstandingby.ntris.data.adapters.G).toFloat(),
-                getDouble(com.ridwanstandingby.ntris.data.adapters.B).toFloat(),
-                getDouble(com.ridwanstandingby.ntris.data.adapters.A).toFloat()
-        )
+    Color(
+        getDouble(R).toFloat(),
+        getDouble(G).toFloat(),
+        getDouble(B).toFloat(),
+        getDouble(A).toFloat()
+    )
 
 private const val R = "r"
 private const val G = "g"

@@ -12,10 +12,11 @@ import com.ridwanstandingby.ntris.render.fonts.Fonts
 import com.ridwanstandingby.ntris.render.views.View
 
 class ScoreView(dimensions: Dimensions, fonts: Fonts, originBlocks: Vector2, sizeBlocks: Vector2) :
-        View(dimensions, fonts, originBlocks, sizeBlocks) {
+    View(dimensions, fonts, originBlocks, sizeBlocks) {
 
     private val scaledPadding = dimensions.rescale(TEXT_PADDING)
-    private val ySpacing = FontHelper.getDimensionsOfText(fonts.boxInfo, TEXT_SCORE.format(0F)).y + scaledPadding
+    private val ySpacing =
+        FontHelper.getDimensionsOfText(fonts.boxInfo, TEXT_SCORE.format(0F)).y + scaledPadding
 
     override val inputKeys = SCORE_KEYS
 
@@ -53,7 +54,7 @@ class ScoreView(dimensions: Dimensions, fonts: Fonts, originBlocks: Vector2, siz
     }
 
     private fun renderCurrentScoreIcon(sb: SpriteBatch) {
-        val x = origin.x + scaledPadding * 3/2
+        val x = origin.x + scaledPadding * 3 / 2
         val y = origin.y + size.y - scaledPadding * 2f
         fonts.boxCharacter.draw(sb, CURRENT_SCORE_ICON, x, y)
     }
