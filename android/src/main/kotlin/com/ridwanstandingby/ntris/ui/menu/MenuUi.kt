@@ -37,7 +37,7 @@ fun MenuActivityUi(vm: MenuViewModel, launcher: MenuActivity.Launcher) {
 }
 
 @Composable
-private fun MenuUi(
+fun MenuUi(
     polyominosLoaded: State<Boolean>,
     nickname: State<String>,
     layoutArrangement: State<LayoutArrangement>,
@@ -73,16 +73,16 @@ private fun MenuUi(
 }
 
 @Composable
-private fun Logo() {
+fun Logo() {
     Image(
         painter = painterResource(R.drawable.logo_alien_encounters),
         contentDescription = null,
-        modifier = Modifier.padding(horizontal = 16.dp, vertical = 48.dp)
+        modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 96.dp, bottom = 32.dp)
     )
 }
 
 @Composable
-private fun NicknameField(
+fun NicknameField(
     nickname: State<String>,
     updateNickname: (String) -> Unit
 ) {
@@ -106,7 +106,7 @@ private fun NicknameField(
 }
 
 @Composable
-private fun LayoutArrangementSwitch(
+fun LayoutArrangementSwitch(
     layoutArrangement: State<LayoutArrangement>,
     updateLayoutArrangement: (LayoutArrangement) -> Unit
 ) {
@@ -150,13 +150,13 @@ private fun LayoutArrangementSwitch(
     }
 }
 
-private val menuButtonModifier = Modifier
+val menuButtonModifier = Modifier
     .padding(16.dp)
     .fillMaxWidth(0.61f)
     .height(48.dp)
 
 @Composable
-private fun ProgressBarOrPlayButton(
+fun ProgressBarOrPlayButton(
     polyominosLoaded: State<Boolean>,
     launchGame: () -> Unit
 ) {
@@ -179,7 +179,7 @@ private fun ProgressBarOrPlayButton(
 }
 
 @Composable
-private fun MenuButton(
+fun MenuButton(
     buttonText: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier

@@ -17,6 +17,6 @@
     <string name="lines">Lines</string>
     <string name="score">Score</string>
     <string name="nickname">Nickname</string>
-    <string name="score_loading_connection_error_message">Whoops. Looks like it\'s empty. Check your internet connection I guess?</string>
+    <string name="score_loading_connection_error_message">Whoops. Looks like it\'s empty.\nCheck your internet connection I guess?</string>
 
 </resources>

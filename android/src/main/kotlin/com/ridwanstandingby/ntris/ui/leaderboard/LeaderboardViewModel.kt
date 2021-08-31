@@ -11,36 +11,30 @@ import com.ridwanstandingby.ntris.domain.ScoreEntry
 
 class LeaderboardViewModel(private val remoteDataManager: RemoteDataManager) : ViewModel() {
 
-    private val weeklyScoreEntries: MutableLiveData<List<ScoreEntry>> = MutableLiveData()
-    private val allTimeScoreEntries: MutableLiveData<List<ScoreEntry>> = MutableLiveData()
+    private val _weeklyScoreEntries: MutableLiveData<List<ScoreEntry>> = MutableLiveData()
+    private val _allTimeScoreEntries: MutableLiveData<List<ScoreEntry>> = MutableLiveData()
 
-    fun getWeeklyScoreEntries(): LiveData<List<ScoreEntry>> {
-        if (weeklyScoreEntries.value == null) {
-            loadWeeklyScoreEntries()
-        }
-        return weeklyScoreEntries
-    }
+    val weeklyScoreEntries: LiveData<List<ScoreEntry>> = _weeklyScoreEntries
+    val allTimeScoreEntries: LiveData<List<ScoreEntry>> = _allTimeScoreEntries
 
-    fun getAllTimeScoreEntries(): LiveData<List<ScoreEntry>> {
-        if (allTimeScoreEntries.value == null) {
-            loadAllTimeScoreEntries()
-        }
-        return allTimeScoreEntries
+    fun start() {
+        loadWeeklyScoreEntries()
+        loadAllTimeScoreEntries()
     }
 
     private fun loadWeeklyScoreEntries() {
         remoteDataManager.downloadOrderedScoreEntriesSinceDateLimited(
             since = ONE_WEEK_AGO,
             limit = SCORE_ENTRY_LIMIT,
-            onSuccess = { weeklyScoreEntries.postValue(it) },
-            onError = { it.printStackTrace(); weeklyScoreEntries.postValue(null) })
+            onSuccess = { _weeklyScoreEntries.postValue(it) },
+            onError = { it.printStackTrace(); _weeklyScoreEntries.postValue(emptyList()) })
     }
 
     private fun loadAllTimeScoreEntries() {
         remoteDataManager.downloadOrderedScoreEntriesSinceDateLimited(
             since = BEGINNING_OF_TIME,
             limit = SCORE_ENTRY_LIMIT,
-            onSuccess = { allTimeScoreEntries.postValue(it) },
-            onError = { it.printStackTrace(); allTimeScoreEntries.postValue(null) })
+            onSuccess = { _allTimeScoreEntries.postValue(it) },
+            onError = { it.printStackTrace(); _allTimeScoreEntries.postValue(emptyList()) })
     }
 }

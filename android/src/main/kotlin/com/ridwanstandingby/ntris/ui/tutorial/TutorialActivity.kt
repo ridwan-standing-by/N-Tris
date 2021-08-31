@@ -1,13 +1,15 @@
 package com.ridwanstandingby.ntris.ui.tutorial
 
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import com.ridwanstandingby.ntris.R
 
 class TutorialActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.layout_tutorial)
+        setContent {
+            TutorialActivityUi()
+        }
     }
 }
