@@ -22,6 +22,7 @@ import androidx.compose.ui.zIndex
 import com.ridwanstandingby.ntris.R
 import com.ridwanstandingby.ntris.domain.ScoreEntry
 import com.ridwanstandingby.ntris.ui.theme.NTrisTheme
+import java.lang.Thread.sleep
 import java.util.*
 
 @Composable
@@ -190,7 +191,7 @@ fun ScoreRowSkeleton(
     linesText: String,
     scoreText: String
 ) {
-    Column {
+    Column(Modifier.fillMaxWidth()) {
         Row(
             Modifier
                 .fillMaxWidth()
