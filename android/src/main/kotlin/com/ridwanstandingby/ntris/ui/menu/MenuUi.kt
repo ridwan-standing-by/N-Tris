@@ -1,12 +1,26 @@
-@file:OptIn(ExperimentalAnimationApi::class)
-
 package com.ridwanstandingby.ntris.ui.menu
 
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandHorizontally
+import androidx.compose.animation.shrinkHorizontally
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Switch
+import androidx.compose.material.SwitchDefaults
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -48,10 +62,12 @@ fun MenuUi(
     launchGame: () -> Unit
 ) {
     NTrisTheme {
-        Scaffold {
+        Scaffold { innerPadding ->
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
             ) {
                 Logo()
                 NicknameField(nickname, updateNickname)
@@ -119,8 +135,8 @@ fun LayoutArrangementSwitch(
         Box(modifier = Modifier.weight(0.4f, fill = true)) {
             this@Row.AnimatedVisibility(
                 visible = !layoutArrangement.value.toBoolean(),
-                enter = expandHorizontally(Alignment.End),
-                exit = shrinkHorizontally(Alignment.End),
+                enter = expandHorizontally(expandFrom = Alignment.End),
+                exit = shrinkHorizontally(shrinkTowards = Alignment.End),
                 modifier = Modifier.align(Alignment.CenterEnd)
             ) {
                 Text(stringResource(R.string.left_handed_switch_label))
@@ -140,8 +156,8 @@ fun LayoutArrangementSwitch(
         Box(modifier = Modifier.weight(0.4f, fill = true)) {
             this@Row.AnimatedVisibility(
                 visible = layoutArrangement.value.toBoolean(),
-                enter = expandHorizontally(Alignment.Start),
-                exit = shrinkHorizontally(Alignment.Start),
+                enter = expandHorizontally(expandFrom = Alignment.Start),
+                exit = shrinkHorizontally(shrinkTowards = Alignment.Start),
                 modifier = Modifier.align(Alignment.CenterStart)
             ) {
                 Text(stringResource(R.string.right_handed_switch_label))
@@ -170,7 +186,7 @@ fun ProgressBarOrPlayButton(
         }
         AnimatedVisibility(
             visible = polyominosLoaded.value,
-            enter = expandHorizontally(Alignment.CenterHorizontally),
+            enter = expandHorizontally(expandFrom = Alignment.CenterHorizontally),
             modifier = Modifier.align(Alignment.Center)
         ) {
             MenuButton(stringResource(R.string.play), launchGame, modifier = Modifier.fillMaxSize())

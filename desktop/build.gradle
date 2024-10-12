@@ -1,7 +1,8 @@
 apply plugin: "kotlin"
 
-sourceCompatibility = 1.6
+sourceCompatibility = 1.17
 sourceSets.main.java.srcDirs = [ "src/" ]
+sourceSets.main.resources.srcDirs = [ "assets/" ]
 
 project.ext.mainClassName = "com.ridwanstandingby.ntris.desktop.DesktopLauncher"
 project.ext.assetsDir = new File("../android/assets")

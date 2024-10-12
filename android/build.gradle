@@ -1,5 +1,7 @@
 android {
-    compileSdkVersion 31
+    namespace "com.ridwanstandingby.ntris"
+
+    compileSdkVersion 34
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -13,12 +15,14 @@ android {
 
     }
     packagingOptions {
-        exclude 'META-INF/robovm/ios/robovm.xml'
+        resources {
+            excludes += ['META-INF/robovm/ios/robovm.xml']
+        }
     }
     defaultConfig {
         applicationId "com.ridwanstandingby.ntris"
-        minSdkVersion 21
-        targetSdkVersion 31
+        minSdkVersion 24
+        targetSdkVersion 34
         versionCode 9
         versionName "1.4.1"
         multiDexEnabled true
